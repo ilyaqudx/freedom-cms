@@ -18,8 +18,32 @@ public class User {
 	private String password;
 	private String phone;
 	private String identityCode;
+	private Integer    sex;
+	private String address;//家庭地址
 	private Date   createTime;
-	private int    status;
+	private Integer    status;
+	private Long parentId;
+	public Integer getSex() {
+		return sex;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Long getParentId() {
+		return parentId;
+	}
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	public String getPassword() {
 		return password;
 	}

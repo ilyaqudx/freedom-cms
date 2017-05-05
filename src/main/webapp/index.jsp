@@ -75,15 +75,13 @@
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
 		
-		
-		
 		<c:forEach items="${menus}" var="menu">
 		<dl id="menu-member">
 			<dt><i class="Hui-iconfont">&#xe60d;</i> ${menu.menu.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<c:forEach items="${menu.children}" var="child">
-						<li><a data-href="member-list.html" data-title="${child.name}" href="javascript:;">${child.name}</a></li>
+						<li><a data-href="/user/list" data-title="${child.name}" href="javascript:;">${child.name}</a></li>
 					</c:forEach>
 					<!--<li><a data-href="member-del.html" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
 					<li><a data-href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>

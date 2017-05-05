@@ -30,11 +30,17 @@
 </head>
 <body>
 <article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-member-add">
+	<form action="/user/add" method="post" class="form form-horizontal" id="form-member-add">
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>用户名：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" id="password" name="password">
 			</div>
 		</div>
 		<div class="row cl">
@@ -57,15 +63,16 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile">
+				<input type="text" class="input-text" value="" placeholder="" id="phone" name="phone">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>身份证：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" placeholder="@" name="email" id="email">
+				<input type="text" class="input-text" name="identityCode" id="email">
 			</div>
 		</div>
+		<!--
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">附件：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
@@ -74,16 +81,12 @@
 				<input type="file" multiple name="file-2" class="input-file">
 				</span> </div>
 		</div>
+	-->
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">所在城市：</label>
-			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select class="select" size="1" name="city">
-					<option value="" selected>请选择城市</option>
-					<option value="1">北京</option>
-					<option value="2">上海</option>
-					<option value="3">广州</option>
-				</select>
-				</span> </div>
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>住址：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" name="address" id="address">
+			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">备注：</label>
@@ -127,19 +130,26 @@ $(function(){
 				minlength:2,
 				maxlength:16
 			},
+			password:{
+				required : true,
+				minlength : 6,
+				maxlength : 10
+			},
 			sex:{
-				required:true,
+				required:true
 			},
-			mobile:{
+			phone:{
 				required:true,
-				isMobile:true,
+				minlength:11,
+				maxlength:11
 			},
-			email:{
-				required:true,
-				email:true,
+			address:{
+				required:true
 			},
-			uploadfile:{
+			identityCode:{
 				required:true,
+				minlength:15,
+				maxlength:18
 			},
 			
 		},
@@ -148,9 +158,41 @@ $(function(){
 		success:"valid",
 		submitHandler:function(form){
 			//$(form).ajaxSubmit();
+			console.log("有没有来数据")
 			var index = parent.layer.getFrameIndex(window.name);
 			//parent.$('.btn-refresh').click();
-			parent.layer.close(index);
+			//parent.layer.close(index);
+			var name = $('#name').val();
+			var password = $('#password').val();
+			var phone = $('#phone').val();
+			var identityCode = $('#identityCode').val();
+			var sex = $('#sex').val();
+			var address = $('#address').val();
+
+			var data = {
+				name : name,
+				password : password,
+				phone : phone,
+				identityCode : identityCode,
+				sex : sex,
+				address : address
+			}
+
+			console.log(data);
+
+			$.post({
+				url: '/user/add',
+				data : data,
+				dataType: 'json',
+				contentType : 'application/json;charset=utf-8'
+				success: function(data){
+					layer.msg('添加成功!',{icon: 5,time:1000});
+				},
+				error:function(data) {
+					console.log(data.msg);
+				}
+			});
+			return false;		
 		}
 	});
 });

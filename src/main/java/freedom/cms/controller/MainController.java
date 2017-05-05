@@ -26,7 +26,6 @@ public class MainController {
 
 	@Autowired
 	private MenuMapper menuMapper;
-	
 	@RequestMapping("/")
 	public ModelAndView home(ModelAndView mv)
 	{
