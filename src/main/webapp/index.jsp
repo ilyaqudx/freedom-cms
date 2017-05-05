@@ -94,7 +94,7 @@
 		</dd>
 	</dl>
 	</c:forEach>
-	<!--
+	
 		<dl id="menu-admin">
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -131,7 +131,7 @@
 			</ul>
 		</dd>
 	</dl>
-	-->
+	
 </div>
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>

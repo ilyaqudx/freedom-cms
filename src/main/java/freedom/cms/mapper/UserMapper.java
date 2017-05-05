@@ -22,7 +22,8 @@ import freedom.cms.domain.User;
 @Mapper
 public interface UserMapper {
 
-	@Insert("INSERT INTO user(name,identityCode,status,createTime) VALUES(#{name},#{identityCode},#{status},#{createTime})")
+	@Insert("INSERT INTO user(name,password,phone,identityCode,address,status,createTime) "
+			+ "VALUES(#{name},#{password},#{phone},#{identityCode},#{address},#{status},#{createTime})")
 	@SelectKey(before = false,keyColumn = "id",statement = "select @@IDENTITY",statementType=StatementType.PREPARED,keyProperty="id",resultType=Long.class)
 	public Long insert(User user);
 	

@@ -88,8 +88,8 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", identityCode="
-				+ identityCode + ", createTime=" + createTime + ", status="
-				+ status + "]";
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", phone=" + phone + ", identityCode="
+				+ identityCode + ", sex=" + sex + ", address=" + address + ", createTime=" + createTime + ", status="
+				+ status + ", parentId=" + parentId + "]";
 	}
 }

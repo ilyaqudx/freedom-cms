@@ -39,11 +39,20 @@ public class UserController {
 	public User get(@PathVariable Long id){
 		return userMapper.get(id);
 	}
-	
-	@RequestMapping(value = "/user/add",method=RequestMethod.POST)
-	public Long post( User user){
+	/**
+	 * 你妹的,JACKSON超级难用.@RequestBody绑定前端的JSON字符串到对象必须要一一对应,不能多也不能少,否则直接来415.我靠
+	 * 
+	 * data : JSON.stringify(data)
+	 * contentType : "application/json"
+	 * */
+	@RequestMapping(value = "/user/add")
+	public User post(HttpServletRequest request,User user){
+		user.setParentId(SessionUtils.getUserInSession(request).getId());
+		user.setStatus(0);
 		user.setCreateTime(new Date());
-		return userMapper.insert(user);
+		System.out.println(user);
+		userMapper.insert(user);
+		return user;
 	}
 	
 	@PublicAPI
