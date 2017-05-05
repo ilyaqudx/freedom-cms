@@ -1,7 +1,9 @@
 package freedom.cms.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 
 import freedom.cms.SessionUtils;
 import freedom.cms.annotation.PublicAPI;
@@ -40,7 +45,7 @@ public class UserController {
 		return userMapper.get(id);
 	}
 	/**
-	 * 你妹的,JACKSON超级难用.@RequestBody绑定前端的JSON字符串到对象必须要一一对应,不能多也不能少,否则直接来415.我靠
+	 * 你妹的,JACKSON超级难用.@RequestBody绑定前端的JSON字符串到对象字段必须要一一对应,不能多也不能少,否则直接来415.我靠
 	 * 
 	 * data : JSON.stringify(data)
 	 * contentType : "application/json"
@@ -76,10 +81,24 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/list")
-	public ModelAndView list(ModelAndView mv){
+	public ModelAndView list(ModelAndView mv,Page<User> page){
+		PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10));
 		List<User> users = userMapper.list();
 		mv.addObject("users", users);
 		mv.setViewName("/member-list.jsp");
 		return mv;
+	}
+	
+	@RequestMapping("/user/tableList")
+	public Object listByDataTable(DataTable<User> table)
+	{
+		PageHelper.startPage(Math.max(table.getPageNum(), 1), Math.max(table.getPageSize(), 10),true);
+		List<User> users = userMapper.list();
+		table.setData(users);
+		table.setRecordsTotal(table.getPages());
+		Map<String,Object> map = new HashMap<>();
+		map.put("data",users);
+		map.put("recordsTotal", table.getTotal());
+		return map;
 	}
 }

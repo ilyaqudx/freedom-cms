@@ -81,7 +81,7 @@
 			<dd>
 				<ul>
 					<c:forEach items="${menu.children}" var="child">
-						<li><a data-href="/user/list" data-title="${child.name}" href="javascript:;">${child.name}</a></li>
+						<li><a data-href="/member-list.jsp" data-title="${child.name}" href="javascript:;">${child.name}</a></li>
 					</c:forEach>
 					<!--<li><a data-href="member-del.html" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
 					<li><a data-href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>

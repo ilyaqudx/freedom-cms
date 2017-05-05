@@ -61,7 +61,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<%-- <c:forEach items="${users}" var="u">
+		<c:forEach items="${users}" var="u">
 			<tr class="text-c">
 				<td><input type="checkbox" value="1" name=""></td>
 				<td>${u.id}</td>
@@ -74,7 +74,7 @@
 				<td class="td-status"><span class="label label-success radius">已启用</span></td>
 				<td class="td-manage"><a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.html','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.html','10001','600','270')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
-		</c:forEach> --%>
+		</c:forEach>
 		</tbody>
 	</table>
 	</div>
@@ -93,20 +93,6 @@
 <script type="text/javascript">
 $(function(){
 	$('.table-sort').dataTable({
-		ajax: {
-            url: "/user/tableList"
-        },
-        serverSide: true,
-        columns: [
-			{"data": null},
-            {"data": "id"},
-            {"data": "name"},
-            {"data": "sex"},
-            {"data": "phone"},
-            {"data": "identityCode"},
-            {"data": "address"},
-            {"data": "createTime"}
-        ],
 		"aaSorting": [[ 1, "asc" ]],//默认第几个排序
 		"bStateSave": true,//状态保存
 		"aoColumnDefs": [

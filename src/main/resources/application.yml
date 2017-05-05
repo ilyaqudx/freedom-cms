@@ -37,3 +37,9 @@ kaptcha:
     clear:
       from: 247,247,247
       to: 247,247,247
+     
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
