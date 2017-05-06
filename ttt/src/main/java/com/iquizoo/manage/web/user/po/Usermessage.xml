@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Auto Create,Don't Modify,you should copy some sql config,because only have insert,update,full query and delete by primaryKey
+	@Author JiangZhiYong	@date 2015年4月21日 11:28:58-->
+	
+<mapper namespace="Usermessage">
+
+	<select id="getUsermessageList"  resultType="Usermessage">
+		SELECT * FROM Usermessage
+	</select>
+
+	<insert id="addUsermessage" parameterType="Usermessage">
+		INSERT INTO Usermessage(
+		id
+		<if test="type != null">
+			,type
+		</if>
+		<if test="userId != null">
+			,userId
+		</if>
+		<if test="attachment != null">
+			,attachment
+		</if>
+		<if test="title != null">
+			,title
+		</if>
+		<if test="content != null">
+			,content
+		</if>
+		<if test="status != null">
+			,status
+		</if>
+		<if test="createTime != null">
+			,createTime
+		</if>
+		<if test="readTime != null">
+			,readTime
+		</if>
+		<if test="parentId != null">
+			,parentId
+		</if>
+		)VALUES(
+		#{id}
+		<if test="type != null">
+			,#{type}
+		</if>
+		<if test="userId != null">
+			,#{userId}
+		</if>
+		<if test="attachment != null">
+			,#{attachment}
+		</if>
+		<if test="title != null">
+			,#{title}
+		</if>
+		<if test="content != null">
+			,#{content}
+		</if>
+		<if test="status != null">
+			,#{status}
+		</if>
+		<if test="createTime != null">
+			,#{createTime}
+		</if>
+		<if test="readTime != null">
+			,#{readTime}
+		</if>
+		<if test="parentId != null">
+			,#{parentId}
+		</if>
+		)
+	</insert>
+
+	<update id="updateUsermessage" parameterType="Usermessage">
+		UPDATE Usermessage
+		SET 
+		id = #{id}
+		<if test="type != null">
+			,type = #{type}
+		</if>
+		<if test="userId != null">
+			,userId = #{userId}
+		</if>
+		<if test="attachment != null">
+			,attachment = #{attachment}
+		</if>
+		<if test="title != null">
+			,title = #{title}
+		</if>
+		<if test="content != null">
+			,content = #{content}
+		</if>
+		<if test="status != null">
+			,status = #{status}
+		</if>
+		<if test="createTime != null">
+			,createTime = #{createTime}
+		</if>
+		<if test="readTime != null">
+			,readTime = #{readTime}
+		</if>
+		<if test="parentId != null">
+			,parentId = #{parentId}
+		</if>
+		WHERE 
+		id=#{id}
+		
+	</update>
+
+	<delete id="deleteUsermessageByKey" parameterType="Usermessage">
+	    DELETE FROM Usermessage 
+		WHERE 
+		id=#{id}
+	</delete>
+
+</mapper>

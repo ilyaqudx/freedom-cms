@@ -1,0 +1,2 @@
+#固定配置,不要修改(由Config类进行加载)
+envrionment=${server-envrionment}

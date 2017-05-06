@@ -1,0 +1,6 @@
+desc select p.id,p.name,p.parent_id,p.level,sum(o.amount) from person p ,
+
+(select id,user_id,amount from porder where user_id in ( select id from person where code like (select CONCAT(code,'-%') from person where id = 1))) o
+
+where p.id = o.user_id GROUP BY p.id
+

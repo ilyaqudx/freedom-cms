@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	
+	<appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+		<param name="encoding" value="utf-8" />
+		<appender-ref ref="STDOUT" />
+	</appender>
+
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="gbk" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d (%t) [%24F:%-3L:%-5p]%x %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+		<param name="encoding" value="gbk" />
+		<param name="File" value="${management2.root}/log/management.log" />
+		<param name="BufferSize" value="8129" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="1024KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d (%t) [%24F:%-3L:%-5p]%x %m%n" />
+		</layout>
+	</appender>
+
+	<category name="org.springframework">
+		<priority value="INFO" />
+	</category>
+
+	<category name="java.sql">
+		<priority value="debug" />
+	</category>
+
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+
+	</root>
+</log4j:configuration>
