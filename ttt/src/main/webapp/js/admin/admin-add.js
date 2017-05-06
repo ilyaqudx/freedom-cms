@@ -15,14 +15,22 @@ $(function(){
 		var phone = $('#phone').val();
 		var realName = $('#realName').val();
 		var adminRole = $('#adminRole').val();
-		var description = $('#description').val();
+		var identityCode = $("#identityCode").val();
+		var weixin = $("#weixin").val();
+		var qq = $("#qq").val();
+		var homeAddress = $("#homeAddress").val();
+		var remark = $('#remark').val();
 		var params = {
 				name:adminName,
 				password:password,
 				phone:phone,
 				realName:realName,
 				roleIds:adminRole,
-				description:description
+				identityCode:identityCode,
+				weixin:weixin,
+				qq:qq,
+				homeAddress:homeAddress,
+				remark:remark
 		};
 		var roleIds = [adminRole];
 		params['roleIds'] = roleIds;

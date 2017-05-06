@@ -89,6 +89,7 @@ public class AdminController extends BaseController{
 	@ResponseBody
 	public String editAdmin(String params) throws Exception{
 		Admin admin = JSON.parseObject(params, Admin.class);
+		System.out.println(admin);
 		adminService.updateAdmin(admin);
 		return success();
 	}

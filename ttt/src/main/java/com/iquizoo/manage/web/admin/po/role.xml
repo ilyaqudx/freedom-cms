@@ -32,6 +32,9 @@
 		<if test="name != null">
 			,name
 		</if>
+		<if test="type != null">
+			,type
+		</if>
 		<if test="createTime != null">
 			,createTime
 		</if>
@@ -45,6 +48,9 @@
 		#{id}
 		<if test="name != null">
 			,#{name}
+		</if>
+		<if test="type != null">
+			,#{type}
 		</if>
 		<if test="createTime != null">
 			,#{createTime}
@@ -64,6 +70,9 @@
 		id = #{id}
 		<if test="name != null">
 			,name = #{name}
+		</if>
+		<if test="type != null">
+			,type = #{type}
 		</if>
 		<if test="createTime != null">
 			,createTime = #{createTime}

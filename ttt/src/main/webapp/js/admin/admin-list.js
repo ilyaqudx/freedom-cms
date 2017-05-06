@@ -109,28 +109,40 @@ $(function(){
 	                orderable: false
 	            },{
 	                data: "realName",
-	                title: "真实姓名",
+	                title: "姓名",
 	                orderable: false
 	            },{
 	            	data: "phone",
 	                title: "手机",
 	                orderable: false 
 	            },{
-	            	name: "createTime",
 	            	data: "createTime",
 	                title: "创建时间",
 	                orderable: false
 	            },{
-	            	data: "updateTime",
-	                title: "更新时间",
-	                orderable: false
-	            },{
-	            	data: "description",
-	                title: "描述",
-	                orderable: false
-	            },{
 	            	data: "status",
 	                title: "状态",
+	                orderable: false ,
+	                width : 40
+	            },{ 
+	            	data: "identityCode",
+	                title: "身份证",
+	                orderable: false
+	            },{
+	                data: "weixin",
+	                title: "微信",
+	                orderable: false
+	            },{
+	            	data: "qq",
+	                title: "QQ",
+	                orderable: false 
+	            },{
+	            	data: "homeAddress",
+	                title: "住址",
+	                orderable: false
+	            },{
+	            	data: "remark",
+	                title: "备注",
 	                orderable: false 
 	            },{ 
 	            	data: null,
@@ -156,21 +168,15 @@ $(function(){
 	      },{
 	        targets: 5,
 	        render: function(data, type, row, meta) {
-	        	return new Date(data).format('yyyy-MM-dd hh:mm:ss');
-	        }
-	      },
-	      {
-	        targets: 6,
-	        render: function(data, type, row, meta) {
-	        	return new Date(data).format('yyyy-MM-dd hh:mm:ss');
+	        	return new Date(data).format('yyyy-MM-dd');
 	        }
 	      },{
-		        targets: 8,
+		        targets: 6,
 		        render: function(data, type, row, meta) {
-		        	return data==1?'<span class="label label-success radius">已启用</span>':'<span class="label radius">已停用</span>';
+		        	return data==1?'<span class="label label-success radius">正常</span>':'<span class="label radius">禁止登陆</span>';
 		        }
 		  },{
-	        targets: 9,
+	        targets: 12,
 	        render: function(data, type, row, meta) {
 	        	var html = '';
 	        	if(row.status == 1){
@@ -225,6 +231,19 @@ $(function(){
 		if(realName != null && realName != ''){
 			params['realName']=realName;
 		}
+		var startTime = $("#datemin").val();
+		var endTime   = $("#datemax").val();
+		if(startTime != null && startTime != '')
+			params['startTime'] = startTime;
+		if(endTime != null && endTime != '')
+			params['endTime'] = endTime;
+		
+		var phone = $("#_phone").val();
+		var weixin   = $("#_weixin").val();
+		if(phone != null && phone != '')
+			params['phone'] = phone;
+		if(weixin != null && weixin != '')
+			params['weixin'] = weixin;
 		return params;
 	}
 });

@@ -29,6 +29,33 @@
 			<input type="text" class="input-text" value="${admin.realName }" placeholder="" name="realName" id="realName">
 		</div>
 	</div>
+	<!-- 新加属性  START-->
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>身份证：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.identityCode }" placeholder="" name="identityCode" id="identityCode">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>微信：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.weixin }" placeholder="" name="weixin" id="weixin">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>QQ：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.qq }" placeholder="" name="qq" id="qq">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>住址：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.homeAddress }" placeholder="" name="homeAddress" id="homeAddress">
+		</div>
+	</div>
+	<!-- 新加属性  END-->
+	
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3">角色：</label>
 		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
@@ -54,7 +81,7 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3">备注：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<textarea name="" id="description" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">${admin.description }</textarea>
+			<textarea name="" id="remark" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)">${admin.remark }</textarea>
 			<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
 		</div>
 	</div>

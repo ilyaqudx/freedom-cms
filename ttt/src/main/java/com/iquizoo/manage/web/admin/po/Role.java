@@ -8,6 +8,13 @@ import java.io.Serializable;
 public class Role implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 1-根(最高权限,不对外)
+	 * 2-系统管理员(对外最高权限)
+	 * 3-普通用户
+	 * */
+	public static final int TYPE_ROOT = 1,TYPE_SYS = 2,TYPE_COMMON = 3;
+	
 	/**ID */
 	private Integer id;	
 
@@ -24,7 +31,17 @@ public class Role implements Serializable{
 	private String description;	
 	
 	private String resourceIds;//资源id
+	//角色类型
+	private Integer type;
 	
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	/** ID */
 	public void setId(Integer id){
 		this.id=id;

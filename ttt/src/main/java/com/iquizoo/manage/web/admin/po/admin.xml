@@ -7,6 +7,21 @@
 		<if test="realName != null">
 			AND realName like '%${realName}%'
 		</if>
+		<if test="startTime != null">
+			AND createTime &gt;= #{startTime}
+		</if>
+		<if test="endTime != null">
+			AND createTime &lt;= #{endTime}
+		</if>
+		<if test="phone != null">
+			AND phone = #{phone}
+		</if>
+		<if test="weixin != null">
+			AND weixin = #{weixin}
+		</if>
+		<if test="parentId != null">
+			AND FIND_IN_SET(id, getChildLst(#{parentId}))
+		</if>
 		limit #{start},#{length}
 	</select>
 	
@@ -14,6 +29,21 @@
 		SELECT count(*) FROM Admin WHERE 1=1 
 		<if test="realName != null">
 			AND realName like '%${realName}%'
+		</if>
+		<if test="startTime != null">
+			AND createTime &gt;= #{startTime}
+		</if>
+		<if test="endTime != null">
+			AND createTime &lt;= #{endTime}
+		</if>
+		<if test="phone != null">
+			AND phone = #{phone}
+		</if>
+		<if test="weixin != null">
+			AND weixin = #{weixin}
+		</if>
+		<if test="parentId != null">
+			AND FIND_IN_SET(id, getChildLst(#{parentId}))
 		</if>
 	</select>  
 	
@@ -55,6 +85,26 @@
 		<if test="status != null">
 			,status
 		</if>
+		
+		<if test="identityCode != null">
+			,identityCode
+		</if>
+		<if test="weixin != null">
+			,weixin
+		</if>
+		<if test="qq != null">
+			,qq
+		</if>
+		<if test="homeAddress != null">
+			,homeAddress
+		</if>
+		<if test="remark != null">
+			,remark
+		</if>
+		<if test="parentId != null">
+			,parentId
+		</if>
+		
 		)VALUES(
 		#{id}
 		<if test="name != null">
@@ -80,6 +130,25 @@
 		</if>
 		<if test="status != null">
 			,#{status}
+		</if>
+		
+		<if test="identityCode != null">
+			,#{identityCode}
+		</if>
+		<if test="weixin != null">
+			,#{weixin}
+		</if>
+		<if test="qq != null">
+			,#{qq}
+		</if>
+		<if test="homeAddress != null">
+			,#{homeAddress}
+		</if>
+		<if test="remark != null">
+			,#{remark}
+		</if>
+		<if test="parentId != null">
+			,#{parentId}
 		</if>
 		)
 	</insert>
@@ -112,6 +181,23 @@
 		<if test="status != null">
 			,status = #{status}
 		</if>
+		
+		<if test="identityCode != null">
+			,identityCode = #{identityCode}
+		</if>
+		<if test="weixin != null">
+			,weixin = #{weixin}
+		</if>
+		<if test="qq != null">
+			,qq = #{qq}
+		</if>
+		<if test="homeAddress != null">
+			,homeAddress = #{homeAddress}
+		</if>
+		<if test="remark != null">
+			,remark = #{remark}
+		</if>
+		
 		WHERE 
 		id=#{id}
 		

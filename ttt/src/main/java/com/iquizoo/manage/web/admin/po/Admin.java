@@ -40,6 +40,63 @@ public class Admin implements Serializable{
 	
 	private List<Integer> _roleIds;//角色id
 	
+	/**
+	 * 新添加信息
+	 * */
+	private String identityCode;
+	private String weixin;
+	private String qq;
+	private String homeAddress;
+	private String remark;
+	private int parentId;
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getIdentityCode() {
+		return identityCode;
+	}
+
+	public void setIdentityCode(String identityCode) {
+		this.identityCode = identityCode;
+	}
+
+	public String getWeixin() {
+		return weixin;
+	}
+
+	public void setWeixin(String weixin) {
+		this.weixin = weixin;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getHomeAddress() {
+		return homeAddress;
+	}
+
+	public void setHomeAddress(String homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	/** ID */
 	public void setId(Integer id){
 		this.id=id;
@@ -123,7 +180,6 @@ public class Admin implements Serializable{
 	public Integer getStatus() {
 		return status;
 	}
-
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
@@ -143,17 +199,9 @@ public class Admin implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Admin ["
-		+" id="+id
-		+" name="+name
-		+" password="+password
-		+" createTime="+createTime
-		+" updateTime="+updateTime
-		+" description="+description
-		+" realName="+realName
-		+" phone="+phone
-		+" status="+status
-		+ "]";
+		return "Admin [id=" + id + ", name=" + name + ", password=" + password + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", description=" + description + ", realName=" + realName + ", phone="
+				+ phone + ", status=" + status + ", _roleIds=" + _roleIds + ", identityCode=" + identityCode
+				+ ", weixin=" + weixin + ", qq=" + qq + ", homeAddress=" + homeAddress + ", remark=" + remark + "]";
 	}
-
 }

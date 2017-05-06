@@ -1,6 +1,7 @@
 package com.iquizoo.manage.web.admin.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +18,11 @@ import com.iquizoo.manage.base.context.AppContext;
 import com.iquizoo.manage.web.admin.dao.AdminDao;
 import com.iquizoo.manage.web.admin.dao.AdminownroleDao;
 import com.iquizoo.manage.web.admin.dao.ResourceDao;
+import com.iquizoo.manage.web.admin.dao.RoleDao;
 import com.iquizoo.manage.web.admin.po.Admin;
 import com.iquizoo.manage.web.admin.po.Adminownrole;
 import com.iquizoo.manage.web.admin.po.Resource;
+import com.iquizoo.manage.web.admin.po.Role;
 
 /**
  * @Description 管理员
@@ -36,6 +39,9 @@ public class AdminServiceImpl implements AdminService{
 	private AdminownroleDao adminownroleDao;
 	
 	@Autowired
+	private RoleDao roleDAO;
+	
+	@Autowired
 	private ResourceDao resourceDao;
 	
 	@Override
@@ -46,7 +52,25 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public void data(DataTable table) throws Exception {
+		//单独的业务逻辑处理.用户是有推荐人的,超级管理员可以查看所有人,其他人只能看自己的下线.
+		Admin admin = AppContext.getAdmin();
+		table.getParams().put("parentId", admin.getId());
+		/*List<Adminownrole> ars = adminownroleDao.getAdminownroleByAdminId(admin.getId());
+		boolean highestAuthority = false;
+		for (Adminownrole ar : ars) {
+			Role role = roleDAO.getRole(ar.getRoleId());
+			if(role.getType() == Role.TYPE_ROOT || role.getType() == Role.TYPE_SYS){
+				highestAuthority = true;
+				break;
+			}
+		}
+		
+		if(!highestAuthority){
+			//如果没有最高权限,只能查看自己下线成员
+		}*/
+		System.out.println(table.getParams());
 		adminDao.getAdminList(table);
+		
 	}
 
 	@Override
@@ -67,6 +91,7 @@ public class AdminServiceImpl implements AdminService{
 		admin.setCreateTime(new Date());
 		admin.setUpdateTime(new Date());
 		admin.setStatus(1);
+		admin.setParentId(AppContext.getAdmin().getId());
 		adminDao.addAdmin(admin);
 		//添加管理员角色
 		List<Integer> roleIds = admin.get_roleIds();
@@ -122,7 +147,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public boolean login(String name, String password) throws Exception {
+	public boolean login(String name, String password) throws Exception 
+	{
 		Admin admin = adminDao.getAdminByName(name);
 		if(admin != null){
 			if(admin.getStatus() == Consts.TRUE){
@@ -136,6 +162,7 @@ public class AdminServiceImpl implements AdminService{
 						for(Resource r : resources){
 							all.add(r.getUrl());
 						}
+						System.out.println(Arrays.toString(all.toArray()));
 					}
 					AppContext.setAuthority(all);
 					return true;

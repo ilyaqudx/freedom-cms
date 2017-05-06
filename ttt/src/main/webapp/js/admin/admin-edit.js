@@ -8,14 +8,24 @@ $(function(){
 		var phone = $('#phone').val();
 		var realName = $('#realName').val();
 		var adminRole = $('#adminRole').val();
-		var description = $('#description').val();
+		var identityCode = $("#identityCode").val();
+		var weixin = $("#weixin").val();
+		var qq = $("#qq").val();
+		var homeAddress = $("#homeAddress").val();
+		var remark = $('#remark').val();
+		
 		var params = {
 				name:adminName,
 				phone:phone,
 				realName:realName,
 				roleIds:adminRole,
-				description:description
+				identityCode:identityCode,
+				weixin:weixin,
+				qq:qq,
+				homeAddress:homeAddress,
+				remark:remark
 		};
+		console.log(params);
 		var roleIds = [adminRole];
 		params['roleIds'] = roleIds;
 		var adminId = $('#adminId').val();
