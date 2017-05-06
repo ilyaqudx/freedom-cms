@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iquizoo.core.api.Consts;
 import com.iquizoo.core.kit.Kit;
 import com.iquizoo.core.page.DataTable;
 import com.iquizoo.core.page.Page;
@@ -124,22 +125,26 @@ public class AdminServiceImpl implements AdminService{
 	public boolean login(String name, String password) throws Exception {
 		Admin admin = adminDao.getAdminByName(name);
 		if(admin != null){
-			if(admin.getStatus() == 1 && Kit.md5(password).equals(admin.getPassword())){
-				//缓存权限信息
-				AppContext.setAdmin(admin);
-				List<Adminownrole> roles = adminownroleDao.getAdminownroleByAdminId(admin.getId());
-				Set<String> all = new HashSet<String>();
-				for(Adminownrole role : roles){
-					List<Resource> resources = resourceDao.getResourceByRoleId(role.getRoleId());
-					for(Resource r : resources){
-						all.add(r.getUrl());
+			if(admin.getStatus() == Consts.TRUE){
+				if(Kit.md5(password).equals(admin.getPassword())){
+					//缓存权限信息
+					AppContext.setAdmin(admin);
+					List<Adminownrole> roles = adminownroleDao.getAdminownroleByAdminId(admin.getId());
+					Set<String> all = new HashSet<String>();
+					for(Adminownrole role : roles){
+						List<Resource> resources = resourceDao.getResourceByRoleId(role.getRoleId());
+						for(Resource r : resources){
+							all.add(r.getUrl());
+						}
 					}
+					AppContext.setAuthority(all);
+					return true;
 				}
-				AppContext.setAuthority(all);
-				return true;
+				throw new IllegalArgumentException("密码错误");
 			}
+			throw new IllegalArgumentException("帐号被锁定,请联系管理员解除锁定!");
 		}
-		return false;
+		throw new IllegalArgumentException("用户名错误");
 	}
 
 	@Override

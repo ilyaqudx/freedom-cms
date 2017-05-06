@@ -38,12 +38,18 @@ public class IndexController extends BaseController{
 	@RequestMapping(method=RequestMethod.POST, value="/login")
 	@ResponseBody
 	public String login(String name, String password) throws Exception{
-		boolean login = adminService.login(name,password);
-		if(login){
-			systemLogService.addLoginLog();
-			return success();
+		boolean login;
+		try {
+			login = adminService.login(name,password);
+			if(login){
+				systemLogService.addLoginLog();
+				return success();
+			}
+		} catch (Exception e) {
+			if(e instanceof IllegalArgumentException)
+				return error(e.getMessage());
 		}
-		return error("登陆失败！");
+		return error("登陆失败");
 	}
 	
 	@RequestMapping("/main")

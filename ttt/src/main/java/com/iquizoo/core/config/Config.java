@@ -1,7 +1,5 @@
 package com.iquizoo.core.config;
 
-import java.util.List;
-
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.event.ConfigurationEvent;
@@ -98,10 +96,5 @@ public class Config {
 	public static final float getFloat(String key)
 	{
 		return config.getFloat(key);
-	}
-	@SuppressWarnings("unchecked")
-	public static final List<String> getStringList(String key)
-	{
-		return config.getList(key);
 	}
 }
