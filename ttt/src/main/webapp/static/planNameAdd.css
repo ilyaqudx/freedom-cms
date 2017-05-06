@@ -1,0 +1,34 @@
+.content{
+	width:600px;
+	margin:80px 100px 0 100px;
+}
+#planName{
+	width: 250px;
+	height: 30px;
+	border: silver solid 1px;
+	border-radius:5px;
+}
+.footer{
+	width:600px;
+	height:80px;
+	margin:0 100px;
+}
+.footer input{
+	width: 150px;
+	height: 50px;
+	background-color:silver;
+	margin-left: 50px;
+	margin-top: 10px;
+	border-radius:10px;
+}
+.imgShow{
+	width:340px;
+	height: 150px;
+	margin-left:50px;
+	margin-top:10px;
+	border: silver solid 1px;
+}
+.fileImg{
+	margin-left:50px;
+	margin-top:8px;
+}

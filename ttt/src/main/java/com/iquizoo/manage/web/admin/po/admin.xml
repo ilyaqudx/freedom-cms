@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Admin">
+  
+	<select id="getAdminList"  resultType="com.iquizoo.manage.web.admin.po.Admin" parameterType="Map">
+		SELECT * FROM Admin WHERE 1=1 
+		<if test="realName != null">
+			AND realName like '%${realName}%'
+		</if>
+		limit #{start},#{length}
+	</select>
+	
+	<select id="getAdminListCount"  resultType="java.lang.Integer" parameterType="Map">
+		SELECT count(*) FROM Admin WHERE 1=1 
+		<if test="realName != null">
+			AND realName like '%${realName}%'
+		</if>
+	</select>  
+	
+	<select id="getAdminById" resultType="Admin" parameterType="Integer">
+		SELECT * FROM Admin WHERE id=#{id}
+	</select>
+	
+	<select id="getAdminByName" resultType="Admin" parameterType="String">
+		SELECT * FROM Admin WHERE name=#{name}
+	</select>
+	
+	<insert id="addAdmin" parameterType="Admin">
+		<selectKey keyColumn="id" keyProperty="id" resultType="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO Admin(
+		id
+		<if test="name != null">
+			,name
+		</if>
+		<if test="password != null">
+			,password
+		</if>
+		<if test="createTime != null">
+			,createTime
+		</if>
+		<if test="updateTime != null">
+			,updateTime
+		</if>
+		<if test="description != null">
+			,description
+		</if>
+		<if test="realName != null">
+			,realName
+		</if>
+		<if test="phone != null">
+			,phone
+		</if>
+		<if test="status != null">
+			,status
+		</if>
+		)VALUES(
+		#{id}
+		<if test="name != null">
+			,#{name}
+		</if>
+		<if test="password != null">
+			,#{password}
+		</if>
+		<if test="createTime != null">
+			,#{createTime}
+		</if>
+		<if test="updateTime != null">
+			,#{updateTime}
+		</if>
+		<if test="description != null">
+			,#{description}
+		</if>
+		<if test="realName != null">
+			,#{realName}
+		</if>
+		<if test="phone != null">
+			,#{phone}
+		</if>
+		<if test="status != null">
+			,#{status}
+		</if>
+		)
+	</insert>
+
+	<update id="updateAdmin" parameterType="Admin">
+		UPDATE Admin
+		SET 
+		id = #{id}
+		<if test="name != null">
+			,name = #{name}
+		</if>
+		<if test="password != null">
+			,password = #{password}
+		</if>
+		<if test="createTime != null">
+			,createTime = #{createTime}
+		</if>
+		<if test="updateTime != null">
+			,updateTime = #{updateTime}
+		</if>
+		<if test="description != null">
+			,description = #{description}
+		</if>
+		<if test="realName != null">
+			,realName = #{realName}
+		</if>
+		<if test="phone != null">
+			,phone = #{phone}
+		</if>
+		<if test="status != null">
+			,status = #{status}
+		</if>
+		WHERE 
+		id=#{id}
+		
+	</update>
+
+	<delete id="deleteAdminByKey" parameterType="Integer">
+	    DELETE FROM Admin 
+		WHERE 
+		id=#{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product">
+
+		<insert id="insert" parameterType="Product">
+			<selectKey resultType="int" keyProperty="id">    
+             	<![CDATA[SELECT @@IDENTITY AS ID ]]>   
+       		</selectKey>
+			INSERT INTO Product(type,code,name,originalPrice,price,iosOriginalPrice,iosPrice,count,payCode,status,description) 
+			VALUES(#{type},#{code},#{name},#{originalPrice},#{price},#{iosOriginalPrice},#{iosPrice},#{count},#{payCode},#{status},#{description})
+		</insert>
+		
+		<select id="getById" parameterType="int" resultType="Product">
+			SELECT * FROM Product WHERE id = #{id}
+		</select>
+		
+		
+		<update id="update" parameterType="Product">
+			UPDATE Product SET  type = #{type}, code = #{code} ,name = #{name}, 
+			originalPrice = #{originalPrice},
+			price = #{price}, 
+			iosOriginalPrice = #{iosOriginalPrice},
+			iosPrice = #{iosPrice}, count = #{count}, payCode = #{payCode}, status = #{status}, description = #{description} WHERE id = #{id}
+		</update>
+		
+		<delete id="delete" parameterType="int">
+			DELETE FROM Product WHERE id = #{id}
+		</delete>
+		
+		<select id="getProductList" resultType="Product">
+			SELECT * FROM Product 
+		</select>
+		
+		<select id="getProduct" resultType="Product">
+			SELECT * FROM Product 
+			<if test="order != null">
+			order by ${order}
+		   </if>
+		    limit #{start},#{length}
+		</select>
+		<select id="getProductListCount" resultType="Integer">
+			SELECT count(*) FROM Product 
+		</select>
+		
+	
+</mapper>

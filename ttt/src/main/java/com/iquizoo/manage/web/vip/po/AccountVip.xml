@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Auto Create,Don't Modify,you should copy some sql config,because only have insert,update,full query and delete by primaryKey
+	@Author JiangZhiYong	@date 2015年4月21日 11:28:58-->
+	
+<mapper namespace="AccountVip">
+
+	<select id="getList" parameterType="Map" resultType="AccountVip">
+		SELECT av.*
+		  FROM
+		     (
+		        SELECT accountId
+		             , MAX(endTime) endTime
+		          FROM accountVip
+		         GROUP BY accountId
+		     ) v
+		  LEFT JOIN accountVip av
+		    ON v.accountId = av.accountId
+		   AND v.endTime = av.endTime
+		 WHERE 1=1
+		<if test="accountId != null">
+			AND av.accountId = #{accountId}
+		</if>
+		<if test="datemin != null">
+			AND av.createTime >= #{datemin}
+		</if>
+		<if test="datemax != null">
+			AND #{datemax}>= av.createTime
+		</if>
+		<if test="order != null">
+			ORDER BY ${order}
+		</if>
+		 LIMIT #{start},#{length}
+	</select>
+	
+	<select id="getListCount" parameterType="Map" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM
+		     (
+		       SELECT accountId
+		            , MAX(endTime) endTime
+		         FROM accountVip
+		        GROUP BY accountId
+		     ) v
+		  LEFT JOIN accountVip av
+		    ON v.accountId = av.accountId
+		   AND v.endTime = av.endTime
+		 WHERE 1=1
+		<if test="accountId != null">
+			and av.accountId = #{accountId}
+		</if>
+		<if test="datemin != null">
+			and av.createTime>#{datemin}
+		</if>
+		<if test="datemax != null">
+			and #{datemax}>av.createTime
+		</if>
+	</select>
+	
+	<insert id="insert" parameterType="AccountVip">
+		INSERT INTO AccountVip(
+		accountId
+		<if test="userId != null">
+			,userId
+		</if>
+		<if test="vipId != null">
+			,vipId
+		</if>
+		<if test="status != null">
+			,status
+		</if>
+		<if test="createTime != null">
+			,createTime
+		</if>
+		<if test="startTime != null">
+			,startTime
+		</if>
+		<if test="EndTime != null">
+			,EndTime
+		</if>
+		<if test="mark != null">
+			,mark
+		</if>
+		) VALUES (
+		#{accountId}
+		<if test="userId != null">
+			,#{userId}
+		</if>
+		<if test="vipId != null">
+			,#{vipId}
+		</if>
+		<if test="status != null">
+			,#{status}
+		</if>
+		<if test="createTime != null">
+			,#{createTime}
+		</if>
+		<if test="startTime != null">
+			,#{startTime}
+		</if>
+		<if test="EndTime != null">
+			,#{EndTime}
+		</if>
+		<if test="mark != null">
+			,#{mark}
+		</if>
+		)
+	</insert>
+	<update id="update" parameterType="AccountVip">
+	 UPDATE accountVip SET 
+	 <if test="EndTime != null">
+		EndTime = #{EndTime}
+	</if>
+	WHERE id = #{id}
+	</update>
+	<select id="getByAccountId" parameterType="Integer" resultType="AccountVip">
+	   SELECT * FROM accountvip WHERE accountId = #{accountId} ORDER BY createTime DESC LIMIT 0,1
+	</select>
+
+</mapper>

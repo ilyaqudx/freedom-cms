@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserProp">
+
+		<insert id="insert" parameterType="UserProp">
+			INSERT INTO UserProp(userId,propId,count) 
+			VALUES(#{userId},#{propId},#{count})
+		</insert>
+		
+		<select id="getByUidPid" parameterType="int" resultType="UserProp">
+			SELECT * FROM UserProp WHERE userId = #{userId} and propId = #{propId}
+		</select>
+		
+		<update id="update" parameterType="UserProp">
+			UPDATE UserProp SET count = #{count} 
+			WHERE userId = #{userId} AND propId = #{propId}
+		</update>
+		
+		<select id="list" resultType="UserProp">
+			SELECT * FROM UserProp 
+		</select>
+		
+		<select id="getList" resultType="UserProp" parameterType="Map">
+			SELECT * FROM UserProp WHERE 1=1
+			<if test="userId != null">
+			AND userId = #{userId}
+			</if>
+			<if test="order != null">
+			order by ${order}
+		   </if>
+		    limit #{start},#{length}
+		</select>
+		<select id="getListCount" resultType="Integer" parameterType="Map">
+			SELECT count(*) FROM UserProp WHERE 1=1	
+			<if test="userId != null">
+			AND userId = #{userId}
+			</if>
+		</select>
+		
+	
+</mapper>

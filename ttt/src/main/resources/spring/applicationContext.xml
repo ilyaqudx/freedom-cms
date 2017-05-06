@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	 					http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+	 					http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	 					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	 					http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	 					http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd    ">
+
+<context:property-placeholder location="classpath:mysql/jdbc.properties"/>
+	<task:annotation-driven />
+	<mvc:annotation-driven>
+		<!-- <mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="writeAcceptCharset" value="false"></property>
+				<property name="supportedMediaTypes" value="text/html;charset=utf-8"></property>
+			</bean>
+		</mvc:message-converters> -->
+		<mvc:message-converters>
+          <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+              <property name="supportedMediaTypes">
+                  <list>
+                      <value>application/json;charset=UTF-8</value>
+                      <value>text/html;charset=UTF-8</value>
+                  </list>
+              </property>
+          </bean>
+      </mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 注解扫描目录 -->
+	<context:component-scan base-package="com.iquizoo.manage" />
+
+	<!-- 数据源azy -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="5" />
+		<property name="maxActive" value="100" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="100000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="20" />
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+
+	<!-- -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<!-- 注解事务 <tx:annotation-driven transaction-manager="transactionManager" 
+		/> -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:mysql/mybatis-config.xml</value>
+		</property>
+		<property name="mapperLocations">
+			<value>classpath*:com/iquizoo/manage/web/**/po/*.xml</value>
+		</property>
+		
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	 <!-- 上传文件拦截，设置最大上传文件大小   200M=20*1024*1024(B)=20971520 bytes -->   
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+       <property name="maxUploadSize" value="209715200" /> 
+       <property name="defaultEncoding" value="UTF-8"/> 
+   </bean>
+	
+	<!-- 不拦截静态文件 -->
+	<mvc:default-servlet-handler/>
+	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/pages/" p:suffix=".jsp" />
+	<!-- 静态资源文件 -->
+	<mvc:resources location="/lib/**" mapping="/lib/"/>
+	<mvc:resources location="/static/**" mapping="/static/"/>
+	<mvc:resources location="/js/**" mapping="/js/"/>
+	
+	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+</beans>
