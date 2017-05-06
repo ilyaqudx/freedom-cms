@@ -1,5 +1,7 @@
 package freedom.cms.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -26,4 +28,9 @@ public interface UserMapper {
 	
 	@Select("SELECT * FROM user WHERE id = #{id}")
 	public User get(Long id);
+	
+	@Select("SELECT * FROM user")
+	public List<User> list();
+	
+	
 }

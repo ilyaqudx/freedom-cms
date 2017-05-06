@@ -5,9 +5,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import freedom.cms.annotation.PublicAPI;
 import freedom.cms.domain.User;
 
 /**  
@@ -25,8 +27,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception 
 	{
-		String requestPath = request.getRequestURI();
-		if(!"/users/login".equals(requestPath)){
+		HandlerMethod method = (HandlerMethod) handler;
+		PublicAPI publicAPI = method.getMethodAnnotation(PublicAPI.class);
+		if(publicAPI == null){
+			String requestPath = request.getRequestURI();
 			User user = (User) request.getSession().getAttribute("user_in_session");
 			if(user == null){
 				response.sendRedirect("/login.html");
