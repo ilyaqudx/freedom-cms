@@ -48,12 +48,14 @@ public class Admin implements Serializable{
 	private String qq;
 	private String homeAddress;
 	private String remark;
-	private int parentId;
-	public int getParentId() {
+	private Integer parentId;
+	private String bank;//银行名称
+	private String bankAccount;//银行帐号
+	public Integer getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 
