@@ -1,7 +1,9 @@
 package com.iquizoo.manage.web.admin.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,11 @@ import com.iquizoo.manage.web.admin.po.Admin;
 import com.iquizoo.manage.web.admin.po.Role;
 import com.iquizoo.manage.web.admin.service.AdminService;
 import com.iquizoo.manage.web.admin.service.RoleService;
+import com.iquizoo.manage.web.bank.dao.BankAccountDAO;
+import com.iquizoo.manage.web.bank.dao.BankDAO;
+import com.iquizoo.manage.web.bank.po.Bank;
+import com.iquizoo.manage.web.bank.po.BankAccount;
+import com.iquizoo.manage.web.bank.vo.AdminVO;
 import com.iquizoo.manage.web.system.service.SystemLogService;
 
 /**
@@ -36,6 +43,12 @@ public class AdminController extends BaseController{
 	
 	@Autowired
 	private SystemLogService systemLogService;
+	
+	@Autowired
+	private BankDAO bankDAO;
+	
+	@Autowired
+	private BankAccountDAO bankAccountDAO;
 	
 	@RequestMapping(method=RequestMethod.GET, value="/list")
 	public ModelAndView list() throws Exception{
@@ -61,7 +74,10 @@ public class AdminController extends BaseController{
 			model.addObject("admin", admin);
 		}
 		List<Role> roles = roleService.getAllRole();
+		List<Bank> banks = bankDAO.getBankList();
 		model.addObject("roles", roles);
+		model.addObject("banks", banks);
+		System.out.println(Arrays.toString(banks.toArray()));
 		return model;
 	}
 	
@@ -70,7 +86,14 @@ public class AdminController extends BaseController{
 		ModelAndView model = new ModelAndView("admin/admin-edit");
 		if(id != null){
 			Admin admin = adminService.getAdminById(id);
-			model.addObject("admin", admin);
+			BankAccount account = bankAccountDAO.getAccountBankByUserId(admin.getId());
+			AdminVO adminVO = new AdminVO();
+			BeanUtils.copyProperties(admin, adminVO);
+			if(null != account){
+				BeanUtils.copyProperties(account, adminVO);
+			}
+			adminVO.setId(admin.getId());
+			model.addObject("admin", adminVO);
 		}
 		List<Role> roles = roleService.getAllRole();
 		model.addObject("roles", roles);
@@ -80,8 +103,14 @@ public class AdminController extends BaseController{
 	@RequestMapping(method=RequestMethod.POST, value="/add")
 	@ResponseBody
 	public String addAdmin(String params) throws Exception{
-		Admin admin = JSON.parseObject(params, Admin.class);
-		adminService.addAdmin(admin);
+		AdminVO adminVO = JSON.parseObject(params, AdminVO.class);
+		adminService.addAdmin(adminVO);
+		//插入银行信息
+		BankAccount account = new BankAccount();
+		account.setUserId(adminVO.getId());
+		BeanUtils.copyProperties(adminVO, account);
+		account.setId(null);
+		bankAccountDAO.addBankAccount(account);
 		return success();
 	}
 	

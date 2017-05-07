@@ -14,7 +14,7 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" value="${admin.name }" placeholder="" id="adminName" name="adminName">
+			<input disabled="disabled" type="text" class="input-text" value="${admin.name }" placeholder="" id="adminName" name="adminName">
 		</div>
 	</div>
 	<div class="row cl">
@@ -36,7 +36,7 @@
 			<input type="text" class="input-text" value="${admin.identityCode }" placeholder="" name="identityCode" id="identityCode">
 		</div>
 	</div>
-	<div class="row cl">
+	<%-- <div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>微信：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text" value="${admin.weixin }" placeholder="" name="weixin" id="weixin">
@@ -52,6 +52,24 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>住址：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text" value="${admin.homeAddress }" placeholder="" name="homeAddress" id="homeAddress">
+		</div>
+	</div> --%>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户银行：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input disabled="disabled" type="text" class="input-text" value="${admin.bankName }" placeholder="" name="bankName" id="bankName">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户名：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input disabled="disabled" type="text" class="input-text" value="${admin.accountName }" placeholder="" name="accountName" id="accountName">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户帐号：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input disabled="disabled" type="text" class="input-text" value="${admin.account }" placeholder="" name="account" id="account">
 		</div>
 	</div>
 	<!-- 新加属性  END-->

@@ -20,6 +20,13 @@ $(function(){
 		var qq = $("#qq").val();
 		var homeAddress = $("#homeAddress").val();
 		var remark = $('#remark').val();
+		
+		//银行信息
+		var bankName = $("#bankName").val();
+		var account = $("#account").val();
+		var accountName = $("#accountName").val();
+		var bankBranch  = $("#bankBranch").val();
+		var bankAddress = $("#bankAddress").val();
 		var params = {
 				name:adminName,
 				password:password,
@@ -30,7 +37,12 @@ $(function(){
 				weixin:weixin,
 				qq:qq,
 				homeAddress:homeAddress,
-				remark:remark
+				remark:remark,
+				bankName : bankName,
+				account : account,
+				accountName : accountName,
+				bankBranch : bankBranch,
+				bankAddress : bankAddress
 		};
 		var roleIds = [adminRole];
 		params['roleIds'] = roleIds;

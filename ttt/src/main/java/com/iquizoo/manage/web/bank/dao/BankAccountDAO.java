@@ -8,5 +8,9 @@ public interface BankAccountDAO {
 
 	public BankAccount getAccountBankById(int id);
 	
-	public List<BankAccount> listAccountBankByUserId(int userId);
+	public List<BankAccount> listBankAccountByUserId(int userId);
+
+	public void addBankAccount(BankAccount account);
+
+	public BankAccount getAccountBankByUserId(Integer userId);
 }

@@ -49,8 +49,6 @@ public class Admin implements Serializable{
 	private String homeAddress;
 	private String remark;
 	private Integer parentId;
-	private String bank;//银行名称
-	private String bankAccount;//银行帐号
 	public Integer getParentId() {
 		return parentId;
 	}

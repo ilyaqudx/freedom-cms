@@ -1,5 +1,7 @@
 package com.iquizoo.manage.web.bank.po;
 
+import java.util.Date;
+
 public class BankAccount {
 
 	private Integer id;
@@ -10,6 +12,13 @@ public class BankAccount {
 	private String  accountName;//开户人名称
 	private String  bankBranch;//开户行支行
 	private String  bankAddress;//开户行地址
+	private Date  createTime;
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 	public Integer getId() {
 		return id;
 	}

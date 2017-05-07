@@ -48,7 +48,7 @@
 			<input type="text" class="input-text" value="${admin.identityCode }" placeholder="" name="identityCode" id="identityCode">
 		</div>
 	</div>
-	<div class="row cl">
+	<%-- <div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>微信：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text" value="${admin.weixin }" placeholder="" name="weixin" id="weixin">
@@ -64,6 +64,48 @@
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>住址：</label>
 		<div class="formControls col-xs-8 col-sm-9">
 			<input type="text" class="input-text" value="${admin.homeAddress }" placeholder="" name="homeAddress" id="homeAddress">
+		</div>
+	</div> --%>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">银行：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+			<select class="select" id="bankName" name="bankName" size="1">
+				<c:if test="${admin==null }">
+					<c:forEach var="bank" items="${banks }">
+						<option value="${bank.name }">${bank.name }</option>
+					</c:forEach>
+				</c:if>
+			</select>
+			</span> </div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>银行帐号：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.account }" placeholder="银行卡号" name="account" id="account">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户名称：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.accountName }" placeholder="开户人姓名" name="accountName" id="accountName">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户名称：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.accountName }" placeholder="开户人姓名" name="accountName" id="accountName">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户行支行：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.bankBranch }" placeholder="" name="bankBranch" id="bankBranch">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户行地址：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="${admin.bankAddress }" placeholder="" name="bankAddress" id="bankAddress">
 		</div>
 	</div>
 	<!-- 新加属性  END-->
