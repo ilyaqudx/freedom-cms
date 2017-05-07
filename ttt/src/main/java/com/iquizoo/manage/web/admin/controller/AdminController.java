@@ -120,9 +120,22 @@ public class AdminController extends BaseController{
 	@RequestMapping(method=RequestMethod.POST, value="/edit")
 	@ResponseBody
 	public String editAdmin(String params) throws Exception{
-		Admin admin = JSON.parseObject(params, Admin.class);
+		AdminVO admin = JSON.parseObject(params, AdminVO.class);
 		System.out.println(admin);
 		adminService.updateAdmin(admin);
+
+		BankAccount oldAccount = bankAccountDAO.getAccountBankByUserId(admin.getId());
+		int accountId       = oldAccount.getId();
+		
+		BankAccount account    = new BankAccount();
+		account.setId(accountId);
+		account.setUserId(admin.getId());
+		account.setBankId(admin.getBankId());
+		account.setBankName(bankDAO.getBankById(admin.getBankId()).getName());
+		account.setAccount(admin.getAccount());
+		account.setBankAddress(admin.getBankAddress());
+		account.setBankBranch(admin.getBankBranch());
+		bankAccountDAO.updateBankAccount(account);
 		return success();
 	}
 	
@@ -161,21 +174,8 @@ public class AdminController extends BaseController{
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/editPass")
 	@ResponseBody
-	public String editPass(AdminVO admin) throws Exception{
+	public String editPass(Admin admin) throws Exception{
 		adminService.updateAdminPass(admin);
-		
-		BankAccount oldAccount = bankAccountDAO.getAccountBankByUserId(admin.getId());
-		int accountId       = oldAccount.getId();
-		
-		BankAccount account    = new BankAccount();
-		account.setId(accountId);
-		account.setUserId(admin.getId());
-		account.setBankId(admin.getBankId());
-		account.setBankName(bankDAO.getBankById(admin.getBankId()).getName());
-		account.setAccount(admin.getAccount());
-		account.setBankAddress(admin.getBankAddress());
-		account.setBankBranch(admin.getBankBranch());
-		bankAccountDAO.updateBankAccount(account);
 		return success();
 	}
 }
