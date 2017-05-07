@@ -22,7 +22,7 @@ $(function(){
 		var remark = $('#remark').val();
 		
 		//银行信息
-		var bankName = $("#bankName").val();
+		var bankId = $("#bankId").val();
 		var account = $("#account").val();
 		var accountName = $("#accountName").val();
 		var bankBranch  = $("#bankBranch").val();
@@ -38,7 +38,7 @@ $(function(){
 				qq:qq,
 				homeAddress:homeAddress,
 				remark:remark,
-				bankName : bankName,
+				bankId   : bankId,
 				account : account,
 				accountName : accountName,
 				bankBranch : bankBranch,

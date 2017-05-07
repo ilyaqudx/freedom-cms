@@ -32,4 +32,10 @@ public class BankAccountDAOImpl extends BaseDAO implements BankAccountDAO {
 		return Kit.isBlank(accounts) ? null : accounts.get(0);
 	}
 
+	@Override
+	public void updateBankAccount(BankAccount account) 
+	{
+		getSqlSession().update("updateBankAccount", account);
+	}
+
 }

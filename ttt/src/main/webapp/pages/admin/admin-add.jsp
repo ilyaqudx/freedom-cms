@@ -69,10 +69,10 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3">银行：</label>
 		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
-			<select class="select" id="bankName" name="bankName" size="1">
+			<select class="select" id="bankId" name="bankId" size="1">
 				<c:if test="${admin==null }">
 					<c:forEach var="bank" items="${banks }">
-						<option value="${bank.name }">${bank.name }</option>
+						<option value="${bank.id }">${bank.name }</option>
 					</c:forEach>
 				</c:if>
 			</select>

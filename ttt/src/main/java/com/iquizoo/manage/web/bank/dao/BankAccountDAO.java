@@ -13,4 +13,6 @@ public interface BankAccountDAO {
 	public void addBankAccount(BankAccount account);
 
 	public BankAccount getAccountBankByUserId(Integer userId);
+
+	public void updateBankAccount(BankAccount account);
 }

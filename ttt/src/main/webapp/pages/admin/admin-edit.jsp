@@ -55,10 +55,21 @@
 		</div>
 	</div> --%>
 	<div class="row cl">
-		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户银行：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input disabled="disabled" type="text" class="input-text" value="${admin.bankName }" placeholder="" name="bankName" id="bankName">
-		</div>
+		<label class="form-label col-xs-4 col-sm-3">开户银行：</label>
+		<div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
+			<select class="select" id="bankId" name="bankId" size="1">
+				<c:if test="${admin!=null }">
+					<c:forEach var="b" items="${banks }">
+						<c:if test="${b.id == admin.bankId}">
+							<option value="${b.id }" selected="selected">${b.name }</option>
+						</c:if>
+						<c:if test="${b.id != admin.bankId}">
+							<option value="${b.id }">${b.name }</option>
+						</c:if>
+					</c:forEach>
+				</c:if>
+			</select>
+			</span> </div>
 	</div>
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户名：</label>
@@ -69,7 +80,7 @@
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开户帐号：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input disabled="disabled" type="text" class="input-text" value="${admin.account }" placeholder="" name="account" id="account">
+			<input type="text" class="input-text" value="${admin.account }" placeholder="" name="account" id="account">
 		</div>
 	</div>
 	<!-- 新加属性  END-->

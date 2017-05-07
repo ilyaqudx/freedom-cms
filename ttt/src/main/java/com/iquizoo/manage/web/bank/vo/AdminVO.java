@@ -6,9 +6,16 @@ public class AdminVO extends Admin {
 
 	private String account;
 	private String accountName;
+	private Integer bankId;
 	private String bankName;
 	private String bankBranch;
 	private String bankAddress;
+	public Integer getBankId() {
+		return bankId;
+	}
+	public void setBankId(Integer bankId) {
+		this.bankId = bankId;
+	}
 	public String getBankName() {
 		return bankName;
 	}

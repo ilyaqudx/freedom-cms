@@ -5,6 +5,7 @@ $(function(){
 		if(isNull(adminName)){
 			layer.msg('账号不能为空！');return;
 		}
+		debugger;
 		var phone = $('#phone').val();
 		var realName = $('#realName').val();
 		var adminRole = $('#adminRole').val();
@@ -13,6 +14,9 @@ $(function(){
 		var qq = $("#qq").val();
 		var homeAddress = $("#homeAddress").val();
 		var remark = $('#remark').val();
+		var bankId = $("#bankId").val();
+		var account  = $("#account").val();
+		var accountName = $("#accountName").val();
 		
 		var params = {
 				name:adminName,
@@ -23,7 +27,10 @@ $(function(){
 				weixin:weixin,
 				qq:qq,
 				homeAddress:homeAddress,
-				remark:remark
+				remark:remark,
+				bankId   : bankId,
+				account : account,
+				accountName : accountName
 		};
 		console.log(params);
 		var roleIds = [adminRole];

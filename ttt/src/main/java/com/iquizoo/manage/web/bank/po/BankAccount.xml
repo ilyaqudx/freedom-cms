@@ -61,6 +61,30 @@
 		</if>
 		)
   	</insert>
+  	
+  	<update id="updateBankAccount" parameterType="com.iquizoo.manage.web.bank.po.BankAccount">
+  		UPDATE BankAccount SET 
+  		id = #{id}
+  		<if test="account != null">
+  			, account = #{account}
+  		</if>
+  		<if test="accountName != null">
+  			, accountName = #{accountName}
+  		</if>
+  		<if test="bankId != null">
+  			, bankId = #{bankId}
+  		</if>
+  		<if test="bankName != null">
+  			, bankName = #{bankName}
+  		</if>
+  		<if test="bankBranch != null">
+  			, bankBranch = #{bankBranch}
+  		</if>
+  		<if test="bankAddress != null">
+  			, bankAddress = #{bankAddress}
+  		</if>
+  		WHERE userId = #{userId}
+  	</update>
   
 	<select id="getAccountBankById" resultType="com.iquizoo.manage.web.bank.po.BankAccount" parameterType="Integer">
 		SELECT * FROM BankAccount WHERE id=#{id}

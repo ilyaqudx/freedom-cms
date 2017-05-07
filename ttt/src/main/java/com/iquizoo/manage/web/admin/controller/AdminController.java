@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.iquizoo.core.controller.BaseController;
+import com.iquizoo.core.kit.Kit;
 import com.iquizoo.core.page.DataTable;
 import com.iquizoo.manage.base.context.AppContext;
 import com.iquizoo.manage.web.admin.po.Admin;
@@ -95,8 +96,10 @@ public class AdminController extends BaseController{
 			adminVO.setId(admin.getId());
 			model.addObject("admin", adminVO);
 		}
+		List<Bank> banks = bankDAO.getBankList();
 		List<Role> roles = roleService.getAllRole();
 		model.addObject("roles", roles);
+		model.addObject("banks",banks);
 		return model;
 	}
 	
@@ -158,8 +161,21 @@ public class AdminController extends BaseController{
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/editPass")
 	@ResponseBody
-	public String editPass(Admin admin) throws Exception{
+	public String editPass(AdminVO admin) throws Exception{
 		adminService.updateAdminPass(admin);
+		
+		BankAccount oldAccount = bankAccountDAO.getAccountBankByUserId(admin.getId());
+		int accountId       = oldAccount.getId();
+		
+		BankAccount account    = new BankAccount();
+		account.setId(accountId);
+		account.setUserId(admin.getId());
+		account.setBankId(admin.getBankId());
+		account.setBankName(bankDAO.getBankById(admin.getBankId()).getName());
+		account.setAccount(admin.getAccount());
+		account.setBankAddress(admin.getBankAddress());
+		account.setBankBranch(admin.getBankBranch());
+		bankAccountDAO.updateBankAccount(account);
 		return success();
 	}
 }
