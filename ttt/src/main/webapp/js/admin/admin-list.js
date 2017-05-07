@@ -129,16 +129,16 @@ $(function(){
 	                title: "身份证",
 	                orderable: false
 	            },{
-	                data: "weixin",
-	                title: "微信",
+	                data: "bankName",
+	                title: "开户银行",
 	                orderable: false
 	            },{
-	            	data: "qq",
-	                title: "QQ",
+	            	data: "accountName",
+	                title: "开户名",
 	                orderable: false 
 	            },{
-	            	data: "homeAddress",
-	                title: "住址",
+	            	data: "account",
+	                title: "银行帐号",
 	                orderable: false
 	            },{
 	            	data: "remark",

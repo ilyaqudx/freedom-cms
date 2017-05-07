@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,9 @@ import com.iquizoo.manage.web.admin.dao.RoleDao;
 import com.iquizoo.manage.web.admin.po.Admin;
 import com.iquizoo.manage.web.admin.po.Adminownrole;
 import com.iquizoo.manage.web.admin.po.Resource;
-import com.iquizoo.manage.web.admin.po.Role;
+import com.iquizoo.manage.web.bank.dao.BankAccountDAO;
+import com.iquizoo.manage.web.bank.po.BankAccount;
+import com.iquizoo.manage.web.bank.vo.AdminVO;
 
 /**
  * @Description 管理员
@@ -50,6 +53,9 @@ public class AdminServiceImpl implements AdminService{
 		return page;
 	}
 
+	@Autowired
+	private BankAccountDAO bankAccountDAO;
+	
 	@Override
 	public void data(DataTable table) throws Exception {
 		//单独的业务逻辑处理.用户是有推荐人的,超级管理员可以查看所有人,其他人只能看自己的下线.
@@ -69,8 +75,21 @@ public class AdminServiceImpl implements AdminService{
 			//如果没有最高权限,只能查看自己下线成员
 		}*/
 		System.out.println(table.getParams());
-		adminDao.getAdminList(table);
-		
+		List<Admin> adminList = adminDao.getAdminList(table);
+		//查询每个用户的绑定的银行卡信息
+		List<AdminVO> data = new ArrayList<>();
+		for (Admin a : adminList) {
+			BankAccount account = bankAccountDAO.getAccountBankByUserId(a.getId());
+			AdminVO vo = Kit.copy(a, AdminVO.class);
+			if(account != null){
+				vo.setAccount(account.getAccount());
+				vo.setAccountName(account.getAccountName());
+				vo.setBankName(account.getBankName());
+				vo.setBankId(account.getBankId());
+			}
+			data.add(vo);
+		}
+		table.setData(data);
 	}
 
 	@Override
