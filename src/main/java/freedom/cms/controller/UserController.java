@@ -17,9 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
+import freedom.cms.Kit;
+import freedom.cms.Result;
 import freedom.cms.SessionUtils;
 import freedom.cms.annotation.PublicAPI;
+import freedom.cms.domain.Bank;
 import freedom.cms.domain.User;
+import freedom.cms.mapper.BankMapper;
+import freedom.cms.mapper.RegionMaaper;
 import freedom.cms.mapper.ResourceMapper;
 import freedom.cms.mapper.UserMapper;
 
@@ -39,20 +44,70 @@ public class UserController {
 	private UserMapper userMapper;
 	@Autowired
 	private ResourceMapper resourceMapper;
-	
+	@Autowired
+	private BankMapper bankMapper;
+	@Autowired
+	private RegionMaaper regionMapper;
 	@RequestMapping(value = "/user/{id}" , method = RequestMethod.GET)
 	public User get(@PathVariable Long id){
 		return userMapper.get(id);
 	}
+	
+	/**
+	 * 返回数据:
+	 * 银行列表
+	 * 省份-市-区
+	 * 自动生成的会员编号(一开始就生成好)
+	 * 
+	 * */
+	@RequestMapping(value = "/user/add",method = RequestMethod.GET)
+	public ModelAndView add(ModelAndView mv,User user)
+	{
+		List<String> provinces = regionMapper.listProvince();
+		List<Bank> banks = bankMapper.list();
+		String code = "a" + Kit.generatorNumber(6);
+		boolean isExist = userMapper.isExist(code) > 0;
+		user.setCode(code);
+		mv.addObject("provinces", provinces);
+		mv.addObject("banks",banks);
+		mv.addObject("user",user);
+		mv.setViewName("/view/vip-add.jsp");
+		return mv;
+	}
+	
+	@RequestMapping("/user/refreshCode")
+	public Result<?> refreshCode()
+	{
+		boolean exist = true;
+		String code = null;
+		do {
+			code = "a" + Kit.generatorNumber(6);
+			exist = userMapper.isExist(code) > 0;
+		} while (exist);
+		return Result.ok(code);
+	}
+	@RequestMapping("/user/checkCode")
+	public <V> Result<V> checkCode(String code,Integer type)
+	{
+		Long exist = userMapper.isExist(code);
+		if(type != 3){
+			if(exist != null && exist > 0)
+				return Result.ok();
+		}else{
+			if(exist == null || exist <= 0)
+				return Result.ok();
+		}
+		return Result.err("编码无效或不存在");
+	}
+	
 	/**
 	 * 你妹的,JACKSON超级难用.@RequestBody绑定前端的JSON字符串到对象字段必须要一一对应,不能多也不能少,否则直接来415.我靠
 	 * 
 	 * data : JSON.stringify(data)
 	 * contentType : "application/json"
 	 * */
-	@RequestMapping(value = "/user/add")
+	@RequestMapping(value = "/user/add",method=RequestMethod.POST)
 	public User post(HttpServletRequest request,User user){
-		user.setParentId(SessionUtils.getUserInSession(request).getId());
 		user.setStatus(0);
 		user.setCreateTime(new Date());
 		System.out.println(user);
@@ -66,7 +121,7 @@ public class UserController {
 		User user = userMapper.get(userId);
 		if(user == null)
 			throw new IllegalArgumentException("用户名不存在");
-		if(!user.getPassword().equals(password))
+		if(!user.getLoginPassword().equals(password))
 			throw new IllegalArgumentException("密码错误");
 		
 		String sessionKaptcha = SessionUtils.getKaptcha(request);
