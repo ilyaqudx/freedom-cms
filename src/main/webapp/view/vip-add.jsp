@@ -124,24 +124,34 @@
         
         function cascadeRegion(type,obj){
         	var value = $(obj).find('option:selected').val();
-        	alert(value);
-        	
         	$.ajax({
     			type:'POST',
     			url:"/region/cascade?regionName="+value,
     			dataType:'json',
     			success:function(data){
     				if(data.code == 0){
+    					debugger;
     					if(type == 1){
     						//市
     						$("#city option").remove();
     						
     						//添加
-    						var citys = JSON.parse(data.result);
+    						var citys = data.result;
     						$("#city").append("<option value='-1'>选择城市</option>");
     						for(var i = 0;i < citys.length;i++){
     							var city = citys[i];
     							$("#city").append("<option value='"+city+"'>"+city+"</option>");
+    						}
+    					}else if(type == 2){
+    						//市
+    						$("#area option").remove();
+    						
+    						//添加
+    						var citys = data.result;
+    						$("#area").append("<option value='-1'>选择区县</option>");
+    						for(var i = 0;i < citys.length;i++){
+    							var city = citys[i];
+    							$("#area").append("<option value='"+city+"'>"+city+"</option>");
     						}
     					}
     				}else{
@@ -170,11 +180,11 @@ if (!theForm) {
     theForm = document.form1;
 }
 function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+    /* if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
         theForm.__EVENTTARGET.value = eventTarget;
         theForm.__EVENTARGUMENT.value = eventArgument;
         theForm.submit();
-    }
+    } */
 }
 //]]>
 </script>
@@ -239,7 +249,7 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                     <li id="left_li_ask" style="display: none"><a href="http://osd.greenleafgroup.cn/member/member/ask.aspx">开店申请</a></li>
                     <li id="left_li_shop_1" style="display:display;"><a href="/user/add">会员注册</a></li>
                     <li id="left_li_shop_2" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/auditing.aspx">会员激活</a></li>
-                    <li id="left_li_shop_5" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/slist.aspx">会员激活列表</a></li>
+                    <li id="left_li_shop_5" style="display:display;"><a href="/user/list">会员激活列表</a></li>
 
                 </ul>
             </li>
@@ -542,13 +552,13 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                         <div class="form-group">
                                                             <label for="input2" class="col-sm-2 control-label form-label">省市区*</label>
                                                             <div class="col-sm-6">
-                                                                <select id="province" name="province" onchange="cascadeRegion(this)" style="height:30px;">
+                                                                <select id="province" name="province" onchange="cascadeRegion(1,this)" style="height:30px;">
 		<option selected="selected" value="-1">选择省份</option>
 		<c:forEach items="${ provinces}" var="province">
 			<option value="${province }">${province }</option>
 		</c:forEach>
 	</select>
-                                                                <select id="city" name="city" onchange="cascadeRegion(this)" style="height:30px;">
+                                                                <select id="city" name="city" onchange="cascadeRegion(2,this)" style="height:30px;">
 		<option selected="selected" value="-1">选择城市</option>
 
 	</select>

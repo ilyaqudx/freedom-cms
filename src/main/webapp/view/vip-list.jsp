@@ -1,3 +1,6 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <!-- saved from url=(0053)http://osd.greenleafgroup.cn/member/member/slist.aspx -->
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
@@ -59,9 +62,9 @@
                     <span>专卖店管理</span></a>
                 <ul class="sub-menu-list">
                     <li id="left_li_ask" style="display: none"><a href="http://osd.greenleafgroup.cn/member/member/ask.aspx">开店申请</a></li>
-                    <li id="left_li_shop_1" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/add.aspx">会员注册</a></li>
+                    <li id="left_li_shop_1" style="display:display;"><a href="/user/add">会员注册</a></li>
                     <li id="left_li_shop_2" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/auditing.aspx">会员激活</a></li>
-                    <li id="left_li_shop_5" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/slist.aspx">会员激活列表</a></li>
+                    <li id="left_li_shop_5" style="display:display;"><a href="/user/list">会员激活列表</a></li>
 
                 </ul>
             </li>
@@ -287,335 +290,33 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr class="warning">
-                                                        <th>序号</th>
-                                                        <th>会员编号</th>
-                                                        <th>会员姓名</th>
-                                                        <th>联系电话</th>
-                                                        <th>注册时间</th>
-                                                        <th>推荐人卡号
-                                                        </th>
-                                                        <th>推荐人姓名
-                                                        </th>
-                                                        <th>接点人卡号
-                                                        </th>
-                                                        <th>接点人姓名
-                                                        </th>
-                                                        <th>报单金额
-                                                        </th>
-                                                    </tr>
+												<th>序号</th>
+												<th>会员编号</th>
+												<th>会员姓名</th>
+												<th>联系电话</th>
+												<th>注册时间</th>
+												<th>推荐人卡号</th>
+												<th>推荐人姓名</th>
+												<th>接点人卡号</th>
+												<th>接点人姓名</th>
+												<th>报单金额</th>
+											</tr>
                                                 </thead>
                                                 <tbody>
-                                        
-                                            <tr>
-                                                <td><b>1</b></td>
-                                                <td>
-                                                    a557063
-                                                </td>
-                                                <td>
-                                                    廖小容
-                                                </td>
-                                                <td>
-                                                    15282779037
-                                                </td>
-                                                <td>
-                                                    2017/5/5 17:26:59
-                                                </td>
-                                                <td>
-                                                    a016016
-                                                </td>
-                                                <td>
-                                                    姚琼
-                                                </td>
-                                                <td>
-                                                    a015825
-                                                </td>
-                                                <td>
-                                                    靳彩霞
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>2</b></td>
-                                                <td>
-                                                    a110532
-                                                </td>
-                                                <td>
-                                                    魏艳琼
-                                                </td>
-                                                <td>
-                                                    18382786570
-                                                </td>
-                                                <td>
-                                                    2017/5/5 14:12:57
-                                                </td>
-                                                <td>
-                                                    a100100
-                                                </td>
-                                                <td>
-                                                    杨华
-                                                </td>
-                                                <td>
-                                                    a100100
-                                                </td>
-                                                <td>
-                                                    杨华
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>3</b></td>
-                                                <td>
-                                                    a282231
-                                                </td>
-                                                <td>
-                                                    乔菊华
-                                                </td>
-                                                <td>
-                                                    18282754595
-                                                </td>
-                                                <td>
-                                                    2017/5/4 15:11:54
-                                                </td>
-                                                <td>
-                                                    a127661
-                                                </td>
-                                                <td>
-                                                    夏松柏
-                                                </td>
-                                                <td>
-                                                    a316601
-                                                </td>
-                                                <td>
-                                                    朱琼英
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>4</b></td>
-                                                <td>
-                                                    a151016
-                                                </td>
-                                                <td>
-                                                    彭尚寿
-                                                </td>
-                                                <td>
-                                                    18398940458
-                                                </td>
-                                                <td>
-                                                    2017/5/4 14:05:47
-                                                </td>
-                                                <td>
-                                                    a730788
-                                                </td>
-                                                <td>
-                                                    彭尚寿
-                                                </td>
-                                                <td>
-                                                    a730788
-                                                </td>
-                                                <td>
-                                                    彭尚寿
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>5</b></td>
-                                                <td>
-                                                    a730788
-                                                </td>
-                                                <td>
-                                                    彭尚寿
-                                                </td>
-                                                <td>
-                                                    18398940458
-                                                </td>
-                                                <td>
-                                                    2017/5/4 11:37:03
-                                                </td>
-                                                <td>
-                                                    a216786
-                                                </td>
-                                                <td>
-                                                    张镁
-                                                </td>
-                                                <td>
-                                                    a216786
-                                                </td>
-                                                <td>
-                                                    张镁
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>6</b></td>
-                                                <td>
-                                                    a015825
-                                                </td>
-                                                <td>
-                                                    靳彩霞
-                                                </td>
-                                                <td>
-                                                    15983988165
-                                                </td>
-                                                <td>
-                                                    2017/5/4 11:30:21
-                                                </td>
-                                                <td>
-                                                    a056163
-                                                </td>
-                                                <td>
-                                                    陈雪梅
-                                                </td>
-                                                <td>
-                                                    a352728
-                                                </td>
-                                                <td>
-                                                    朱春梅
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>7</b></td>
-                                                <td>
-                                                    a216786
-                                                </td>
-                                                <td>
-                                                    张镁
-                                                </td>
-                                                <td>
-                                                    15982731243
-                                                </td>
-                                                <td>
-                                                    2017/5/1 12:28:33
-                                                </td>
-                                                <td>
-                                                    a056163
-                                                </td>
-                                                <td>
-                                                    陈雪梅
-                                                </td>
-                                                <td>
-                                                    a537787
-                                                </td>
-                                                <td>
-                                                    曹小利
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>8</b></td>
-                                                <td>
-                                                    a352728
-                                                </td>
-                                                <td>
-                                                    朱春梅
-                                                </td>
-                                                <td>
-                                                    13981676300
-                                                </td>
-                                                <td>
-                                                    2017/5/1 11:21:04
-                                                </td>
-                                                <td>
-                                                    a056163
-                                                </td>
-                                                <td>
-                                                    陈雪梅
-                                                </td>
-                                                <td>
-                                                    a016016
-                                                </td>
-                                                <td>
-                                                    姚琼
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>9</b></td>
-                                                <td>
-                                                    a730231
-                                                </td>
-                                                <td>
-                                                    李俊
-                                                </td>
-                                                <td>
-                                                    15982760663
-                                                </td>
-                                                <td>
-                                                    2017/4/30 18:08:01
-                                                </td>
-                                                <td>
-                                                    a858018
-                                                </td>
-                                                <td>
-                                                    蔡波
-                                                </td>
-                                                <td>
-                                                    a858018
-                                                </td>
-                                                <td>
-                                                    蔡波
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td><b>10</b></td>
-                                                <td>
-                                                    a737130
-                                                </td>
-                                                <td>
-                                                    吴映琼
-                                                </td>
-                                                <td>
-                                                    13458349993
-                                                </td>
-                                                <td>
-                                                    2017/4/30 16:18:30
-                                                </td>
-                                                <td>
-                                                    a127661
-                                                </td>
-                                                <td>
-                                                    夏松柏
-                                                </td>
-                                                <td>
-                                                    a127661
-                                                </td>
-                                                <td>
-                                                    夏松柏
-                                                </td>
-                                                <td>
-                                                    498.00
-                                                </td>
-                                            </tr>
-                                        
+                                            <c:forEach  items="${users }" var="user" varStatus="status">
+	                                            <tr>
+													<td><b>${ status.index + 1}</b></td>
+													<td>${user.code }</td>
+													<td>${user.name }</td>
+													<td>${user.phone }</td>
+													<td><fmt:formatDate value="${user.createTime }" pattern="yyyy/MM/dd HH:mm:ss" /> </td>
+													<td>${user.recommender }</td>
+													<td>${user.name }</td>
+													<td>${user.settler }</td>
+													<td>${user.name }</td>
+													<td>498.00</td>
+												</tr>
+											</c:forEach>
                                             </tbody>
                                             </table>
                                         

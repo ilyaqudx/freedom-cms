@@ -21,10 +21,6 @@ public class Kit {
 
 	static Random r = new Random();
 	
-	public static void main(String[] args) {
-		System.out.println(generatorNumber(6));
-	}
-	
 	public static final String generatorNumber(int length)
 	{
 		StringBuilder sb = new StringBuilder();

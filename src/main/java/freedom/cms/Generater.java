@@ -5,7 +5,7 @@ import freedom.cms.domain.User;
 
 public class Generater {
 
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		
 		StringBuilder create = new StringBuilder();
 		String template= "create table %s(%s)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";

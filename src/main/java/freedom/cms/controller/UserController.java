@@ -107,12 +107,12 @@ public class UserController {
 	 * contentType : "application/json"
 	 * */
 	@RequestMapping(value = "/user/add",method=RequestMethod.POST)
-	public User post(HttpServletRequest request,User user){
+	public ModelAndView post(ModelAndView mv,Page<User> page,HttpServletRequest request,User user){
 		user.setStatus(0);
 		user.setCreateTime(new Date());
 		System.out.println(user);
 		userMapper.insert(user);
-		return user;
+		return list(mv, page);
 	}
 	
 	@PublicAPI
@@ -140,7 +140,7 @@ public class UserController {
 		PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10));
 		List<User> users = userMapper.list();
 		mv.addObject("users", users);
-		mv.setViewName("/member-list.jsp");
+		mv.setViewName("/view/vip-list.jsp");
 		return mv;
 	}
 	

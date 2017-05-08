@@ -9,7 +9,7 @@ import freedom.cms.domain.Region;
 @Mapper
 public interface RegionMaaper {
 
-	@Select("select * from region where name = #{name}")
+	@Select("select * from region where name = #{name} limit 1")
 	public Region get(String name);
 	
 	/**省名称列表*/
