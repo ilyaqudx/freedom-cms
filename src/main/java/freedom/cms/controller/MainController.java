@@ -36,7 +36,7 @@ public class MainController {
 		vo.setMenu(menus.get(0));
 		vo.setChildren(children);
 		vos.add(vo);
-		mv.setViewName("/index.jsp");
+		mv.setViewName("view/index.jsp");
 		mv.getModel().put("menus", vos);
 		return mv;
 	}

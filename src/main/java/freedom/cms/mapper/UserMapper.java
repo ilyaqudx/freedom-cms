@@ -22,14 +22,16 @@ import freedom.cms.domain.User;
 @Mapper
 public interface UserMapper {
 
-	@Insert("INSERT INTO user(name,password,phone,identityCode,address,status,createTime) "
-			+ "VALUES(#{name},#{password},#{phone},#{identityCode},#{address},#{status},#{createTime})")
+	@Insert("insert into User(id,code,name,loginPassword,payPassword,phone,identityCode,sex,address,createTime,status,recommender,settler,bank,bankAccount,bankAccountName,bankAddress,province,city,area,receivingAddress,marketLocation) values(#{id},#{code},#{name},#{loginPassword},#{payPassword},#{phone},#{identityCode},#{sex},#{address},#{createTime},#{status},#{recommender},#{settler},#{bank},#{bankAccount},#{bankAccountName},#{bankAddress},#{province},#{city},#{area},#{receivingAddress},#{marketLocation})")
 	@SelectKey(before = false,keyColumn = "id",statement = "select @@IDENTITY",statementType=StatementType.PREPARED,keyProperty="id",resultType=Long.class)
 	public Long insert(User user);
 	
 	@Select("SELECT * FROM user WHERE id = #{id}")
 	public User get(Long id);
-	
+	@Select("select * from user where code = #{code}")
+	public User getByCode(String code);
+	@Select("select count(id) from user where code = #{code}")
+	public Long isExist(String code);
 	@Select("SELECT * FROM user")
 	public List<User> list();
 	
