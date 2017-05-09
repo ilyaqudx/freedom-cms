@@ -488,7 +488,7 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">会员姓名*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="name" value="${user.name }" type="text" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;name\&#39;,\&#39;\&#39;)&#39;, 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="name" class="form-control">
+                                                        <input name="name" value="${user.name }" type="text" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="name" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

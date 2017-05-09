@@ -55,7 +55,7 @@
                     <li id="left_li_ask" style="display: none"><a href="http://osd.greenleafgroup.cn/member/member/ask.aspx">开店申请</a></li>
                     <li id="left_li_shop_1" style="display:display;"><a href="/user/add">会员注册</a></li>
                     <li id="left_li_shop_2" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/auditing.aspx">会员激活</a></li>
-                    <li id="left_li_shop_5" style="display:display;"><a href="http://osd.greenleafgroup.cn/member/member/slist.aspx">会员激活列表</a></li>
+                    <li id="left_li_shop_5" style="display:display;"><a href="/user/list">会员激活列表</a></li>
 
                 </ul>
             </li>
