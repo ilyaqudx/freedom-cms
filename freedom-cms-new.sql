@@ -23,7 +23,7 @@ CREATE TABLE `bank` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bank
@@ -70,7 +70,7 @@ CREATE TABLE `region` (
   PRIMARY KEY (`code`),
   KEY `i_region_name` (`name`) USING BTREE,
   KEY `i_region_parent` (`parentCode`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of region
@@ -3916,7 +3916,7 @@ CREATE TABLE `user` (
   `receivingAddress` varchar(255) DEFAULT NULL,
   `marketLocation` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
