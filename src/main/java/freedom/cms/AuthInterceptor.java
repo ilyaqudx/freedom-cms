@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception 
 	{
-		HandlerMethod method = (HandlerMethod) handler;
+		/*HandlerMethod method = (HandlerMethod) handler;
 		PublicAPI publicAPI = method.getMethodAnnotation(PublicAPI.class);
 		if(publicAPI == null){
 			String requestPath = request.getRequestURI();
@@ -42,7 +42,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 				System.out.println("user have no permission : " + requestPath);
 				return false;
 			}
-		}
+		}*/
 		return true;
 	}
 
