@@ -10,14 +10,19 @@
     <script src="/js/jquery-1.10.2.min.js"></script>
     <script src="/js/lhgdialog.js"></script><link href="/js/idialog.css" rel="stylesheet">
     <script src="/js/public.js"></script>
-    <script src="/js/WdatePicker.js"></script><link href="/js/WdatePicker.css" rel="stylesheet" type="text/css">
+    <script src="/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+    <!-- <link href="/js/WdatePicker.css" rel="stylesheet" type="text/css"> -->
 </head>
 
-<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div style="position: absolute; z-index: 19700; top: 133px; left: 329px; display: none;"><iframe src="/js/My97DatePicker.html" frameborder="0" border="0" scrolling="no" style="width: 186px; height: 219px;"></iframe></div>
-    <form name="form1" method="post" action="http://osd.greenleafgroup.cn/member/member/slist.aspx" id="form1">
+<body class="sticky-header left-side-collapsed">
+<div class="" style="display: none; position: absolute;">
+<div class="ui_outer"><table class="ui_border">
+<tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="/user/list###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div style="position: absolute; z-index: 19700; top: 133px; left: 329px; display: none;">
+</div>
+    <form name="form1" method="post" action="/user/list" id="form1">
 
 <div>
-	<input type="hidden" name="" id="" value="" cmd="${p.totalPage }">
+	<input type="hidden" name="" id="" value="" cmd="">
 	<input type="hidden" name="" id="" value="">
 	<input type="hidden" name="" id="" value="">
 </div>
@@ -244,10 +249,10 @@
 
 
                                     <div class="col-sm-2">
-                                        <input name="txtStart" type="text" id="txtStart" class="form-control" placeholder="起始时间" onfocus="WdatePicker({startDate:%y-%M-01 00:00:00,dateFmt:yyyy-MM-dd HH:mm:ss,alwaysUseStartDate:true})" realvalue="">
+                                        <input name="txtStart" type="text" id="txtStart" class="form-control" placeholder="起始时间" onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input name="txtEnd" type="text" id="txtEnd" class="form-control" placeholder="截止时间" onfocus="WdatePicker({startDate:%y-%M-01 00:00:00,dateFmt:yyyy-MM-dd HH:mm:ss,alwaysUseStartDate:true})" realvalue="">
+                                        <input name="txtEnd" type="text" id="txtEnd" class="form-control" placeholder="截止时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
                                     </div>
                                     <div class="col-sm-2">
                                         <input name="txtLoginName" type="text" id="txtLoginName" class="form-control" placeholder="会员账号">
@@ -318,14 +323,14 @@
 	<tbody><tr>
 													<td class="pages" valign="bottom" nowrap="true"
 														style="width: 60%;">
-														<a style="margin-right: 5px;" href="javascript:query(1)">首页</a>
-														<a style="margin-right: 5px;" href="javascript:query(${p.getPrePage() })">上一页</a><a
-														href="javascript:query(${p.getNextPage() })"
+														<a style="margin-right: 5px;" href="javascript:query(${p.currentPage },1)">首页</a>
+														<a style="margin-right: 5px;" href="javascript:query(${p.currentPage },${p.prePage })">上一页</a><a
+														href="javascript:query(${p.currentPage },${p.getNextPage() })"
 														style="margin-right: 5px;">下一页</a><a
-														href="javascript:query(${p.getLastPage() })"
+														href="javascript:query(${p.currentPage },${p.getLastPage() })"
 														style="margin-right: 5px;">尾页</a></td>
 													<td class="pages" valign="bottom" nowrap="true"
-														style="width: 40%;">共4页</td>
+														style="width: 40%;">当前第${p.currentPage}页,共${p.totalPage}页</td>
 												</tr>
 </tbody></table>
 </div>
@@ -347,32 +352,13 @@
 <script type="text/javascript">
 
 
-function query(page){
+function query(currentPage,requestPage){
 	debugger;
-	var pageNum = $("#p").attr("pageNum");
-	if(page == 'firstPage'){
-		if(pageNum <= 1){
-			return;
-		}
-		pageNum = 1;
-	}else if(page == 'prePage'){
-		if(pageNum <= 1){
-			return;
-		}
-		pageNum--;
-	}else if(page == 'nextPage'){
-		if(pageNum >= $("#p").attr("pages")){
-			return;
-		}
-		pageNum++;
-	}else if(page == 'lastPage'){
-		if(pageNum >= $("#p").attr("pages")){
-			return;
-		}
-		pageNum = $("#p").attr("pages");
-	}
 	
-	window.location.href  = "/user/list?pageNum="+pageNum;
+	if(currentPage != requestPage)
+	{
+		window.location.href  = "/user/list?pageNum="+requestPage;
+	}
 	
 }
 

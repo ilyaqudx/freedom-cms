@@ -28,6 +28,7 @@ import freedom.cms.mapper.BankMapper;
 import freedom.cms.mapper.RegionMaaper;
 import freedom.cms.mapper.ResourceMapper;
 import freedom.cms.mapper.UserMapper;
+import freedom.cms.query.UserQuery;
 
 /**  
  * 创建时间: 2017年5月3日 下午12:22:51  
@@ -113,7 +114,7 @@ public class UserController {
 		user.setCreateTime(new Date());
 		System.out.println(user);
 		userMapper.insert(user);
-		return list(mv, page);
+		return list(mv, page,new UserQuery());
 	}
 	
 	@PublicAPI
@@ -137,15 +138,15 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/list")
-	public ModelAndView list(ModelAndView mv,Page<User> page){
-		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10),true);
+	public ModelAndView list(ModelAndView mv,Page<User> page,UserQuery query){
+		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 2),true);
+		List<User> users = userMapper.list(query);
 		P p = new P();
 		p.setCurrentPage(page.getPageNum());
 		p.setTotalPage(page.getPages());
 		p.setTotalCount(page.getTotal());
 		p.setFirstPage(1);
 		p.setLastPage(p.getTotalPage());
-		List<User> users = userMapper.list();
 		mv.addObject("users", users);
 		mv.addObject("p", p);
 		mv.setViewName("/view/vip-list.jsp");
@@ -153,10 +154,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/tableList")
-	public Object listByDataTable(DataTable<User> table)
+	public Object listByDataTable(DataTable<User> table,UserQuery query)
 	{
 		PageHelper.startPage(Math.max(table.getPageNum(), 1), Math.max(table.getPageSize(), 10),true);
-		List<User> users = userMapper.list();
+		List<User> users = userMapper.list(query);
 		table.setData(users);
 		table.setRecordsTotal(table.getPages());
 		Map<String,Object> map = new HashMap<>();

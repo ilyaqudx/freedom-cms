@@ -6,9 +6,11 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.mapping.StatementType;
 
 import freedom.cms.domain.User;
+import freedom.cms.query.UserQuery;
 
 /**  
  * 创建时间: 2017年5月3日 下午12:26:15  
@@ -32,8 +34,30 @@ public interface UserMapper {
 	public User getByCode(String code);
 	@Select("select count(id) from user where code = #{code}")
 	public Long isExist(String code);
-	@Select("SELECT * FROM user")
-	public List<User> list();
+	@SelectProvider(type=UserProvider.class,method = "list")
+	public List<User> list(UserQuery query);
 	
-	
+	public class UserProvider{
+		public String list(UserQuery userQuery)
+		{
+			StringBuilder sql = new StringBuilder();
+			String str = "select * from User where 1 = 1 ";
+			if (userQuery.getStartTime() != null) {
+				sql.append("and createTime &gt;= #{startTime}");
+			}
+			if (userQuery.getEndTime() != null) {
+				sql.append("and createTime &lt;= #{endTime}");
+			}
+			if (userQuery.getCode() != null) {
+				sql.append("and code = #{code}");
+			}
+			if (userQuery.getPhone() != null) {
+				sql.append("and phone = #{phone}");
+			}
+			if (userQuery.getName() != null) {
+				sql.append("and name like '%#{name}%'");
+			}
+			return String.format(str, sql.toString());
+		}
+	}
 }
