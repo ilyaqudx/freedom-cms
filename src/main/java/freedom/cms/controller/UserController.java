@@ -1,5 +1,6 @@
 package freedom.cms.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import freedom.cms.mapper.RegionMaaper;
 import freedom.cms.mapper.ResourceMapper;
 import freedom.cms.mapper.UserMapper;
 import freedom.cms.query.UserQuery;
+import freedom.cms.vo.UserVO;
 
 /**  
  * 创建时间: 2017年5月3日 下午12:22:51  
@@ -141,14 +143,28 @@ public class UserController {
 	public ModelAndView list(ModelAndView mv,Page<User> page,UserQuery query){
 		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 2),true);
 		List<User> users = userMapper.list(query);
+		List<UserVO> vos = new ArrayList<UserVO>();
+		users.stream().forEach(u ->{
+			try {
+				UserVO vo = Kit.copy(u, UserVO.class);
+				String recommenderName = userMapper.getByCode(vo.getRecommender()).getName();
+				String settlerName = userMapper.getByCode(vo.getSettler()).getName();
+				vo.setRecommenderName(recommenderName);
+				vo.setSettlerName(settlerName);
+				vos.add(vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 		P p = new P();
 		p.setCurrentPage(page.getPageNum());
 		p.setTotalPage(page.getPages());
 		p.setTotalCount(page.getTotal());
 		p.setFirstPage(1);
 		p.setLastPage(p.getTotalPage());
-		mv.addObject("users", users);
+		mv.addObject("users", vos);
 		mv.addObject("p", p);
+		mv.addObject("q", query);
 		mv.setViewName("/view/vip-list.jsp");
 		return mv;
 	}

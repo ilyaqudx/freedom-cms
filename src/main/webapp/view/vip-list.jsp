@@ -247,21 +247,21 @@
                             <div class="panel-body form-horizontal">
                                 <div class="form-group">
 
-
+                                        <input type="hidden" name="pageNum" value="${p.currentPage }" type="text" id="pageNum" class="form-control" onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
                                     <div class="col-sm-2">
-                                        <input name="txtStart" type="text" id="txtStart" class="form-control" placeholder="起始时间" onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
+                                        <input name="startTime" value="${q.startTime }" type="text" id="startTime" class="form-control" placeholder="起始时间" onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input name="txtEnd" type="text" id="txtEnd" class="form-control" placeholder="截止时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
+                                        <input name="endTime" value="${q.endTime }" type="text" id="endTime" class="form-control" placeholder="截止时间" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" realvalue=""/>
                                     </div>
                                     <div class="col-sm-2">
-                                        <input name="txtLoginName" type="text" id="txtLoginName" class="form-control" placeholder="会员账号">
+                                        <input name="code" value="${q.code }" type="text" id="code" class="form-control" placeholder="会员账号">
                                     </div>
                                     <div class="col-sm-2">
-                                        <input name="txtName" type="text" id="txtName" class="form-control" placeholder="会员姓名">
+                                        <input name="name" value="${q.name }" type="text" id="name" class="form-control" placeholder="会员姓名">
                                     </div>
                                     <div class="col-sm-2">
-                                        <input name="txtMobile" type="text" id="txtMobile" class="form-control" placeholder="联系手机">
+                                        <input name="phone" value="${q.phone }" type="text" id="phone" class="form-control" placeholder="联系手机">
                                     </div>
 
 
@@ -307,9 +307,9 @@
 													<td>${user.phone }</td>
 													<td><fmt:formatDate value="${user.createTime }" pattern="yyyy/MM/dd HH:mm:ss" /> </td>
 													<td>${user.recommender }</td>
-													<td>${user.name }</td>
+													<td>${user.recommenderName }</td>
 													<td>${user.settler }</td>
-													<td>${user.name }</td>
+													<td>${user.settlerName }</td>
 													<td>498.00</td>
 												</tr>
 											</c:forEach>
@@ -357,7 +357,8 @@ function query(currentPage,requestPage){
 	
 	if(currentPage != requestPage)
 	{
-		window.location.href  = "/user/list?pageNum="+requestPage;
+		$("#pageNum").val(requestPage);
+		$("#form1").submit();
 	}
 	
 }

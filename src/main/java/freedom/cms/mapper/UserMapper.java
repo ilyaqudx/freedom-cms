@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.mapping.StatementType;
 
+import freedom.cms.Kit;
 import freedom.cms.domain.User;
 import freedom.cms.query.UserQuery;
 
@@ -36,26 +37,25 @@ public interface UserMapper {
 	public Long isExist(String code);
 	@SelectProvider(type=UserProvider.class,method = "list")
 	public List<User> list(UserQuery query);
-	
 	public class UserProvider{
 		public String list(UserQuery userQuery)
 		{
 			StringBuilder sql = new StringBuilder();
-			String str = "select * from User where 1 = 1 ";
-			if (userQuery.getStartTime() != null) {
-				sql.append("and createTime &gt;= #{startTime}");
+			String str = "select * from User where 1 = 1 %s";
+			if (Kit.isNotBlank(userQuery.getStartTime())) {
+				sql.append(" and createTime >= #{startTime}");
 			}
-			if (userQuery.getEndTime() != null) {
-				sql.append("and createTime &lt;= #{endTime}");
+			if (Kit.isNotBlank(userQuery.getEndTime())) {
+				sql.append(" and createTime <= #{endTime}");
 			}
-			if (userQuery.getCode() != null) {
-				sql.append("and code = #{code}");
+			if (Kit.isNotBlank(userQuery.getCode())) {
+				sql.append(" and code = #{code}");
 			}
-			if (userQuery.getPhone() != null) {
-				sql.append("and phone = #{phone}");
+			if (Kit.isNotBlank(userQuery.getPhone())) {
+				sql.append(" and phone = #{phone}");
 			}
-			if (userQuery.getName() != null) {
-				sql.append("and name like '%#{name}%'");
+			if (Kit.isNotBlank(userQuery.getName())) {
+				sql.append(" and name = #{name}");
 			}
 			return String.format(str, sql.toString());
 		}
