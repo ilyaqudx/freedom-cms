@@ -15,17 +15,11 @@
 
 <body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/member/slist.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div style="position: absolute; z-index: 19700; top: 133px; left: 329px; display: none;"><iframe src="/js/My97DatePicker.html" frameborder="0" border="0" scrolling="no" style="width: 186px; height: 219px;"></iframe></div>
     <form name="form1" method="post" action="http://osd.greenleafgroup.cn/member/member/slist.aspx" id="form1">
-<div>
-<input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="77fb3a7d-c109-4d9f-a2ec-3a29f5370246">
-<input type="hidden" name="__RefreshHiddenField" id="__RefreshHiddenField" value="095820.32835">
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
-</div>
 
 <div>
-
-	<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
-	<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
-	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBwLhgvC+BQLE2qDWDwKG+5ajBwKpwK/OBgLEhISFCwKxhYrZCQKln/PuCjI7QmPN4z3iaBPT3apbUb38Y69F">
+	<input type="hidden" name="" id="" value="" cmd="${p.totalPage }">
+	<input type="hidden" name="" id="" value="">
+	<input type="hidden" name="" id="" value="">
 </div>
         <section>
             
@@ -241,7 +235,6 @@
 
     </div>
 </div>
-
                 <div id="page-wrapper">
                     <div class="graphs">
                         <div class="panel panel-widget col_12">
@@ -251,10 +244,10 @@
 
 
                                     <div class="col-sm-2">
-                                        <input name="txtStart" type="text" id="txtStart" class="form-control" placeholder="起始时间" onfocus="WdatePicker({startDate:&#39;%y-%M-01 00:00:00&#39;,dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;,alwaysUseStartDate:true})" realvalue="">
+                                        <input name="txtStart" type="text" id="txtStart" class="form-control" placeholder="起始时间" onfocus="WdatePicker({startDate:%y-%M-01 00:00:00,dateFmt:yyyy-MM-dd HH:mm:ss,alwaysUseStartDate:true})" realvalue="">
                                     </div>
                                     <div class="col-sm-2">
-                                        <input name="txtEnd" type="text" id="txtEnd" class="form-control" placeholder="截止时间" onfocus="WdatePicker({startDate:&#39;%y-%M-01 00:00:00&#39;,dateFmt:&#39;yyyy-MM-dd HH:mm:ss&#39;,alwaysUseStartDate:true})" realvalue="">
+                                        <input name="txtEnd" type="text" id="txtEnd" class="form-control" placeholder="截止时间" onfocus="WdatePicker({startDate:%y-%M-01 00:00:00,dateFmt:yyyy-MM-dd HH:mm:ss,alwaysUseStartDate:true})" realvalue="">
                                     </div>
                                     <div class="col-sm-2">
                                         <input name="txtLoginName" type="text" id="txtLoginName" class="form-control" placeholder="会员账号">
@@ -283,8 +276,6 @@
                                         <span class="button-icon has-bg"><i class="ti ti-angle-down"></i></span>
                                     </div>
                                 </div>
-
-
                                 <div class="panel-body no-padding table-responsive">
                                     
                                             <table class="table table-striped">
@@ -325,8 +316,17 @@
 <div id="anp1" class="pages">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tbody><tr>
-		<td class="pages" valign="bottom" nowrap="true" style="width:60%;"><a disabled="disabled" style="margin-right:5px;">首页</a><a disabled="disabled" style="margin-right:5px;">上一页</a><a href="javascript:__doPostBack(&#39;anp1&#39;,&#39;2&#39;)" style="margin-right:5px;">下一页</a><a href="javascript:__doPostBack(&#39;anp1&#39;,&#39;4&#39;)" style="margin-right:5px;">尾页</a></td><td class="pages" valign="bottom" nowrap="true" style="width:40%;">共4页</td>
-	</tr>
+													<td class="pages" valign="bottom" nowrap="true"
+														style="width: 60%;">
+														<a style="margin-right: 5px;" href="javascript:query(1)">首页</a>
+														<a style="margin-right: 5px;" href="javascript:query(${p.getPrePage() })">上一页</a><a
+														href="javascript:query(${p.getNextPage() })"
+														style="margin-right: 5px;">下一页</a><a
+														href="javascript:query(${p.getLastPage() })"
+														style="margin-right: 5px;">尾页</a></td>
+													<td class="pages" valign="bottom" nowrap="true"
+														style="width: 40%;">共4页</td>
+												</tr>
 </tbody></table>
 </div>
 <!-- AspNetPager 7.3.2  Copyright:2003-2010 Webdiyer (www.webdiyer.com) -->
@@ -345,8 +345,39 @@
         <script src="/js/bootstrap.min.js"></script>
     
 <script type="text/javascript">
+
+
+function query(page){
+	debugger;
+	var pageNum = $("#p").attr("pageNum");
+	if(page == 'firstPage'){
+		if(pageNum <= 1){
+			return;
+		}
+		pageNum = 1;
+	}else if(page == 'prePage'){
+		if(pageNum <= 1){
+			return;
+		}
+		pageNum--;
+	}else if(page == 'nextPage'){
+		if(pageNum >= $("#p").attr("pages")){
+			return;
+		}
+		pageNum++;
+	}else if(page == 'lastPage'){
+		if(pageNum >= $("#p").attr("pages")){
+			return;
+		}
+		pageNum = $("#p").attr("pages");
+	}
+	
+	window.location.href  = "/user/list?pageNum="+pageNum;
+	
+}
+
 //<![CDATA[
-var theForm = document.forms['form1'];
+/* var theForm = document.forms['form1'];
 if (!theForm) {
     theForm = document.form1;
 }
@@ -356,11 +387,12 @@ function __doPostBack(eventTarget, eventArgument) {
         theForm.__EVENTARGUMENT.value = eventArgument;
         theForm.submit();
     }
-}
+} */
 //]]>
 </script>
 
 </form><div id="ascrail2000" class="nicescroll-rails" style="width: 5px; z-index: 1000; cursor: default; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 0; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; float: right; width: 5px; height: 388px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2000-hr" class="nicescroll-rails" style="height: 5px; z-index: 1000; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; height: 5px; width: 1366px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2001" class="nicescroll-rails" style="width: 3px; z-index: 100; cursor: default; position: fixed; top: 0px; left: 49px; height: 623px; display: none; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; float: right; width: 3px; height: 0px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails" style="height: 3px; z-index: 100; top: 620px; left: 0px; position: fixed; cursor: default; display: none; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; height: 3px; width: 0px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div>
 
 
-<div id="dragMask" style="display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; cursor: move; opacity: 0; pointer-events: none; background: rgb(255, 255, 255);"></div></body></html>
+<div id="dragMask" style="display: none; position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; cursor: move; opacity: 0; pointer-events: none; background: rgb(255, 255, 255);"></div>
+</body></html>

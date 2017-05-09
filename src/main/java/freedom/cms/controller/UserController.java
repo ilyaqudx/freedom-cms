@@ -18,6 +18,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
 import freedom.cms.Kit;
+import freedom.cms.P;
 import freedom.cms.Result;
 import freedom.cms.SessionUtils;
 import freedom.cms.annotation.PublicAPI;
@@ -137,9 +138,16 @@ public class UserController {
 	
 	@RequestMapping("/user/list")
 	public ModelAndView list(ModelAndView mv,Page<User> page){
-		PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10));
+		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10),true);
+		P p = new P();
+		p.setCurrentPage(page.getPageNum());
+		p.setTotalPage(page.getPages());
+		p.setTotalCount(page.getTotal());
+		p.setFirstPage(1);
+		p.setLastPage(p.getTotalPage());
 		List<User> users = userMapper.list();
 		mv.addObject("users", users);
+		mv.addObject("p", p);
 		mv.setViewName("/view/vip-list.jsp");
 		return mv;
 	}
