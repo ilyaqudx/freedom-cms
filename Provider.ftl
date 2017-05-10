@@ -11,8 +11,11 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 
-import ${allClassName};
+import org.apache.ibatis.annotations.Mapper;
 
+
+import ${allClassName};
+@Mapper
 public interface ${className}Mapper {
 
 	@SelectKey(statement = "SELECT @@IDENTITY AS ID",before = false,keyColumn = "id" , keyProperty = "id" , resultType = Long.class)
@@ -29,32 +32,25 @@ public interface ${className}Mapper {
 	public ${className} get(Long id);
 	
 	@SelectProvider(type = ${className}Provider.class,method = "list")
-	public List<${className}> list(Map<String,Object> params);
+	public List<${className}> list(${className} ${className ? uncap_first});
 
 	public class ${className}Provider {
 
 		public String insert(${className} ${className ? uncap_first}) {
-			return ${insertBody};
+		 	${insertBody};
 		}
 		
 		public String delete(${className} ${className ? uncap_first}){
-			return ${deleteBody};
+			${deleteBody};
 		}
 		
 		public String get(Long id){
-			return ${selectBody};
+			${selectOneBody};
 		}
 		
-		public String list(Map<String,Object> params)
+		public String list(${className} ${className ? uncap_first})
 		{
-			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT * FROM ${className}");
-			Iterator<Entry<String, Object>> it = params.entrySet().iterator();
-			if(it.hasNext()){
-				Entry<String, Object> e = it.next();
-				//手动添加
-			}
-			return sql.toString();
+			${selectListBody}
 		}
 		
 		public String update(${className} ${className ? uncap_first}) {

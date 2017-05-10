@@ -1,10 +1,16 @@
 package freedom.cms;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-import freedom.cms.query.UserQuery;
+import freedom.cms.domain.CashOrder;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
 public class ReflectUtils {
 
@@ -13,25 +19,24 @@ public class ReflectUtils {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 		
-		Class<?> clazz = UserQuery.class;
-		String packageName = "freedom.mapper";
+		Class<?> clazz = CashOrder.class;
+		String packageName = "freedom.cms.mapper";
 		String className   = clazz.getSimpleName();
 		String allClassName= clazz.getName();
 		String insertBody = reflectInsertSqlOfMybatis(clazz);
 		String updateBody = reflectUpdateSqlOfMybatis(clazz);
 		String deleteBody = reflectDeleteSqlOfMybatis(clazz);
-		String selectBody = reflectSelectSqlOfMybatis(clazz);
+		String selectOneBody = reflectSelectOneSqlOfMybatis(clazz);
+		String selectListBody = reflectSelectListSqlOfMybatis(clazz);
 		System.out.println(insertBody);
 		System.out.println(updateBody);
-		/*freedom.cms.query.UserQuery user = new freedom.cms.query.UserQuery();
-		user.setId(100L);
-		user.setPassword("123456");
-		user.setName("abcd");
-		user.setCreateTime(new Date());*/
+		System.out.println(deleteBody);
+		System.out.println(selectOneBody);
+		System.out.println(selectListBody);
 		
-		/*Configuration config = Configuration.getDefaultConfiguration();
+		Configuration config = Configuration.getDefaultConfiguration();
 		//设置模版目录
-		config.setDirectoryForTemplateLoading(new File("F:/azy-maven-workspace-21/azy/azy-auto-config/src/main/resources/templates"));
+		config.setDirectoryForTemplateLoading(new File("C:/Users/m00056/git/freedom-cms"));
 		//获取Target模版
 		//config.gettemplate
 		Template template = config.getTemplate("Provider.ftl");
@@ -42,21 +47,30 @@ public class ReflectUtils {
 		parameter.put("insertBody", insertBody);
 		parameter.put("deleteBody", deleteBody);
 		parameter.put("updateBody", updateBody);
-		parameter.put("selectBody", selectBody);
+		parameter.put("selectOneBody", selectOneBody);
+		parameter.put("selectListBody", selectListBody);
 		//输出Target文件
-		Writer fos = new FileWriter(new File(String.format("d:/%s.java", user.getClass().getSimpleName())));
+		Writer fos = new FileWriter(new File(String.format("d:/%s%s.java", clazz.getSimpleName(),"Mapper")));
 		template.process(parameter, fos);
-		fos.close();*/
+		fos.close();
 	}
 	
 	public static final <T> String reflectDeleteSqlOfMybatis(Class<T> clazz)
 	{
-		return String.format("\"DELETE FROM %s WHERE id = #{id}\"", clazz.getSimpleName());
+		return String.format("return \"DELETE FROM %s WHERE id = #{id};\"", clazz.getSimpleName());
 	}
 	
-	public static final <T> String reflectSelectSqlOfMybatis(Class<T> clazz)
+	public static final <T> String reflectSelectOneSqlOfMybatis(Class<T> clazz)
 	{
-		return String.format("\"SELECT * FROM %s WHERE id = #{id}\"", clazz.getSimpleName());
+		return String.format("return \"SELECT * FROM %s WHERE id = #{id};\"", clazz.getSimpleName());
+	}
+	
+	public static final <T> String reflectSelectListSqlOfMybatis(Class<T> clazz)
+	{
+		String template = "String str = \"SELECT * FROM  " +clazz.getSimpleName()+ " WHERE id = #{id} %s\";";
+		//return String.format("\"SELECT * FROM %s WHERE id = #{id}\"", clazz.getSimpleName());
+		String insertFields = reflectInsertFields(clazz);
+		return reflectUpdateValuesOfMybatis(clazz.getSimpleName(), template, insertFields);
 	}
 	
 	public static final <T> String reflectInsertSqlOfIbatis(Class<T> clazz)
@@ -67,9 +81,9 @@ public class ReflectUtils {
 	}
 	public static final <T> String reflectInsertSqlOfMybatis(Class<T> clazz)
 	{
+		String template = "return %s ";
 		String insertFields = reflectInsertFields(clazz);
-		String insertValues = reflectFieldValuesOfMybatis(clazz.getSimpleName(), insertFields);
-		return insertValues;
+		return String.format(template, reflectFieldValuesOfMybatis(clazz.getSimpleName(), insertFields));
 	}
 	
 	public static final <T> String reflectUpdateSqlOfIbatis(Class<T> clazz)
@@ -80,7 +94,8 @@ public class ReflectUtils {
 	public static final <T> String reflectUpdateSqlOfMybatis(Class<T> clazz)
 	{
 		String insertFields = reflectInsertFields(clazz);
-		return reflectUpdateValuesOfMybatis(clazz.getSimpleName(), insertFields);
+		String template = "String str = \"UPDATE SET " +clazz.getSimpleName()+ " id = #{id} %s WHERE id = #{id}\";";
+		return reflectUpdateValuesOfMybatis(clazz.getSimpleName(), template,insertFields);
 	}
 	
 	private static final <T> String reflectInsertFields(Class<T> clazz)
@@ -169,10 +184,9 @@ public class ReflectUtils {
 		return sql.toString();
 	}
 	
-	private static final <T> String reflectUpdateValuesOfMybatis(String table,String insertFields)
+	private static final <T> String reflectUpdateValuesOfMybatis(String className,String template,String insertFields)
 	{
 		String str = "StringBuilder sql = new StringBuilder();";
-		String template = "String str = \"UPDATE SET " +table+ " id = #{id} %s WHERE id = #{id}\";";
 		StringBuilder sql = new StringBuilder();
 		sql.append(str);
 		sql.append(template);
@@ -182,7 +196,10 @@ public class ReflectUtils {
 		for (int i = 0;i < count ; i++) 
 		{
 			String field = fields[i];
-			sql.append("if(").append(Kit.firstLower(table)).append(".get").append(Kit.firstUpper(field)).append("()").append(" != null)").append("{");
+			sql.append("if(")
+			.append("Kit.isNotBlank(")
+			.append(Kit.firstLower(className)).append(".get").append(Kit.firstUpper(field)).append("()))")
+			.append("{");
 			sql.append("sql.append(\"").append(",").append(field).append(" = ").append("#{").append(field).append("}");
 			sql.append("\"").append(");");
 			sql.append("}");
