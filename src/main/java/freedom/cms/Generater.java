@@ -1,18 +1,18 @@
 package freedom.cms;
 import java.lang.reflect.Field;
 
-import freedom.cms.domain.User;
+import freedom.cms.domain.CashOrder;
 
 public class Generater {
 
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
 		
+		Class<CashOrder> clazz = CashOrder.class;
 		StringBuilder create = new StringBuilder();
 		String template= "create table %s(%s)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
 	
 	
 		StringBuilder sb = new StringBuilder();
-		Class<User> clazz = User.class;
 		Field[] fs = clazz.getDeclaredFields();
 		boolean hasId = false;
 		int count = fs.length;

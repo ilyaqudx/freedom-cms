@@ -3,10 +3,17 @@
 <!-- saved from url=(0046)http://osd.greenleafgroup.cn/member/index.aspx -->
 <html xmlns="http://www.w3.org/1999/xhtml" class="" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
 	会员管理系统
-</title><meta name="viewport" content="width=device-width, initial-scale=1"><link href="/js/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="/js/style.css" rel="stylesheet" type="text/css"><link href="/js/font-awesome.css" rel="stylesheet"><link href="/js/icon-font.min.css" rel="stylesheet" type="text/css"><link href="/js/animate.css" rel="stylesheet" type="text/css" media="all">
+</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/js/style.css" rel="stylesheet" type="text/css">
+	<link href="/js/font-awesome.css" rel="stylesheet">
+	<link href="/js/icon-font.min.css" rel="stylesheet" type="text/css">
+	<link href="/js/animate.css" rel="stylesheet" type="text/css" media="all">
     <script src="/js/wow.min.js"></script>
-    <script src="/js/jquery-1.10.2.min.js"></script>
-    <script src="/js/lhgdialog.js"></script><link href="/js/idialog.css" rel="stylesheet">
+    <!-- <script src="/js/jquery-1.10.2.min.js"></script> -->
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/js/lhgdialog.js"></script>
+    <link href="/js/idialog.css" rel="stylesheet">
     <script src="/js/public.js"></script>
 </head>
 
@@ -81,8 +88,8 @@
                 <ul class="sub-menu-list">
                     <li><a href="http://osd.greenleafgroup.cn/member/recharge/add.aspx">汇款操作</a></li>
                     <li><a href="http://osd.greenleafgroup.cn/member/recharge/list.aspx">汇款记录</a></li>
-                    <li><a href="http://osd.greenleafgroup.cn/member/withdraw/add.aspx">提现操作</a></li>
-                    <li><a href="http://osd.greenleafgroup.cn/member/withdraw/list.aspx">提现记录</a></li>
+                    <li><a href="/order/add?id=1">提现操作</a></li>
+                    <li><a href="/order/list">提现记录</a></li>
                 </ul>
             </li>
             <li class="menu-list">
@@ -106,8 +113,8 @@
             <li class="menu-list"><a href="http://osd.greenleafgroup.cn/member/index.aspx#">
                 <i class="lnr lnr-cog"></i><span>帐号管理</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="http://osd.greenleafgroup.cn/member/info.aspx">个人资料</a></li>
-                    <li><a href="http://osd.greenleafgroup.cn/member/updpwd.aspx">安全设置</a></li>
+                    <li><a href="/user/edit?id=1">个人资料</a></li>
+                    <li><a href="/user/security?id=7">安全设置</a></li>
                 </ul>
             </li>
 
@@ -445,9 +452,10 @@
                 </div>
             </div>
         </section>
-        <script src="/js/jquery.nicescroll.js"></script>
+        <!-- <script src="/js/jquery.nicescroll.js"></script> -->
+        <script src="https://cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
         <script src="/js/scripts.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
 <script>showMessaggeInfo(166)</script></form><div id="ascrail2000" class="nicescroll-rails" style="width: 5px; z-index: 1000; cursor: default; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 0; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; float: right; width: 5px; height: 388px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2000-hr" class="nicescroll-rails" style="height: 5px; z-index: 1000; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; height: 5px; width: 1366px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2001" class="nicescroll-rails" style="width: 3px; z-index: 100; cursor: default; position: fixed; top: 0px; left: 49px; height: 623px; display: none; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; float: right; width: 3px; height: 0px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails" style="height: 3px; z-index: 100; top: 620px; left: 0px; position: fixed; cursor: default; display: none; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; height: 3px; width: 0px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; opacity: 0.6; z-index: 1976; display: none; background: rgb(220, 226, 241);"></div>
 

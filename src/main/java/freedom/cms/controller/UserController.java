@@ -2,9 +2,8 @@ package freedom.cms.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +29,7 @@ import freedom.cms.mapper.RegionMaaper;
 import freedom.cms.mapper.ResourceMapper;
 import freedom.cms.mapper.UserMapper;
 import freedom.cms.query.UserQuery;
+import freedom.cms.vo.ChangePasswordVO;
 import freedom.cms.vo.UserVO;
 
 /**  
@@ -52,9 +52,24 @@ public class UserController {
 	private BankMapper bankMapper;
 	@Autowired
 	private RegionMaaper regionMapper;
+	
+	
 	@RequestMapping(value = "/user/{id}" , method = RequestMethod.GET)
 	public User get(@PathVariable Long id){
 		return userMapper.get(id);
+	}
+	
+	@RequestMapping(value = "/login" , method = RequestMethod.GET)
+	public ModelAndView get(ModelAndView mv){
+		mv.setViewName("/view/login.jsp");
+		mv.addObject("code", new Random().nextInt(10) + ".PNG");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/refreshCode" , method = RequestMethod.POST)
+	public Result refreshCode(ModelAndView mv){
+		String code = new Random().nextInt(10) + ".PNG";
+		return Result.ok(code);
 	}
 	
 	/**
@@ -76,6 +91,24 @@ public class UserController {
 		mv.addObject("banks",banks);
 		mv.addObject("user",user);
 		mv.setViewName("/view/vip-add.jsp");
+		return mv;
+	}
+	
+	/**
+	 * 返回数据:
+	 * 银行列表
+	 * 省份-市-区
+	 * 自动生成的会员编号(一开始就生成好)
+	 * 
+	 * */
+	@RequestMapping(value = "/user/edit",method = RequestMethod.GET)
+	public ModelAndView edit(ModelAndView mv,User user)
+	{
+		List<Bank> banks = bankMapper.list();
+		user = userMapper.get(user.getId());
+		mv.addObject("banks",banks);
+		mv.addObject("user",user);
+		mv.setViewName("/view/vip-edit.jsp");
 		return mv;
 	}
 	
@@ -117,6 +150,46 @@ public class UserController {
 		System.out.println(user);
 		userMapper.insert(user);
 		return list(mv, page,new UserQuery());
+	}
+	
+	
+	@RequestMapping(value = "/user/update",method=RequestMethod.POST)
+	public ModelAndView update(ModelAndView mv,User user){
+		userMapper.update(user);
+		return edit(mv, user);
+	}
+	
+	@RequestMapping("/user/security")
+	public ModelAndView security(ModelAndView mv,Long id)
+	{
+		mv.addObject("id", id);
+		mv.setViewName("/view/vip-security.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/user/changePassword",method=RequestMethod.POST)
+	public ModelAndView changePassword(ModelAndView mv,Long id,ChangePasswordVO vo){
+		
+		User user = userMapper.get(id);
+		if(Kit.isNotBlank(vo.getOldLoginPassword()) && Kit.isNotBlank(vo.getNewLoginPassword())){
+			if(user.getLoginPassword().equals(vo.getOldLoginPassword())){
+				user.setLoginPassword(vo.getNewLoginPassword());
+				userMapper.update(user);
+				mv.addObject("error", "一级密码修改成功");
+			}else{
+				mv.addObject("error", "旧一级密码不正确");
+			}
+		}
+		if(Kit.isNotBlank(vo.getOldPayPassword()) && Kit.isNotBlank(vo.getNewPayPassword())){
+			if(user.getPayPassword().equals(vo.getOldPayPassword())){
+				user.setPayPassword(vo.getNewPayPassword());
+				userMapper.update(user);
+				mv.addObject("error", "二级密码修改成功");
+			}else{
+				mv.addObject("error", "旧二级密码不正确");
+			}
+		}
+		return security(mv, id);
 	}
 	
 	@PublicAPI
@@ -167,18 +240,5 @@ public class UserController {
 		mv.addObject("q", query);
 		mv.setViewName("/view/vip-list.jsp");
 		return mv;
-	}
-	
-	@RequestMapping("/user/tableList")
-	public Object listByDataTable(DataTable<User> table,UserQuery query)
-	{
-		PageHelper.startPage(Math.max(table.getPageNum(), 1), Math.max(table.getPageSize(), 10),true);
-		List<User> users = userMapper.list(query);
-		table.setData(users);
-		table.setRecordsTotal(table.getPages());
-		Map<String,Object> map = new HashMap<>();
-		map.put("data",users);
-		map.put("recordsTotal", table.getTotal());
-		return map;
 	}
 }

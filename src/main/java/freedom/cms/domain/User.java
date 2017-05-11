@@ -23,6 +23,7 @@ public class User {
 	private Integer    sex;//性别
 	private String address;//家庭地址
 	private Date   createTime;//创建时间
+	private Date   activationTime;//激活日期
 	private Integer    status;//状态
 	private String recommender;//推荐人编号
 	private String settler;//安置人编号
@@ -37,6 +38,12 @@ public class User {
 	private String area;//区
 	private String receivingAddress;//收货地址
 	
+	public Date getActivationTime() {
+		return activationTime;
+	}
+	public void setActivationTime(Date activationTime) {
+		this.activationTime = activationTime;
+	}
 	public String getCode() {
 		return code;
 	}
@@ -115,9 +122,6 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 	public String getPhone() {
 		return phone;
 	}
@@ -148,10 +152,10 @@ public class User {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public String getLoginPassword() {

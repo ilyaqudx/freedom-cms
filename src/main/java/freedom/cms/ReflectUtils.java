@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import freedom.cms.domain.CashOrder;
+import freedom.cms.domain.User;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -19,7 +20,7 @@ public class ReflectUtils {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 		
-		Class<?> clazz = CashOrder.class;
+		Class<?> clazz = User.class;
 		String packageName = "freedom.cms.mapper";
 		String className   = clazz.getSimpleName();
 		String allClassName= clazz.getName();
@@ -36,7 +37,7 @@ public class ReflectUtils {
 		
 		Configuration config = Configuration.getDefaultConfiguration();
 		//设置模版目录
-		config.setDirectoryForTemplateLoading(new File("C:/Users/m00056/git/freedom-cms"));
+		config.setDirectoryForTemplateLoading(new File(System.getProperty("user.dir")));
 		//获取Target模版
 		//config.gettemplate
 		Template template = config.getTemplate("Provider.ftl");
@@ -94,7 +95,7 @@ public class ReflectUtils {
 	public static final <T> String reflectUpdateSqlOfMybatis(Class<T> clazz)
 	{
 		String insertFields = reflectInsertFields(clazz);
-		String template = "String str = \"UPDATE SET " +clazz.getSimpleName()+ " id = #{id} %s WHERE id = #{id}\";";
+		String template = "String str = \"UPDATE " +clazz.getSimpleName()+ "SET id = #{id} %s WHERE id = #{id}\";";
 		return reflectUpdateValuesOfMybatis(clazz.getSimpleName(), template,insertFields);
 	}
 	
