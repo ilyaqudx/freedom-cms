@@ -10,6 +10,6 @@ import freedom.cms.domain.Bank;
 @Mapper
 public interface BankMapper {
 
-	@Select("select * from bank")
+	@Select("select * from Bank")
 	public List<Bank> list();
 }

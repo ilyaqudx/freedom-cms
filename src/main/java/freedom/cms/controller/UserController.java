@@ -59,16 +59,19 @@ public class UserController {
 		return userMapper.get(id);
 	}
 	
+	@PublicAPI
 	@RequestMapping(value = "/login" , method = RequestMethod.GET)
 	public ModelAndView get(ModelAndView mv){
 		mv.setViewName("/view/login.jsp");
 		mv.addObject("code", new Random().nextInt(10) + ".PNG");
 		return mv;
 	}
-	
+	@PublicAPI
 	@RequestMapping(value = "/refreshCode" , method = RequestMethod.POST)
-	public Result refreshCode(ModelAndView mv){
-		String code = new Random().nextInt(10) + ".PNG";
+	public Result refreshCode(HttpServletRequest request,ModelAndView mv){
+		int index = new Random().nextInt(10);
+		String code =  index+ ".PNG";
+		SessionUtils.putKaptcha(request, SessionUtils.VERIFY_CODES.get(index));
 		return Result.ok(code);
 	}
 	
@@ -195,15 +198,21 @@ public class UserController {
 	@PublicAPI
 	@RequestMapping(value = "/user/login")
 	public ModelAndView login(HttpServletRequest request,Long userId,String password,String kaptcha){
+		ModelAndView mv = new ModelAndView("/view/login.jsp");
 		User user = userMapper.get(userId);
-		if(user == null)
-			throw new IllegalArgumentException("用户名不存在");
-		if(!user.getLoginPassword().equals(password))
-			throw new IllegalArgumentException("密码错误");
+		if(user == null){
+			mv.addObject("error","用户不存在");
+			return mv;
+		}
+		if(!user.getLoginPassword().equals(password)){
+			mv.addObject("error","密码错误");
+			return mv;
+		}
 		
 		String sessionKaptcha = SessionUtils.getKaptcha(request);
 		if(!sessionKaptcha.equalsIgnoreCase(kaptcha)){
-			throw new IllegalArgumentException("验证码不正确");
+			mv.addObject("error","验证码不正确");
+			return mv;
 		}
 		//登陆成功
 		List<String> resources = resourceMapper.listUserResource(userId);

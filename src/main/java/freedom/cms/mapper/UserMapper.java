@@ -30,11 +30,11 @@ public interface UserMapper {
 	@SelectKey(before = false,keyColumn = "id",statement = "select @@IDENTITY",statementType=StatementType.PREPARED,keyProperty="id",resultType=Long.class)
 	public Long insert(User user);
 	
-	@Select("SELECT * FROM user WHERE id = #{id}")
+	@Select("SELECT * FROM User WHERE id = #{id}")
 	public User get(Long id);
-	@Select("select * from user where code = #{code}")
+	@Select("select * from User where code = #{code}")
 	public User getByCode(String code);
-	@Select("select count(id) from user where code = #{code}")
+	@Select("select count(id) from User where code = #{code}")
 	public Long isExist(String code);
 	@SelectProvider(type=UserProvider.class,method = "list")
 	public List<User> list(UserQuery query);

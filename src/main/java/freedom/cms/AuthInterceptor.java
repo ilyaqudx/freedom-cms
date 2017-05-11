@@ -27,22 +27,22 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception 
 	{
-		/*HandlerMethod method = (HandlerMethod) handler;
+		HandlerMethod method = (HandlerMethod) handler;
 		PublicAPI publicAPI = method.getMethodAnnotation(PublicAPI.class);
 		if(publicAPI == null){
 			String requestPath = request.getRequestURI();
 			User user = (User) request.getSession().getAttribute("user_in_session");
 			if(user == null){
-				response.sendRedirect("/login.html");
+				response.sendRedirect("/login");
 				return false;
 			}
-			List<String> resources = (List<String>) request.getSession().getAttribute("user_resources");
+			/*List<String> resources = (List<String>) request.getSession().getAttribute("user_resources");
 			
 			if(null != resources && !resources.contains(requestPath)){
 				System.out.println("user have no permission : " + requestPath);
 				return false;
-			}
-		}*/
+			}*/
+		}
 		return true;
 	}
 

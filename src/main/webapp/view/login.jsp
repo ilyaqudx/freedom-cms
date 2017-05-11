@@ -22,36 +22,47 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.formValidator.initConfig({ onError: function (msg) { alert(msg) } });
-            $("#txtUserAccount").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的用户名" });
-            $("#txtPassword").formValidator().InputValidator({ min: 1, max: 20, onerror: "请输入密码" });
-            $("#txtValidCode").formValidator().InputValidator({ min: 4, max: 4, onerror: "请输入4个字符长度的验证码" });
+            $("#code").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的用户名" });
+            $("#loginPassword").formValidator().InputValidator({ min: 1, max: 20, onerror: "请输入密码" });
+            $("#kaptcha").formValidator().InputValidator({ min: 4, max: 4, onerror: "请输入4个字符长度的验证码" });
 
         });
     </script>
     <script type="text/javascript">
-        function refresh(obj) {
-            //var num = Math.ceil(Math.random() * 100);
-            //obj.src = "yzm.aspx?Num=" + num;
-        	$.ajax({
-    			type:'POST',
-    			url:"/refreshCode",
-    			dataType:'json',
-    			success:function(data){
-    				if(data.code == 0){
-    					obj.src = "/verify-code/" + data.result;
-    				}else{
-    				}
-    			}
-    		});
-        }
+		   
+	    function refresh(obj) {
+	        //var num = Math.ceil(Math.random() * 100);
+	        //obj.src = "yzm.aspx?Num=" + num;
+	    	$.ajax({
+				type:'POST',
+				url:"/refreshCode",
+				dataType:'json',
+				success:function(data){
+					if(data.code == 0){
+						obj.src = "/verify-code/" + data.result;
+					}else{
+					}
+				}
+			});
+	    }
+			
+		$(function(){
+			var error = $("#error").val();
+			if(error){
+				alert(error);
+			}
+			refresh();
+		});
+       
     </script>
 </head>
 <body><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/login.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/login.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/login.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/login.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/login.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="http://osd.greenleafgroup.cn/login.aspx" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
-    <form name="form1" method="post" action="http://osd.greenleafgroup.cn/login.aspx" id="form1">
+    <form name="form1" method="post" action="/user/login" id="form1">
 <div>
 <input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="fa616666-74a9-42ee-9819-0f5a33eb2541">
 <input type="hidden" name="__RefreshHiddenField" id="__RefreshHiddenField" value="011704.10895">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTU3MjE0NzQzMWRkLkAUPZSenysGYwW+nHPoWxly1K4=">
+<input type="hidden" id="error" value="${error}"/>
 </div>
 
 <div>
@@ -70,21 +81,21 @@
                         
                             <div class="form-group">
                                 <label for="j_username" class="t"><font color="black">会员编号：</font></label>
-                                <input name="txtUserAccount" type="text" id="txtUserAccount" tabindex="1" class="form-control x319 in">
+                                <input name="code" type="text" id="code" tabindex="1" class="form-control x319 in">
 
                             </div>
                             <div class="form-group">
                                 <label for="j_password" class="t"><font color="black">登陆密码：</font></label>
-                                <input name="txtPassword" type="password" id="txtPassword" class="password form-control x319 in" tabindex="2">
+                                <input name="loginPassword" type="password" id="loginPassword" class="password form-control x319 in" tabindex="2">
                             </div>
                             <div class="form-group">
                                 <label for="j_captcha" class="t"><font color="black">验证码：</font></label>
-                                <input name="txtValidCode" type="text" id="txtValidCode" maxlength="4" tabindex="3" class="form-control x164 in">
+                                <input name="kaptcha" type="text" id="kaptcha" maxlength="4" tabindex="3" class="form-control x164 in">
                                 <img src="/verify-code/${code}" onclick="refresh(this)" class="m" title="看不清楚？点击换一个" alt="看不清楚？点击换一个" style="height: 32px; width: 80px; border-width: 0px;">
                             </div>
 
                             <div class="form-group space">
-                                <input type="submit" name="btnSubmit" value=" 登 录 " onclick="return jQuery.formValidator.PageIsValid(&#39;1&#39;);" id="btnSubmit" tabindex="4" src="images/login.jpg" class="btn btn-primary btn-lg" style="margin-left:100px;">
+                                <input type="submit" name="btnSubmit" value=" 登 录 " onclick="return jQuery.formValidator.PageIsValid(1);" id="btnSubmit" tabindex="4" src="images/login.jpg" class="btn btn-primary btn-lg" style="margin-left:100px;">
                                <!-- &nbsp;&nbsp;&nbsp;&nbsp;
                                  <a class="btn btn-primary btn-lg" href="javascript:void(0)" onclick="$.dialog({id: 'a3_3' ,title: '找回密码',content: 'url:/m_zhaohui.aspx',max:false,min:false,width: '400px', height: '300px',lock:true,padding:0});">找回密码</a>
                                 -->
