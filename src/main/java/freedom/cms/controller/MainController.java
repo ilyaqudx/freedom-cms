@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import freedom.cms.annotation.NotPayPassword;
 import freedom.cms.domain.Menu;
 import freedom.cms.mapper.MenuMapper;
 import freedom.cms.vo.MenuVO;
@@ -26,6 +27,8 @@ public class MainController {
 
 	@Autowired
 	private MenuMapper menuMapper;
+	
+	@NotPayPassword
 	@RequestMapping("/")
 	public ModelAndView home(ModelAndView mv)
 	{

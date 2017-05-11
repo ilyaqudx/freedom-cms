@@ -21,13 +21,58 @@
     <script src="/js/lhgdialog.js"></script><link href="/js/idialog.css" rel="stylesheet">
     <script type="text/javascript">
         $(document).ready(function () {
-            $.formValidator.initConfig({ onError: function (msg) { alert(msg) } });
-            $("#code").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的用户名" });
-            $("#loginPassword").formValidator().InputValidator({ min: 1, max: 20, onerror: "请输入密码" });
-            $("#kaptcha").formValidator().InputValidator({ min: 4, max: 4, onerror: "请输入4个字符长度的验证码" });
-
-        });
-    </script>
+           
+					$.formValidator.initConfig({
+							onError : function(msg) {
+								alert(msg)
+							},
+							onSuccess : function(){
+								var code = $("#code").val();
+								var pwd  = $("#loginPassword").val();
+								var kaptcha = $("#kaptcha").val();
+								var params = {
+										code : code,
+										loginPassword : pwd,
+										kaptcha : kaptcha
+								}
+								$.ajax({
+									type:'POST',
+									data : JSON.stringify(params),
+									url:"/user/login",
+									dataType:'json',
+									contentType : "application/json",
+									success:function(data){
+										if(data.code == 0){
+											window.location.href="/";
+										}else{
+											alert(data.msg);
+										}
+									}
+								});
+								
+								
+								
+								return false;
+							}
+						});
+						$("#code").formValidator().InputValidator({
+							min : 2,
+							max : 20,
+							onerror : "请输入2-20位的用户名"
+						});
+						$("#loginPassword").formValidator().InputValidator({
+							min : 1,
+							max : 20,
+							onerror : "请输入密码"
+						});
+						$("#kaptcha").formValidator().InputValidator({
+							min : 4,
+							max : 4,
+							onerror : "请输入4个字符长度的验证码"
+						});
+						return false;
+					});
+				</script>
     <script type="text/javascript">
 		   
 	    function refresh(obj) {
@@ -45,15 +90,6 @@
 				}
 			});
 	    }
-			
-		$(function(){
-			var error = $("#error").val();
-			if(error){
-				alert(error);
-			}
-			refresh();
-		});
-       
     </script>
 </head>
 <body><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/login.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/login.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/login.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/login.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/login.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="http://osd.greenleafgroup.cn/login.aspx" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>

@@ -43,7 +43,7 @@
 					<li id="left_li_shop_1" style="display: display;"><a
 						href="/user/add">会员注册</a></li>
 					<li id="left_li_shop_2" style="display: display;"><a
-						href="/user/activate">会员激活</a></li>
+						href="javascript:void(0)">会员激活</a></li>
 					<li id="left_li_shop_5" style="display: display;"><a
 						href="/user/list">会员激活列表</a></li>
 
@@ -78,7 +78,7 @@
 						href="http://osd.greenleafgroup.cn/member/recharge/add.aspx">汇款操作</a></li>
 					<li><a
 						href="http://osd.greenleafgroup.cn/member/recharge/list.aspx">汇款记录</a></li> -->
-					<li><a href="/order/add?id=1">提现操作</a></li>
+					<li><a href="/order/add">提现操作</a></li>
 					<li><a href="/order/list">提现记录</a></li>
 				</ul></li>
 			<!-- <li class="menu-list"><a
@@ -108,8 +108,8 @@
 				href="/#"> <i
 					class="lnr lnr-cog"></i><span>帐号管理</span></a>
 				<ul class="sub-menu-list">
-					<li><a href="/user/edit?id=1">个人资料</a></li>
-					<li><a href="/user/security?id=7">安全设置</a></li>
+					<li><a href="/user/edit">个人资料</a></li>
+					<li><a href="/user/security">安全设置</a></li>
 				</ul></li>
 
 			<li><a href="/user/logout">

@@ -9,6 +9,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import freedom.cms.annotation.NotPayPassword;
 import freedom.cms.annotation.PublicAPI;
 import freedom.cms.domain.User;
 
@@ -31,10 +32,21 @@ public class AuthInterceptor implements HandlerInterceptor {
 		PublicAPI publicAPI = method.getMethodAnnotation(PublicAPI.class);
 		if(publicAPI == null){
 			String requestPath = request.getRequestURI();
-			User user = (User) request.getSession().getAttribute("user_in_session");
+			User user = SessionUtils.getUserInSession(request);
 			if(user == null){
 				response.sendRedirect("/login");
 				return false;
+			}
+			
+			NotPayPassword security = method.getMethodAnnotation(NotPayPassword.class);
+			if(!"/error".equals(requestPath) && security == null){
+				//说明需要输入二级密码才能查看
+				if(!user.getPayPassword().equals(SessionUtils.getPayPassword(request))){
+					//SESSION中保存当前二级页面需要的页面,当输入成功后则直接跳转到相应页面
+					SessionUtils.setAttr(request, SessionUtils.PAY_PASSWORD_VIEW, requestPath);
+					response.sendRedirect("/inputPayPwd");
+					return false;
+				}
 			}
 			/*List<String> resources = (List<String>) request.getSession().getAttribute("user_resources");
 			

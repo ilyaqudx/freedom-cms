@@ -29,12 +29,14 @@ public class SessionUtils {
 			VERIFY_CODES.put(i, codes.get(i));
 		}
 	}
-	
+	public static final String PAY_PASSWORD_VIEW = "pay_password_view";
 	
 	
 	public static final String USER_IN_SESSION = "user_in_session";
 	
 	public static final String USER_RESOURCE = "user_resources";
+	
+	public static final String USER_PAY_PASSWORD = "user_pay_password";
 	
 	public static final String getKaptcha(HttpServletRequest request)
 	{
@@ -72,5 +74,32 @@ public class SessionUtils {
 	private static final HttpSession getSession(HttpServletRequest request)
 	{
 		return request.getSession();
+	}
+	public static void putPayPasswordInSession(HttpServletRequest request, String payPassword) {
+		getSession(request).setAttribute(USER_PAY_PASSWORD, payPassword);
+	}
+	public static String getPayPassword(HttpServletRequest request) {
+		return (String) getSession(request).getAttribute(USER_PAY_PASSWORD);
+	}
+	public static final void setAttr(HttpServletRequest request,String key,String val)
+	{
+		getSession(request).setAttribute(key, val);
+	}
+	
+	public static final Object getAttr(HttpServletRequest request,String key)
+	{
+		return getSession(request).getAttribute(key);
+	}
+	
+	public static final void delAttr(HttpServletRequest request,String key)
+	{
+		getSession(request).removeAttribute(key);
+	}
+	
+	public static final Object getAndDelAttr(HttpServletRequest request,String key)
+	{
+		Object value = getSession(request).getAttribute(key);;
+		getSession(request).removeAttribute(key);
+		return value;
 	}
 }

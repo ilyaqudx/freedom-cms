@@ -46,6 +46,9 @@ public interface UserMapper {
 		{
 			StringBuilder sql = new StringBuilder();
 			String str = "select * from User where 1 = 1 %s";
+			if(Kit.isNotBlank(userQuery.getRecommender())){
+				sql.append(" and recommender = #{recommender}");
+			}
 			if (Kit.isNotBlank(userQuery.getStartTime())) {
 				sql.append(" and createTime >= #{startTime}");
 			}

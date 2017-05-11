@@ -1,14 +1,17 @@
 package freedom.cms.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +24,7 @@ import freedom.cms.Kit;
 import freedom.cms.P;
 import freedom.cms.Result;
 import freedom.cms.SessionUtils;
+import freedom.cms.annotation.NotPayPassword;
 import freedom.cms.annotation.PublicAPI;
 import freedom.cms.domain.Bank;
 import freedom.cms.domain.User;
@@ -30,6 +34,7 @@ import freedom.cms.mapper.ResourceMapper;
 import freedom.cms.mapper.UserMapper;
 import freedom.cms.query.UserQuery;
 import freedom.cms.vo.ChangePasswordVO;
+import freedom.cms.vo.LoginVO;
 import freedom.cms.vo.UserVO;
 
 /**  
@@ -68,7 +73,7 @@ public class UserController {
 	}
 	@PublicAPI
 	@RequestMapping(value = "/refreshCode" , method = RequestMethod.POST)
-	public Result refreshCode(HttpServletRequest request,ModelAndView mv){
+	public Result<?> refreshCode(HttpServletRequest request,ModelAndView mv){
 		int index = new Random().nextInt(10);
 		String code =  index+ ".PNG";
 		SessionUtils.putKaptcha(request, SessionUtils.VERIFY_CODES.get(index));
@@ -105,8 +110,9 @@ public class UserController {
 	 * 
 	 * */
 	@RequestMapping(value = "/user/edit",method = RequestMethod.GET)
-	public ModelAndView edit(ModelAndView mv,User user)
+	public ModelAndView edit(ModelAndView mv,HttpServletRequest request)
 	{
+		User user = SessionUtils.getUserInSession(request);
 		List<Bank> banks = bankMapper.list();
 		user = userMapper.get(user.getId());
 		mv.addObject("banks",banks);
@@ -157,23 +163,25 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/user/update",method=RequestMethod.POST)
-	public ModelAndView update(ModelAndView mv,User user){
+	public ModelAndView update(ModelAndView mv,HttpServletRequest request,User user){
 		userMapper.update(user);
-		return edit(mv, user);
+		return edit(mv,request);
 	}
 	
+	@NotPayPassword
 	@RequestMapping("/user/security")
-	public ModelAndView security(ModelAndView mv,Long id)
+	public ModelAndView security(ModelAndView mv,HttpServletRequest request)
 	{
-		mv.addObject("id", id);
+		User user = SessionUtils.getUserInSession(request);
+		mv.addObject("id", user.getId());
 		mv.setViewName("/view/vip-security.jsp");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/user/changePassword",method=RequestMethod.POST)
-	public ModelAndView changePassword(ModelAndView mv,Long id,ChangePasswordVO vo){
+	public ModelAndView changePassword(ModelAndView mv,HttpServletRequest request,ChangePasswordVO vo){
 		
-		User user = userMapper.get(id);
+		User user = SessionUtils.getUserInSession(request);
 		if(Kit.isNotBlank(vo.getOldLoginPassword()) && Kit.isNotBlank(vo.getNewLoginPassword())){
 			if(user.getLoginPassword().equals(vo.getOldLoginPassword())){
 				user.setLoginPassword(vo.getNewLoginPassword());
@@ -192,33 +200,60 @@ public class UserController {
 				mv.addObject("error", "旧二级密码不正确");
 			}
 		}
-		return security(mv, id);
+		return security(mv, request);
+	}
+	
+	/**输入支付密码页面
+	 * @param request
+	 * @param payPassword
+	 * @return
+	 */
+	@NotPayPassword
+	@RequestMapping(value = "/inputPayPwd",method=RequestMethod.GET)
+	public ModelAndView inputPayPwd(){
+		return new ModelAndView("/view/input-paypwd.jsp");
+	}
+	
+	/**验证支付密码
+	 * @param request
+	 * @param payPassword
+	 * @return
+	 */
+	@NotPayPassword
+	@RequestMapping(value = "/verifyPayPwd",method=RequestMethod.POST)
+	public Result<?> verifyPayPwd(HttpServletRequest request,String payPassword){
+		User user = SessionUtils.getUserInSession(request);
+		if(!user.getPayPassword().equals(payPassword)){
+			return Result.err("二级密码错误");
+		}
+		//登陆成功
+		SessionUtils.putPayPasswordInSession(request, user.getPayPassword());
+		String view = (String) SessionUtils.getAndDelAttr(request, SessionUtils.PAY_PASSWORD_VIEW);
+		//页面直接去跳转即可
+		return Result.ok(view);
 	}
 	
 	@PublicAPI
 	@RequestMapping(value = "/user/login")
-	public ModelAndView login(HttpServletRequest request,Long userId,String password,String kaptcha){
-		ModelAndView mv = new ModelAndView("/view/login.jsp");
-		User user = userMapper.get(userId);
+	public Result<?> login(HttpServletRequest request,HttpServletResponse resp,
+			@RequestBody LoginVO vo){
+		User user = userMapper.getByCode(vo.getCode());
 		if(user == null){
-			mv.addObject("error","用户不存在");
-			return mv;
+			return Result.err("用户不存在");
 		}
-		if(!user.getLoginPassword().equals(password)){
-			mv.addObject("error","密码错误");
-			return mv;
+		if(!user.getLoginPassword().equals(vo.getLoginPassword())){
+			return Result.err("密码错误");
 		}
 		
 		String sessionKaptcha = SessionUtils.getKaptcha(request);
-		if(!sessionKaptcha.equalsIgnoreCase(kaptcha)){
-			mv.addObject("error","验证码不正确");
-			return mv;
+		if(null == sessionKaptcha || !sessionKaptcha.equalsIgnoreCase(vo.getKaptcha())){
+			return Result.err("验证码错误");
 		}
 		//登陆成功
-		List<String> resources = resourceMapper.listUserResource(userId);
+		List<String> resources = resourceMapper.listUserResource(user.getId());
 		SessionUtils.putUserInSession(request, user);
 		SessionUtils.putUserResourceInSession(request, resources);
-		return new ModelAndView("redirect:/");
+		return Result.ok();
 	}
 	
 	@RequestMapping("/user/list")
@@ -249,5 +284,49 @@ public class UserController {
 		mv.addObject("q", query);
 		mv.setViewName("/view/vip-list.jsp");
 		return mv;
+	}
+	
+	@RequestMapping("/user/activation")
+	public ModelAndView activation(ModelAndView mv,Page<User> page,UserQuery query){
+		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 2),true);
+		List<User> users = userMapper.list(query);
+		List<UserVO> vos = new ArrayList<UserVO>();
+		users.stream().forEach(u ->{
+			try {
+				UserVO vo = Kit.copy(u, UserVO.class);
+				String recommenderName = userMapper.getByCode(vo.getRecommender()).getName();
+				String settlerName = userMapper.getByCode(vo.getSettler()).getName();
+				vo.setRecommenderName(recommenderName);
+				vo.setSettlerName(settlerName);
+				vos.add(vo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		P p = new P();
+		p.setCurrentPage(page.getPageNum());
+		p.setTotalPage(page.getPages());
+		p.setTotalCount(page.getTotal());
+		p.setFirstPage(1);
+		p.setLastPage(p.getTotalPage());
+		mv.addObject("users", vos);
+		mv.addObject("p", p);
+		mv.addObject("q", query);
+		mv.setViewName("/view/vip-list.jsp");
+		return mv;
+	}
+	
+	@NotPayPassword
+	@RequestMapping("/user/logout")
+	public void home(HttpServletRequest request,HttpServletResponse response)
+	{
+		SessionUtils.delAttr(request, SessionUtils.USER_IN_SESSION);
+		SessionUtils.delAttr(request, SessionUtils.PAY_PASSWORD_VIEW);
+		SessionUtils.delAttr(request, SessionUtils.USER_PAY_PASSWORD);
+		try {
+			response.sendRedirect("/login");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

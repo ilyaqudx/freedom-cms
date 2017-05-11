@@ -7,6 +7,13 @@ public class UserQuery {
 	private String code;
 	private String phone;
 	private String name;
+	private Long  recommender;
+	public Long getRecommender() {
+		return recommender;
+	}
+	public void setRecommender(Long recommender) {
+		this.recommender = recommender;
+	}
 	public String getStartTime() {
 		return startTime;
 	}
