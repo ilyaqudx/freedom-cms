@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import com.github.pagehelper.PageHelper;
 
 import freedom.cms.Kit;
 import freedom.cms.P;
+import freedom.cms.SessionUtils;
 import freedom.cms.domain.CashOrder;
 import freedom.cms.domain.User;
 import freedom.cms.mapper.CashOrderMapper;
@@ -29,8 +32,6 @@ public class CashOrderController {
 	
 	@Autowired
 	private CashOrderMapper cashOrderMapper;
-	@Autowired
-	private UserMapper userMapper;
 	
 	/**
 	 * 返回数据:
@@ -39,9 +40,9 @@ public class CashOrderController {
 	 * 目前拥有的奖金币数量
 	 * */
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
-	public ModelAndView add(ModelAndView mv,User user)
+	public ModelAndView add(HttpServletRequest request,ModelAndView mv)
 	{
-		user = userMapper.get(user.getId());
+		User user = SessionUtils.getUserInSession(request);
 		mv.addObject("user",user);
 		mv.setViewName("/view/order-add.jsp");
 		return mv;

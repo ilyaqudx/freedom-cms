@@ -2,14 +2,25 @@ package freedom.cms.vo;
 
 public class ChangePasswordVO {
 
+	
+	public static final int TYPE_LOGIN_PWD = 1,TYPE_PAY_PWD = 2;
+	
+	private Integer changeType;
 	private String oldLoginPassword;
 	private String newLoginPassword;
 	private String oldPayPassword;
 	private String newPayPassword;
 	@Override
 	public String toString() {
-		return "ChangePasswordVO [oldLoginPassword=" + oldLoginPassword + ", newLoginPassword=" + newLoginPassword
-				+ ", oldPayPassword=" + oldPayPassword + ", newPayPassword=" + newPayPassword + "]";
+		return "ChangePasswordVO [changeType=" + changeType + ", oldLoginPassword=" + oldLoginPassword
+				+ ", newLoginPassword=" + newLoginPassword + ", oldPayPassword=" + oldPayPassword + ", newPayPassword="
+				+ newPayPassword + "]";
+	}
+	public Integer getChangeType() {
+		return changeType;
+	}
+	public void setChangeType(Integer changeType) {
+		this.changeType = changeType;
 	}
 	public String getOldLoginPassword() {
 		return oldLoginPassword;

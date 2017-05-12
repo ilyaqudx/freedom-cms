@@ -66,18 +66,23 @@ public class UserController {
 	
 	@PublicAPI
 	@RequestMapping(value = "/login" , method = RequestMethod.GET)
-	public ModelAndView get(ModelAndView mv){
+	public ModelAndView get(HttpServletRequest request,ModelAndView mv){
 		mv.setViewName("/view/login.jsp");
-		mv.addObject("code", new Random().nextInt(10) + ".PNG");
 		return mv;
 	}
 	@PublicAPI
 	@RequestMapping(value = "/refreshCode" , method = RequestMethod.POST)
 	public Result<?> refreshCode(HttpServletRequest request,ModelAndView mv){
+		String code = randomVerifyCode(request);
+		return Result.ok(code);
+	}
+
+	private String randomVerifyCode(HttpServletRequest request) {
 		int index = new Random().nextInt(10);
 		String code =  index+ ".PNG";
 		SessionUtils.putKaptcha(request, SessionUtils.VERIFY_CODES.get(index));
-		return Result.ok(code);
+		System.out.println("生成登陆验证码 : " + code + "," +SessionUtils.getKaptcha(request));
+		return code;
 	}
 	
 	/**
@@ -178,29 +183,31 @@ public class UserController {
 		return mv;
 	}
 	
+	@NotPayPassword
 	@RequestMapping(value = "/user/changePassword",method=RequestMethod.POST)
-	public ModelAndView changePassword(ModelAndView mv,HttpServletRequest request,ChangePasswordVO vo){
+	public Result<?> changePassword(ModelAndView mv,HttpServletRequest request,ChangePasswordVO vo){
 		
 		User user = SessionUtils.getUserInSession(request);
-		if(Kit.isNotBlank(vo.getOldLoginPassword()) && Kit.isNotBlank(vo.getNewLoginPassword())){
+		if(vo.getChangeType() == ChangePasswordVO.TYPE_LOGIN_PWD)
+		{
 			if(user.getLoginPassword().equals(vo.getOldLoginPassword())){
 				user.setLoginPassword(vo.getNewLoginPassword());
 				userMapper.update(user);
-				mv.addObject("error", "一级密码修改成功");
+				return Result.ok("一级密码修改成功");
 			}else{
-				mv.addObject("error", "旧一级密码不正确");
+				return Result.err("原一级密码不正确");
 			}
 		}
-		if(Kit.isNotBlank(vo.getOldPayPassword()) && Kit.isNotBlank(vo.getNewPayPassword())){
+		else if(vo.getChangeType() == ChangePasswordVO.TYPE_PAY_PWD){
 			if(user.getPayPassword().equals(vo.getOldPayPassword())){
 				user.setPayPassword(vo.getNewPayPassword());
 				userMapper.update(user);
-				mv.addObject("error", "二级密码修改成功");
+				return Result.ok("二级密码修改成功");
 			}else{
-				mv.addObject("error", "旧二级密码不正确");
+				return Result.err("原二级密码不正确");
 			}
 		}
-		return security(mv, request);
+		return Result.err("修改密码失败");
 	}
 	
 	/**输入支付密码页面
