@@ -91,7 +91,7 @@
                 <div class="profile_img">
                     <span style="background: url(/js/8.jpg) no-repeat center"></span>
                     <div class="user-name">
-                        <p><b id="top_p_name">姚兰</b><span id="top_p_level">会员</span></p>
+                        <p><b id="top_p_name">${user.name }</b><span id="top_p_level">会员</span></p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

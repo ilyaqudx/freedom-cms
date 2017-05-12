@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <!-- saved from url=(0046)http://osd.greenleafgroup.cn/member/index.aspx -->
 <html xmlns="http://www.w3.org/1999/xhtml" class="" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
@@ -66,21 +67,24 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">会员账号</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="p_loginName" class="new badge1 blue1">a062050</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="p_loginName" class="new badge1 blue1">${user.code }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">会员姓名</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="p_name" class="new badge1 blue1">姚兰</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="p_name" class="new badge1 blue1">${user.name }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">联系手机</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_mobile" class="new badge1 blue2">15284712413</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_mobile" class="new badge1 blue2">${user.phone }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             
@@ -88,7 +92,8 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">奖衔级别</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="spanlevelone" class="new badge1 blue2"></span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="spanlevelone" class="new badge1 blue2">会员</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
 
@@ -96,14 +101,16 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">推荐人账号</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_p" class="new badge1 blue2">a585381</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_p" class="new badge1 blue2">${user.recommender }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">安置人账号</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_danbaoren" class="new badge1 blue2">a585381</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_danbaoren" class="new badge1 blue2">${user.settler }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                            
@@ -111,7 +118,8 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">注册日期</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_d" class="new badge1 blue2">2017/4/4 21:23:15</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_d" class="new badge1 blue2"><fmt:formatDate value="${user.createTime }" pattern="yyyy/MM/dd HH:mm:ss"/></span></a>
                                                 <div class="clearfix"></div>
                                             </li>
 

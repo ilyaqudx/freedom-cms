@@ -3,11 +3,14 @@ package freedom.cms.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import freedom.cms.SessionUtils;
 import freedom.cms.annotation.NotPayPassword;
 import freedom.cms.domain.Menu;
 import freedom.cms.mapper.MenuMapper;
@@ -30,7 +33,7 @@ public class MainController {
 	
 	@NotPayPassword
 	@RequestMapping("/")
-	public ModelAndView home(ModelAndView mv)
+	public ModelAndView home(HttpServletRequest request,ModelAndView mv)
 	{
 		List<Menu> menus = menuMapper.listParentMenu();
 		List<Menu> children = menuMapper.listChildren(menus.get(0).getId());
@@ -40,7 +43,8 @@ public class MainController {
 		vo.setChildren(children);
 		vos.add(vo);
 		mv.setViewName("view/index.jsp");
-		mv.getModel().put("menus", vos);
+		mv.addObject("menus", vos);
+		mv.addObject("user",SessionUtils.getUserInSession(request));
 		return mv;
 	}
 }

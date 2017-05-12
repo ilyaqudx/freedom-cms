@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,15 +56,33 @@ public class CashOrderController {
 	 * 目前拥有的奖金币数量
 	 * */
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
-	public CashOrder add(CashOrder order)
+	public ModelAndView add(HttpServletRequest request,ModelAndView mv,CashOrder order,String payPassword)
 	{
-		System.out.println(order);
-		order.setActualAmount(order.getAmount());
-		order.setCreateTime(new Date());
-		order.setStatus(CashOrder.STATUS_PROCESSING);
-		order.setOrderNo(Kit.time2String(new Date(), "yyMMddHHmmss"+order.getUserId()+Kit.generatorNumber(4)));
-		cashOrderMapper.insert(order);
-		return order;
+		//验证二级密码是否正确
+		System.out.println("paypassword : " + payPassword);
+		User user = SessionUtils.getUserInSession(request);
+		if(!user.getPayPassword().equals(payPassword)){
+			mv.addObject("error","二级密码错误");
+		}else{
+			System.out.println(order);
+			try {
+				float amount = order.getAmount() == null ? 0 : order.getAmount();
+				int validAmount = (int) amount;
+				if(validAmount % 100 != 0)
+					throw new IllegalArgumentException();
+				order.setAmount(order.getAmount());
+				order.setActualAmount(order.getAmount());
+				order.setCreateTime(new Date());
+				order.setStatus(CashOrder.STATUS_PROCESSING);
+				order.setOrderNo(Kit.time2String(new Date(), "yyMMddHHmmss"+order.getUserId()+Kit.generatorNumber(4)));
+				cashOrderMapper.insert(order);
+				mv.addObject("error","申请提交成功");
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				mv.addObject("error","提现金额必须是100的整数倍，请重新输入！");
+			}
+		}
+		return add(request, mv);
 	}
 	
 	@RequestMapping("/list")

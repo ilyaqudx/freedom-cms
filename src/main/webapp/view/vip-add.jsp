@@ -281,7 +281,7 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">会员姓名*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="name" value="${user.name }" type="text" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="name" class="form-control">
+                                                        <input name="name" value="${user.name }" type="text" onblur="copyNameToBankAccountName()" id="name" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -331,7 +331,7 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">开户人*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="bankAccountName" value="林磊" type="text" id="bankAccountName" readonly="readonly" class="form-control">
+                                                        <input name="bankAccountName" value="" type="text" id="bankAccountName" readonly="readonly" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -423,6 +423,12 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
 //<![CDATA[
 Sys.Application.initialize();
 //]]>
+
+function copyNameToBankAccountName(){
+	var name = $("#name").val();
+	$("#bankAccountName").val(name);
+}
+
 </script>
 </form><div id="ascrail2000" class="nicescroll-rails" style="width: 5px; z-index: 1000; cursor: default; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 0; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; float: right; width: 5px; height: 429px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2000-hr" class="nicescroll-rails" style="height: 5px; z-index: 1000; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; height: 5px; width: 1366px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2001" class="nicescroll-rails" style="width: 3px; z-index: 100; cursor: default; position: fixed; top: 0px; left: 49px; height: 667px; display: none; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; float: right; width: 3px; height: 0px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails" style="height: 3px; z-index: 100; top: 664px; left: 0px; position: fixed; cursor: default; display: none; background: rgb(66, 79, 99);"><div style="position: relative; top: 0px; height: 3px; width: 0px; border: 0px; border-radius: 10px; background-color: rgb(39, 204, 228); background-clip: padding-box;"></div></div>
 

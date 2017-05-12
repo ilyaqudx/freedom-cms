@@ -25,6 +25,11 @@
             $("#amount").formValidator().InputValidator({ min: 2, max: 8, onerror: "你输入的提现金额有问题,请修改" })
                  .RegexValidator({ regexp: "^[1-9][0-9]*0{2}$",onerror: "提现金额必须是100的整数倍，请重新输入！"});
             //$("#txtMemo").formValidator().InputValidator({ min: 1, onerror: "请输入提现描述" });
+            
+            var error = "${error}";
+            if(error){
+            	alert(error);
+            }
         });
 
     </script>
