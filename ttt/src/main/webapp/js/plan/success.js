@@ -1,4 +1,0 @@
-$(function() {
-
-	parent.location.reload();
-});
