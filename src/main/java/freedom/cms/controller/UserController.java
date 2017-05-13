@@ -325,7 +325,7 @@ public class UserController {
 	
 	@NotPayPassword
 	@RequestMapping("/user/logout")
-	public void home(HttpServletRequest request,HttpServletResponse response)
+	public void logout(HttpServletRequest request,HttpServletResponse response)
 	{
 		SessionUtils.delAttr(request, SessionUtils.USER_IN_SESSION);
 		SessionUtils.delAttr(request, SessionUtils.PAY_PASSWORD_VIEW);

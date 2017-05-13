@@ -127,7 +127,10 @@
         	var value = $(obj).find('option:selected').val();
         	$.ajax({
     			type:'POST',
-    			url:"/region/cascade?regionName="+value,
+    			data : {
+    				regionName : value
+    			},
+    			url:"/region/cascade",
     			dataType:'json',
     			success:function(data){
     				if(data.code == 0){
