@@ -3,9 +3,11 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/freedom-cms-new
+    #url: jdbc:mysql://127.0.0.1:3306/freedom-cms-new?useUnicode\=true&characterEncoding\=utf8&&zeroDateTimeBehavior\=convertToNull
+    url: jdbc:mysql://10.66.201.7:3306/cms?useUnicode\=true&characterEncoding\=utf8&&zeroDateTimeBehavior\=convertToNull
     username: root
-    password: admin
+    #password: admin
+    password: ilYaqudx8858
     driverClassName: com.mysql.jdbc.Driver
     initialSize: 5
     minIdle: 10

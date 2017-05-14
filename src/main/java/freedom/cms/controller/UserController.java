@@ -1,6 +1,7 @@
 package freedom.cms.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +27,11 @@ import freedom.cms.Result;
 import freedom.cms.SessionUtils;
 import freedom.cms.annotation.NotPayPassword;
 import freedom.cms.annotation.PublicAPI;
+import freedom.cms.domain.Achievement;
 import freedom.cms.domain.Bank;
+import freedom.cms.domain.Region;
 import freedom.cms.domain.User;
+import freedom.cms.mapper.AchievementMapper;
 import freedom.cms.mapper.BankMapper;
 import freedom.cms.mapper.RegionMaaper;
 import freedom.cms.mapper.ResourceMapper;
@@ -57,6 +61,8 @@ public class UserController {
 	private BankMapper bankMapper;
 	@Autowired
 	private RegionMaaper regionMapper;
+	@Autowired
+	private AchievementMapper achievementMapper;
 	
 	
 	@RequestMapping(value = "/user/{id}" , method = RequestMethod.GET)
@@ -93,18 +99,47 @@ public class UserController {
 	 * 
 	 * */
 	@RequestMapping(value = "/user/add",method = RequestMethod.GET)
-	public ModelAndView add(ModelAndView mv,User user)
+	public ModelAndView add(HttpServletRequest request,ModelAndView mv,User u)
 	{
+		if(Kit.isNotBlank(u.getCode())){
+			//将省市区全部返回
+			if(Kit.isNotBlank(u.getProvince())){
+				Region p = regionMapper.get(u.getProvince());
+				if(p != null){
+					List<String> citys = regionMapper.listCity(p.getCode());
+					mv.addObject("citys", citys);
+					Region c = regionMapper.get(u.getCity());
+					if(c != null){
+						List<String> areas = regionMapper.listCity(c.getCode());
+						mv.addObject("areas",areas);
+					}
+				}
+			}
+		}else{
+			String code = "w" + Kit.generatorNumber(6);
+			u.setCode(code);
+		}
 		List<String> provinces = regionMapper.listProvince();
 		List<Bank> banks = bankMapper.list();
-		String code = "a" + Kit.generatorNumber(6);
-		boolean isExist = userMapper.isExist(code) > 0;
-		user.setCode(code);
 		mv.addObject("provinces", provinces);
 		mv.addObject("banks",banks);
-		mv.addObject("user",user);
+		mv.addObject("u",u);
+		mv.addObject("user",SessionUtils.getUserInSession(request));
 		mv.setViewName("/view/vip-add.jsp");
 		return mv;
+	}
+	
+	private String encoding(String str)
+	{
+		if(Kit.isNotBlank(str)){
+			try {
+				return new String(str.getBytes("ISO-8859-1"),"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return str;
 	}
 	
 	/**
@@ -120,6 +155,19 @@ public class UserController {
 		User user = SessionUtils.getUserInSession(request);
 		List<Bank> banks = bankMapper.list();
 		user = userMapper.get(user.getId());
+		//身份证后6位隐藏
+		if(Kit.isNotBlank(user.getIdentityCode())){
+			try {
+				String id = user.getIdentityCode();
+				if(id.length() >= 6){
+					String str = id.substring(id.length() - 6);
+					user.setIdentityCode(id.replace(str, "******"));
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		mv.addObject("banks",banks);
 		mv.addObject("user",user);
 		mv.setViewName("/view/vip-edit.jsp");
@@ -158,18 +206,94 @@ public class UserController {
 	 * contentType : "application/json"
 	 * */
 	@RequestMapping(value = "/user/add",method=RequestMethod.POST)
-	public ModelAndView post(ModelAndView mv,Page<User> page,HttpServletRequest request,User user){
-		user.setStatus(0);
-		user.setCreateTime(new Date());
-		System.out.println(user);
-		userMapper.insert(user);
-		return list(mv, page,new UserQuery());
+	public ModelAndView post(ModelAndView mv,Page<User> page,HttpServletRequest request,User u){
+		System.out.println(u);
+		String name = u.getName();
+		String accountName = u.getBankAccountName();
+		String bankAddress = u.getBankAddress();
+		String receivAddress = u.getReceivingAddress();
+		String bank = u.getBank();
+		String province = u.getProvince();
+		String city = u.getCity();
+		String area = u.getArea();
+		
+		u.setName(encoding(name));
+		u.setBankAccountName(encoding(accountName));
+		u.setBankAddress(encoding(bankAddress));
+		u.setReceivingAddress(encoding(receivAddress));
+		u.setBank(encoding(bank));
+		u.setProvince(encoding(province));
+		u.setCity(encoding(city));
+		u.setArea(encoding(area));
+		
+		//验证推荐人编号
+		User remommender = userMapper.getByCode(u.getRecommender());
+		if(null == remommender){
+			mv.addObject("error","推荐人编号无效");
+			return add(request,mv,u);
+		}
+		
+		User settler = userMapper.getByCode(u.getSettler());
+		if(null == settler){
+			mv.addObject("error","安置人编码无效");
+			return add(request,mv,u);
+		}
+		
+		User coder = userMapper.getByCode(u.getCode());
+		if(null != coder){
+			mv.addObject("error","会员编号无效");
+			return add(request,mv,u);
+		}
+		
+		//添加成功
+		u.setStatus(0);
+		u.setCreateTime(new Date());
+		u.setActivationTime(new Date());
+		u.setAdmin(0);
+		System.out.println(u);
+		userMapper.insert(u);
+		mv.addObject("error","添加成功");
+		
+		//同时添加用户的业绩
+		Achievement a = new Achievement();
+		a.setCode(u.getCode());
+		a.setBaoDanCoin(0D);
+		a.setBaoDanGouWuCoin(0D);
+		a.setBonusCoin(0D);
+		a.setElectronicCoin(0D);
+		a.setRepeatSaleCoin(0D);
+		a.setElectCoinCumulative(0D);
+		a.setLevel("会员");
+		achievementMapper.insert(a);
+		return add(request,mv, new User());
 	}
 	
 	
 	@RequestMapping(value = "/user/update",method=RequestMethod.POST)
 	public ModelAndView update(ModelAndView mv,HttpServletRequest request,User user){
+		System.out.println(user);
+		String name = user.getName();
+		String accountName = user.getBankAccountName();
+		String bankAddress = user.getBankAddress();
+		String receivAddress = user.getReceivingAddress();
+		String bank = user.getBank();
+		String province = user.getProvince();
+		String city = user.getCity();
+		String area = user.getArea();
+		
+		user.setName(encoding(name));
+		user.setBankAccountName(encoding(accountName));
+		user.setBankAddress(encoding(bankAddress));
+		user.setReceivingAddress(encoding(receivAddress));
+		user.setBank(encoding(bank));
+		user.setProvince(encoding(province));
+		user.setCity(encoding(city));
+		user.setArea(encoding(area));
+		System.out.println(user);
 		userMapper.update(user);
+		//更新缓存
+		user = userMapper.get(user.getId());
+		SessionUtils.putUserInSession(request, user);
 		return edit(mv,request);
 	}
 	
@@ -264,8 +388,17 @@ public class UserController {
 	}
 	
 	@RequestMapping("/user/list")
-	public ModelAndView list(ModelAndView mv,Page<User> page,UserQuery query){
+	public ModelAndView list(ModelAndView mv,Page<User> page,UserQuery query,HttpServletRequest request){
 		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 2),true);
+		query.setName(encoding(query.getName()));
+		User user = SessionUtils.getUserInSession(request);
+		if(user.getAdmin() != Kit.TRUE){
+			//如果不是管理员,只能查看自己发展的会员信息
+			query.setRecommender(user.getCode());
+		}else{
+			query.setAdminCode(user.getCode());
+		}
+		
 		List<User> users = userMapper.list(query);
 		List<UserVO> vos = new ArrayList<UserVO>();
 		users.stream().forEach(u ->{

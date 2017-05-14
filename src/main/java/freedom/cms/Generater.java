@@ -1,13 +1,13 @@
 package freedom.cms;
 import java.lang.reflect.Field;
 
-import freedom.cms.domain.CashOrder;
+import freedom.cms.domain.Achievement;
 
 public class Generater {
 
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		
-		Class<CashOrder> clazz = CashOrder.class;
+		Class<?> clazz = Achievement.class;
 		StringBuilder create = new StringBuilder();
 		String template= "create table %s(%s)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4";
 	
@@ -33,6 +33,8 @@ public class Generater {
 					sb.append(" varchar(255)");
 				else if(type == java.util.Date.class)
 					sb.append(" datetime default null");
+				else if(type == java.lang.Double.class)
+					sb.append(" double default null");
 				if(name.equals("id")){
 					sb.append(" auto_increment");
 				}

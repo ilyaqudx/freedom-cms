@@ -19,6 +19,8 @@ import org.springframework.beans.BeanUtils;
 
 public class Kit {
 
+	public static final int TRUE = 1,FALSE = 0;
+	
 	static Random r = new Random();
 	
 	public static final String generatorNumber(int length)

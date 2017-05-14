@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- saved from url=(0053)http://osd.greenleafgroup.cn/member/withdraw/add.aspx -->
+<!-- saved from url=(0053)javascript:void(0) -->
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
 	会员管理系统
 </title><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
     </script>
 </head>
 
-<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/member/withdraw/add.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/withdraw/add.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/withdraw/add.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/withdraw/add.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/withdraw/add.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="http://osd.greenleafgroup.cn/member/withdraw/add.aspx" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div style="position: absolute; z-index: 19700; top: -1970px; left: -1970px; display: none;"><iframe src="/js/My97DatePicker.html" frameborder="0" border="0" scrolling="no" style="width: 186px; height: 198px;"></iframe></div>
+<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0)###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="javascript:void(0)###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="javascript:void(0)###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0)###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0)###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="javascript:void(0)" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div><div style="position: absolute; z-index: 19700; top: -1970px; left: -1970px; display: none;"><iframe src="/js/My97DatePicker.html" frameborder="0" border="0" scrolling="no" style="width: 186px; height: 198px;"></iframe></div>
     <form name="form2" method="post" action="/order/add" id="form2">
 <div>
 <input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="57a29d42-b8c0-4037-814d-83cd31d6427f">
@@ -70,7 +70,7 @@
                                              <div class="form-group">
                                                 <label for="input001" class="col-sm-2 control-label form-label">奖金币</label>
                                                 <div class="col-sm-6">
-                                                    <input name="txtM3Balance" type="text" value="197.50" id="txtM3Balance" disabled="disabled" class="form-control">
+                                                    <input name="txtM3Balance" type="text" value="${a.bonusCoin }" id="txtM3Balance" disabled="disabled" class="form-control">
                                                 </div>
                                             </div>
                                            
@@ -116,7 +116,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label form-label"></label>
                                                 <div class="col-sm-10">
-                                                    <input type="submit" name="btnSubmit" value="提交" onclick="return jQuery.formValidator.PageIsValid(&#39;1&#39;);" id="btnSubmit" class="btn btn-default">
+                                                    <input type="submit" name="btnSubmit" value="提交" onclick="return jQuery.formValidator.PageIsValid(1);" id="btnSubmit" class="btn btn-default">
                                                 </div>
                                             </div>
                                         </div>

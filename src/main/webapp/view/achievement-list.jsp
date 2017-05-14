@@ -14,8 +14,9 @@
     <script src="/js/public.js"></script>
 </head>
 
-<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0)###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="javascript:void(0)###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="javascript:void(0)###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0)###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0)###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="javascript:void(0)" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
-    <form name="form1" method="post" action="/order/list" id="form1">
+<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0)###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="javascript:void(0)###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="javascript:void(0)###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0)###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0)###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon">
+<img src="javascript:void(0)" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
+    <form name="form1" method="post" action="/achievement/list" id="form1">
 <div>
 <input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="">
 <input type="hidden" name="__RefreshHiddenField" id="__RefreshHiddenField" value="">
@@ -47,34 +48,32 @@
                                                 <thead>
                                                     <tr class="warning">
 												<th>序号</th>
-												<c:if test="${user.admin == 1 }">
-													<th>会员编号</th>
-													<th>会员姓名</th>
-												</c:if>
-												<th>提现金额</th>
-												<th>实发金额</th>
-												<th>申请时间</th>
-												<th>类型</th>
-												<th>状态</th>
+												<th>会员编号</th>
+												<th>会员级别</th>
+												<th>电子币</th>
+												<th>复消币</th>
+												<th>奖金币</th>
+												<th>报单币</th>
+												<th>报单购物币</th>
+												<th>左区底层会员</th>
+												<th>右区底层会员</th>
+												<th>操作</th>
 											</tr>
                                                 </thead>
                                                 <tbody>
-                                        	<c:forEach items="${orders }" var="order" varStatus="status">
+                                        	<c:forEach items="${as }" var="a" varStatus="status">
                                             <tr>
 												<td>${status.index + 1 }</td>
-                                        		<c:if test="${user.admin == 1 }">
-													<th>${order.code }</th>
-													<th>${order.name }</th>
-												</c:if>
-												<td>${order.amount }</td>
-												<td>${order.actualAmount }</td>
-												<td><fmt:formatDate value="${order.createTime }" pattern="yyyy/MM/dd HH:mm:ss"/> </td>
-												<td><i class="require-red"> 奖金币 </i></td>
-												<td>
-													<i class="require-red"> 
-														${order.status == 0 ? '审核中' : '已发放' }
-												 	</i>
-												 </td>
+												<td>${a.code }</td>
+												<td>${a.level }</td>
+												<td>${a.electronicCoin }</td>
+												<td>${a.repeatSaleCoin }</td>
+												<td>${a.bonusCoin }</td>
+												<td>${a.baoDanCoin }</td>
+												<td>${a.baoDanGouWuCoin }</td>
+												<td>${a.leftChild }</td>
+												<td>${a.rightChild }</td>
+												<td><a href="/achievement/edit?id=${a.id}">编辑</a></td>
 											</tr>
                                         	</c:forEach>
                                             </tbody>

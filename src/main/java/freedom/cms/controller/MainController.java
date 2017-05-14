@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import freedom.cms.SessionUtils;
 import freedom.cms.annotation.NotPayPassword;
+import freedom.cms.domain.Achievement;
 import freedom.cms.domain.Menu;
+import freedom.cms.mapper.AchievementMapper;
 import freedom.cms.mapper.MenuMapper;
 import freedom.cms.vo.MenuVO;
 
@@ -30,6 +32,8 @@ public class MainController {
 
 	@Autowired
 	private MenuMapper menuMapper;
+	@Autowired
+	private AchievementMapper achievementMapper;
 	
 	@NotPayPassword
 	@RequestMapping("/")
@@ -37,6 +41,7 @@ public class MainController {
 	{
 		List<Menu> menus = menuMapper.listParentMenu();
 		List<Menu> children = menuMapper.listChildren(menus.get(0).getId());
+		Achievement a = achievementMapper.getByCode(SessionUtils.getUserInSession(request).getCode());
 		List<MenuVO> vos = new ArrayList<MenuVO>();
 		MenuVO vo = new MenuVO();
 		vo.setMenu(menus.get(0));
@@ -44,7 +49,8 @@ public class MainController {
 		vos.add(vo);
 		mv.setViewName("view/index.jsp");
 		mv.addObject("menus", vos);
-		mv.addObject("user",SessionUtils.getUserInSession(request));
+		mv.addObject("a",a);
+		//mv.addObject("user",SessionUtils.getUserInSession(request));
 		return mv;
 	}
 }

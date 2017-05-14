@@ -26,7 +26,8 @@ import freedom.cms.query.UserQuery;
 @Mapper
 public interface UserMapper {
 
-	@Insert("insert into User(id,code,name,loginPassword,payPassword,phone,identityCode,sex,address,createTime,activationTime,status,recommender,settler,bank,bankAccount,bankAccountName,bankAddress,province,city,area,receivingAddress,marketLocation) values(#{id},#{code},#{name},#{loginPassword},#{payPassword},#{phone},#{identityCode},#{sex},#{address},#{createTime},#{activationTime},#{status},#{recommender},#{settler},#{bank},#{bankAccount},#{bankAccountName},#{bankAddress},#{province},#{city},#{area},#{receivingAddress},#{marketLocation})")
+	@Insert("insert into User(id,code,name,loginPassword,payPassword,phone,identityCode,sex,address,createTime,activationTime,status,recommender,settler,bank,bankAccount,bankAccountName,bankAddress,province,city,area,receivingAddress,marketLocation,admin) "
+			+ "values(#{id},#{code},#{name},#{loginPassword},#{payPassword},#{phone},#{identityCode},#{sex},#{address},#{createTime},#{activationTime},#{status},#{recommender},#{settler},#{bank},#{bankAccount},#{bankAccountName},#{bankAddress},#{province},#{city},#{area},#{receivingAddress},#{marketLocation},#{admin})")
 	@SelectKey(before = false,keyColumn = "id",statement = "select @@IDENTITY",statementType=StatementType.PREPARED,keyProperty="id",resultType=Long.class)
 	public Long insert(User user);
 	
@@ -47,7 +48,7 @@ public interface UserMapper {
 			StringBuilder sql = new StringBuilder();
 			String str = "select * from User where 1 = 1 %s";
 			if(Kit.isNotBlank(userQuery.getRecommender())){
-				sql.append(" and recommender = #{recommender}");
+				sql.append(" and FIND_IN_SET(code, queryChildrenAreaInfo(#{recommender})) and code <> #{recommender} ");
 			}
 			if (Kit.isNotBlank(userQuery.getStartTime())) {
 				sql.append(" and createTime >= #{startTime}");
@@ -63,6 +64,9 @@ public interface UserMapper {
 			}
 			if (Kit.isNotBlank(userQuery.getName())) {
 				sql.append(" and name = #{name}");
+			}
+			if(Kit.isNotBlank(userQuery.getAdminCode())){
+				sql.append(" and code <> #{adminCode}");
 			}
 			return String.format(str, sql.toString());
 		}

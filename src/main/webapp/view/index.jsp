@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
-<!-- saved from url=(0046)http://osd.greenleafgroup.cn/member/index.aspx -->
+<!-- saved from url=(0046)javascript:void(0) -->
 <html xmlns="http://www.w3.org/1999/xhtml" class="" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
 	会员管理系统
 </title><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +18,8 @@
 <script src="/js/public.js"></script>
 </head>
 
-<body class="sticky-header left-side-collapsed"><div style="display: none; position: absolute;" class=""><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/member/index.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/index.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/index.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/index.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/index.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: 1084px; height: 351px;"><div class="ui_content" style="padding: 0px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
-    <form name="form1" method="post" action="http://osd.greenleafgroup.cn/member/index.aspx" id="form1">
+<body class="sticky-header left-side-collapsed"><div style="display: none; position: absolute;" class=""><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0)###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="javascript:void(0)###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="javascript:void(0)###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0)###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0)###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: 1084px; height: 351px;"><div class="ui_content" style="padding: 0px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
+    <form name="form1" method="post" action="javascript:void(0)" id="form1">
 <div>
 <input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="42745c25-1744-419d-aab9-260e1a3c96a3">
 <input type="hidden" name="__RefreshHiddenField" id="__RefreshHiddenField" value="101616.71759">
@@ -53,14 +53,16 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">近三个月电子币复消单业绩累计</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="p_pv" class="new badge1 red">10486.26</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="p_pv" class="new badge1 red">${a.electCoinCumulative }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
 										    <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">专卖店开店审核情况</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="p_shopmemo" class="new badge1 red">1万复消已成功，合格专卖店</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="p_shopmemo" class="new badge1 red">${a.openShopStatus }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
@@ -145,35 +147,40 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">电子币</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="Span1" class="new badge1 blue2">3.74</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="Span1" class="new badge1 blue2">${a.electronicCoin }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">复消币</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="Span2" class="new badge1 blue2">10486.26</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="Span2" class="new badge1 blue2">${a.repeatSaleCoin }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">奖金币</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="Span3" class="new badge1 blue2">197.50</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="Span3" class="new badge1 blue2">${a.bonusCoin }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">报单购物币</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="Span4" class="new badge1 blue2">2502.00</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="Span4" class="new badge1 blue2">${a.baoDanCoin }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">报单币</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="Span5" class="new badge1 blue2">554.00</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="Span5" class="new badge1 blue2">${a.baoDanGouWuCoin }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             
@@ -181,21 +188,24 @@
                                                 <div class="avatar_left">
                                                     <span class="email-title">左区底层会员</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_left_code" class="new badge1 blue2">a215310</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_left_code" class="new badge1 blue2">${a.leftChild }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">右区底层会员</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_right_code" class="new badge1 blue2">a820527</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_right_code" class="new badge1 blue2">${a.rightChild }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
                                             <li class="collection-item avatar email-unread">
                                                 <div class="avatar_left">
                                                     <span class="email-title">会员级别</span>
                                                 </div>
-                                                <a href="javascript:void(0)" class="secondary-content"><span id="b_g" class="new badge1 blue2">会员</span></a>
+                                                <a href="javascript:void(0)" class="secondary-content">
+                                                <span id="b_g" class="new badge1 blue2">${a.level }</span></a>
                                                 <div class="clearfix"></div>
                                             </li>
 

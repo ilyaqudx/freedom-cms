@@ -7,10 +7,10 @@
             <div class="profile_details_left">
                 <ul class="nofitications-dropdown">
                     <li class="dropdown">
-                        <a href="/#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                              <span>最新公告</span>
                         </a>
-                        <ul class="dropdown-menu">
+                       <!--  <ul class="dropdown-menu">
                             <li>
                                 <div class="notification_header">
                                     <h3>最新公告</h3>
@@ -69,20 +69,20 @@
                                 
                             <li>
                                 <div class="notification_bottom">
-                                    <a href="http://osd.greenleafgroup.cn/member/message/notice.aspx">查看更多</a>
+                                    <a href="javascript:void(0)">查看更多</a>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <li class="dropdown">
-                        <a href="/#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span>申诉</span></a>
-                        <ul class="dropdown-menu">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span>申诉</span></a>
+                       <!--  <ul class="dropdown-menu">
                             <li>
                                 <div class="notification_header">
                                     <h3>最新申诉</h3>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                     </li>
                 </ul>
                 <div class="clearfix"></div>
@@ -91,7 +91,7 @@
                 <div class="profile_img">
                     <span style="background: url(/js/8.jpg) no-repeat center"></span>
                     <div class="user-name">
-                        <p><b id="top_p_name">${user.name }</b><span id="top_p_level">会员</span></p>
+                        <p><b id="top_p_name">${user.name }</b><span id="top_p_level">${user.admin == 1 ? "管理员" : "会员" }</span></p>
                     </div>
                     <div class="clearfix"></div>
                 </div>

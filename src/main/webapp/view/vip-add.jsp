@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
-<!-- saved from url=(0051)http://osd.greenleafgroup.cn/member/member/add.aspx -->
+<!-- saved from url=(0051)javascript:void(0) -->
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
 	会员管理系统
 </title><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,32 +17,48 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $.formValidator.initConfig({ onError: function (msg) { alert(msg) } });
-            $("#recommender").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的推荐人编号" });
-            //$("#code").formValidator().InputValidator({ min: 6, max: 20, onerror: "你输入的手机号有问题,请修改" })
-            //    .RegexValidator({ regexp: "mobile", datatype: "enum", onerror: "手机格式不正确，此为必填项" });
-            $("#settler").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的安置人编号" });
-            $("#name").formValidator().InputValidator({ min: 2, max: 30, onerror: "请输入2-30位的会员姓名" });
-            $("#code").formValidator().InputValidator({ min: 5, max: 20, onerror: "请输入5-20位的会员编号" });
-            $("#phone").formValidator().InputValidator({ min: 6, max: 20, onerror: "你输入的手机号有问题,请修改" })
-                .RegexValidator({ regexp: "mobile", datatype: "enum", onerror: "手机格式不正确，此为必填项" });
-
-            $("#identityCode").formValidator().InputValidator({ min: 10, max: 18, onerror: "请输入18位的身份证号" });
-            $("#loginPassword").formValidator().InputValidator({ min: 6,max:6, onerror: "请输入6位数的密码" });
-            $("#loginPassword2").formValidator().InputValidator({ min: 1, onerror: "一级确认密码不能为空,请确认" })
-                .CompareValidator({ desID: "loginPassword", operateor: "=", onerror: "一级两次输入不一致,请修正" });
-            $("#payPassword").formValidator().InputValidator({ min: 6,max:6, onerror: "请输入6位数的二级密码" });
-            $("#payPassword2").formValidator().InputValidator({ min: 1, onerror: "二级确认密码密码不能为空,请修改" })
-                .CompareValidator({ desID: "payPassword", operateor: "=", onerror: "二级密码二次输入不一致,请确认" });
-
-            $("#bankAccount").formValidator().InputValidator({ min: 5, max: 25, onerror: "请输入5-25位的银行账号" });
-            $("#bankAccountName").formValidator().InputValidator({ min: 2, max: 30, onerror: "请输入2-30位的开户姓名" });
-            $("#bankAddress").formValidator().InputValidator({ min: 5, max: 30, onerror: "请输入5-30位的开户地址" });
-
-            $("#receivingAddress").formValidator().InputValidator({ min:4, max: 30, onerror: "请输入4-60位的收货地址" });
-
-
-        });
+        	var error = $("#error").val();
+        	if(error){
+        		alert(error);
+        	}
+        	
+            $.formValidator.initConfig({ 
+            	onError: function (msg) { 
+            		alert(msg) 
+            	}
+            });
+            
+	            $("#recommender").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的推荐人编号" });
+	            //$("#code").formValidator().InputValidator({ min: 6, max: 20, onerror: "你输入的手机号有问题,请修改" })
+	            //    .RegexValidator({ regexp: "mobile", datatype: "enum", onerror: "手机格式不正确，此为必填项" });
+	            $("#settler").formValidator().InputValidator({ min: 2, max: 20, onerror: "请输入2-20位的安置人编号" });
+	            $("#name").formValidator().InputValidator({ min: 2, max: 30, onerror: "请输入2-30位的会员姓名" });
+	            $("#code").formValidator().InputValidator({ min: 5, max: 20, onerror: "请输入5-20位的会员编号" });
+	            $("#phone").formValidator().InputValidator({ min: 6, max: 20, onerror: "你输入的手机号有问题,请修改" })
+	                .RegexValidator({ regexp: "mobile", datatype: "enum", onerror: "手机格式不正确，此为必填项" });
+	
+	            $("#identityCode").formValidator().InputValidator({ min: 10, max: 18, onerror: "请输入18位的身份证号" });
+	            $("#loginPassword").formValidator().InputValidator({ min: 6,max:6, onerror: "请输入6位数的密码" });
+	            $("#loginPassword2").formValidator().InputValidator({ min: 1, onerror: "一级确认密码不能为空,请确认" })
+	                .CompareValidator({ desID: "loginPassword", operateor: "=", onerror: "一级两次输入不一致,请修正" });
+	            $("#payPassword").formValidator().InputValidator({ min: 6,max:6, onerror: "请输入6位数的二级密码" });
+	            $("#payPassword2").formValidator().InputValidator({ min: 1, onerror: "二级确认密码密码不能为空,请修改" })
+	                .CompareValidator({ desID: "payPassword", operateor: "=", onerror: "二级密码二次输入不一致,请确认" });
+	
+	            $("#bankAccount").formValidator().InputValidator({ min: 5, max: 25, onerror: "请输入5-25位的银行账号" });
+	            $("#bankAccountName").formValidator().InputValidator({ min: 2, max: 30, onerror: "请输入2-30位的开户姓名" });
+	            $("#bankAddress").formValidator().InputValidator({ min: 5, max: 30, onerror: "请输入5-30位的开户地址" });
+	
+	            $("#receivingAddress").formValidator().InputValidator({ min:4, max: 30, onerror: "请输入4-60位的收货地址" });
+	
+	
+	        });
+        
+        function checkResultCode(){
+        	var code = $("#resultCode").val();
+        	return code == 1 ? true : false;
+        }
+        
         function checkForm() {
             var bn = false;
             if (jQuery.formValidator.PageIsValid('1')) {
@@ -74,7 +90,7 @@
         }
         
         //验证推荐人或安置人编号是否存在
-        function checkCodeIsExist(type){
+        function checkCodeIsExist(type,okShowMsg){
         	//type : 1-推荐人验证，2-安置人验证
         	var code;
         	if(type == 1){
@@ -101,13 +117,14 @@
     			dataType:'json',
     			success:function(data){
     				if(data.code == 0){
-    					if(type == 1){
+    					if(type == 1  && okShowMsg){
     						alert("推荐人编号有效");
     					}
-    					else if(type == 2){
+    					else if(type == 2 && okShowMsg){
     						alert("安置人编号有效");
     					}else{
-    						alert("会员编号有效");
+    						if(okShowMsg)
+    							alert("会员编号有效");
     					}
     				}else{
     					if(type == 1){
@@ -166,15 +183,17 @@
         }
     </script>
 </head>
-<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/member/member/add.aspx###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/member/add.aspx###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/member/add.aspx###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/member/add.aspx###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/member/add.aspx###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
+<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0)###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="javascript:void(0)###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="javascript:void(0)###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0)###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0)###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
     <form name="form1" method="post" action="/user/add" id="form1">
 <div>
-<input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="2465e4fa-f7bc-4fec-83ad-b57a7a0fcb22">
+<!-- <input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="2465e4fa-f7bc-4fec-83ad-b57a7a0fcb22">
 <input type="hidden" name="__RefreshHiddenField" id="__RefreshHiddenField" value="113448.04771">
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
 <input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTI4NzYzNTgzMA9kFgICAw9kFg4CAw9kFhICAQ8WAh4Fc3R5bGUFEGRpc3BsYXk6ZGlzcGxheTtkAgIPFgIfAAUQZGlzcGxheTpkaXNwbGF5O2QCAw8WAh8ABRBkaXNwbGF5OmRpc3BsYXk7ZAIEDxYCHwAFEGRpc3BsYXk6ZGlzcGxheTtkAgUPFgIfAAUQZGlzcGxheTpkaXNwbGF5O2QCBg8WAh8ABRBkaXNwbGF5OmRpc3BsYXk7ZAIHDxYCHwAFEGRpc3BsYXk6ZGlzcGxheTtkAggPFgIfAAUQZGlzcGxheTpkaXNwbGF5O2QCCQ8WAh8ABRBkaXNwbGF5OmRpc3BsYXk7ZAIFD2QWCAIBDxYCHgtfIUl0ZW1Db3VudAIFFgpmD2QWAmYPFQMDMTY2D+WVhuWfjuWNleWFrOWRihEyMDE3LzUvNiAxMTowNTo1MGQCAQ9kFgJmDxUDAzE2NA81LjHmlL7lgYflhazlkYoSMjAxNy80LzE4IDEwOjQ2OjIxZAICD2QWAmYPFQMDMTYzDOe+juWYieWFrOWRihIyMDE3LzQvMTQgMTI6NDg6MTBkAgMPZBYCZg8VAwMxNjE25YWz5LqO5pS26LSn5rOo5oSP5LqL6aG55Y+K44CK5pS26LSn5byC5bi46KGo44CL5aGr5YaZETIwMTcvNC81IDE0OjM5OjM1ZAIED2QWAmYPFQMDMTYwHTIwMTflubQ05pyI5L+D6ZSA5rS75Yqo6YCa55+lETIwMTcvNC8yIDEwOjQzOjI4ZAIDDxYCHwFmZAIFDxYCHglpbm5lcmh0bWwFBuWnmuWFsGQCBg8WAh8CBQbkvJrlkZhkAg8PEGQPFgJmAgEWAhAFB0HluILlnLoFATFnEAUHQuW4guWcugUBMmdkZAIRDxAPFgYeDURhdGFUZXh0RmllbGQFCUxldmVsTmFtZR4ORGF0YVZhbHVlRmllbGQFAklEHgtfIURhdGFCb3VuZGdkEBUBBuS8muWRmBUBATEUKwMBZ2RkAhMPDxYCHgRUZXh0BQdhMDc2NTMzZGQCHw8QDxYGHwMFC0NvbmZpZ1ZhbHVlHwQFC0NvbmZpZ1ZhbHVlHwVnZBAVDRLkuK3lm73lhpzkuJrpk7booYwS5Lit5Zu95bu66K6+6ZO26KGMDOS4reWbvemTtuihjBLkuK3lm73lt6XllYbpk7booYwS5Lit5Zu95Lqk6YCa6ZO26KGMDOaLm+WVhumTtuihjAzpgq7mlL/lgqjok4QM5rWm5Y+R6ZO26KGMDOW5s+WuiemTtuihjAzlhYnlpKfpk7booYwM5rCR55Sf6ZO26KGMDOW5v+WPkemTtuihjAzkuK3kv6Hpk7booYwVDRLkuK3lm73lhpzkuJrpk7booYwS5Lit5Zu95bu66K6+6ZO26KGMDOS4reWbvemTtuihjBLkuK3lm73lt6XllYbpk7booYwS5Lit5Zu95Lqk6YCa6ZO26KGMDOaLm+WVhumTtuihjAzpgq7mlL/lgqjok4QM5rWm5Y+R6ZO26KGMDOW5s+WuiemTtuihjAzlhYnlpKfpk7booYwM5rCR55Sf6ZO26KGMDOW5v+WPkemTtuihjAzkuK3kv6Hpk7booYwUKwMNZ2dnZ2dnZ2dnZ2dnZ2RkAicPZBYCZg9kFgYCAQ8QDxYGHwMFBXNoZW5nHwQFBXNoZW5nHwVnZBAVIwzpgInmi6nnnIHku70G5YyX5LqsBuWkqea0pQbkuIrmtbcG6YeN5bqGBuays+WMlwblsbHopb8G6L695a6BBuWQieaelwnpu5HpvpnmsZ8G5rGf6IuPBua1meaxnwblronlvr0G56aP5bu6Buaxn+ilvwblsbHkuJwG5rKz5Y2XBua5luWMlwbmuZbljZcG5bm/5LicBua1t+WNlwblm5vlt50G6LS15beeBuS6keWNlwbpmZXopb8G55SY6IKDBumdkua1twnlhoXokpnlj6QG5bm/6KW/Builv+iXjwblroHlpI8G5paw55aGBummmea4rwbmvrPpl6gG5Y+w5rm+FSMCLTEG5YyX5LqsBuWkqea0pQbkuIrmtbcG6YeN5bqGBuays+WMlwblsbHopb8G6L695a6BBuWQieaelwnpu5HpvpnmsZ8G5rGf6IuPBua1meaxnwblronlvr0G56aP5bu6Buaxn+ilvwblsbHkuJwG5rKz5Y2XBua5luWMlwbmuZbljZcG5bm/5LicBua1t+WNlwblm5vlt50G6LS15beeBuS6keWNlwbpmZXopb8G55SY6IKDBumdkua1twnlhoXokpnlj6QG5bm/6KW/Builv+iXjwblroHlpI8G5paw55aGBummmea4rwbmvrPpl6gG5Y+w5rm+FCsDI2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnFgFmZAIDDxAPFgYfAwUDc2hpHwQFA3NoaR8FZ2QQFQEM6YCJ5oup5Z+O5biCFQECLTEUKwMBZxYBZmQCBQ8QDxYGHwMFBHhpYW4fBAUEeGlhbh8FZ2QQFQEN6YCJ5oup5Y6/L+WMuhUBAi0xFCsDAWdkZGR1YzS8XJyWpm/vCm1jP70xvpS0aw==">
+ -->
+<input type="hidden" id="error" name="error" value="${error }"/> 
 </div>
 
 <script type="text/javascript">
@@ -235,19 +254,19 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input002" class="col-sm-2 control-label form-label">推荐人编号*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="recommender" type="text" id="recommender" class="form-control">
+                                                        <input name="recommender" value="${u.recommender }" type="text" id="recommender" class="form-control">
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="button" onclick="checkCodeIsExist(1,this)" name="btnCheckRecommend" value="验证" id="btnCheckRecommend" class="btn btn-default">
+                                                        <input type="button" onclick="checkCodeIsExist(1,true)" name="btnCheckRecommend" value="验证" id="btnCheckRecommend" class="btn btn-default">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="input002" class="col-sm-2 control-label form-label">安置人编号*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="settler" type="text" id="settler" class="form-control">
+                                                        <input name="settler" value="${u.settler }" type="text" id="settler" class="form-control">
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="button" onclick="checkCodeIsExist(2,this)" name="btnCheckAZ" value="验证" id="btnCheckAZ" class="btn btn-default">
+                                                        <input type="button" onclick="checkCodeIsExist(2,true)" name="btnCheckAZ" value="验证" id="btnCheckAZ" class="btn btn-default">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -273,10 +292,10 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input002" class="col-sm-2 control-label form-label">会员编号*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="code" type="text" value="${user.code }" id="code" readonly="readonly" class="form-control">
+                                                        <input name="code" type="text" value="${u.code }" id="code" readonly="readonly" class="form-control">
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="button" onclick="checkCodeIsExist(3)" name="btnCheckLoginName" value="验证" id="btnCheckLoginName" class="btn btn-default">
+                                                        <input type="button" onclick="checkCodeIsExist(3,true)" name="btnCheckLoginName" value="验证" id="btnCheckLoginName" class="btn btn-default">
                                                         <input type="button" onclick="refreshCode()" name="btnRefresh" value="刷新" id="btnRefresh" class="btn btn-default">
                                                     </div>
                                                 </div>
@@ -284,19 +303,19 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">会员姓名*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="name" value="${user.name }" type="text" onblur="copyNameToBankAccountName()" id="name" class="form-control">
+                                                        <input name="name" value="${u.name }" type="text" onblur="copyNameToBankAccountName()" id="name" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">联系手机*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="phone" value="${user.phone }" type="text" id="phone" class="form-control">
+                                                        <input name="phone" value="${u.phone }" type="text" id="phone" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">身份证号*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="identityCode" type="text" value="${user.identityCode }" id="identityCode" class="form-control">
+                                                        <input name="identityCode" type="text" value="${u.identityCode }" id="identityCode" class="form-control">
                                                     </div>
                                                 </div>
 
@@ -305,21 +324,8 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                     <label for="input2" class="col-sm-2 control-label form-label">银行名称*</label>
                                                     <div class="col-sm-6">
                                                         <select name="bank" id="bank" class="selectpicker" style="height:30px;">
-	<!-- <option selected="selected" value="中国农业银行">中国农业银行</option>
-	<option value="中国建设银行">中国建设银行</option>
-	<option value="中国银行">中国银行</option>
-	<option value="中国工商银行">中国工商银行</option>
-	<option value="中国交通银行">中国交通银行</option>
-	<option value="招商银行">招商银行</option>
-	<option value="邮政储蓄">邮政储蓄</option>
-	<option value="浦发银行">浦发银行</option>
-	<option value="平安银行">平安银行</option>
-	<option value="光大银行">光大银行</option>
-	<option value="民生银行">民生银行</option>
-	<option value="广发银行">广发银行</option>
-	<option value="中信银行">中信银行</option> -->
 	<c:forEach items="${banks}" var="bank" >
-		<option value="${ bank.name}">${bank.name }</option>
+		<option value="${ bank.name}" ${u.bank == bank.name ? "selected='selected'" : '' }>${bank.name }</option>
 	</c:forEach>
 </select>
                                                     </div>
@@ -328,19 +334,19 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">银行帐号*</label>
                                                     <div class="col-sm-6">
-                                                        <input value="${user.bankAccount }" name="bankAccount" type="text" id="bankAccount" class="form-control">
+                                                        <input value="${u.bankAccount }" name="bankAccount" type="text" id="bankAccount" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">开户人*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="bankAccountName" value="" type="text" id="bankAccountName" readonly="readonly" class="form-control">
+                                                        <input name="bankAccountName" value="${u.bankAccountName }" type="text" id="bankAccountName" readonly="readonly" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">开户行地址*</label>
                                                     <div class="col-sm-6">
-                                                        <input name="bankAddress" type="text" id="bankAddress" class="form-control">
+                                                        <input name="bankAddress" value="${u.bankAddress }" type="text" id="bankAddress" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div id="up1">
@@ -348,19 +354,23 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                         <div class="form-group">
                                                             <label for="input2" class="col-sm-2 control-label form-label">省市区*</label>
                                                             <div class="col-sm-6">
-                                                                <select id="province" name="province" onchange="cascadeRegion(1,this)" style="height:30px;">
-		<option selected="selected" value="-1">选择省份</option>
+    <select id="province" name="province" onchange="cascadeRegion(1,this)" style="height:30px;">
+		<option ${u.province == null ? "selected='selected'" : '' } value="-1">选择省份</option>
 		<c:forEach items="${ provinces}" var="province">
-			<option value="${province }">${province }</option>
+			<option value="${province }" ${u.province == province ? "selected='selected'" : '' }>${province }</option>
 		</c:forEach>
 	</select>
-                                                                <select id="city" name="city" onchange="cascadeRegion(2,this)" style="height:30px;">
-		<option selected="selected" value="-1">选择城市</option>
-
+    <select id="city" name="city" onchange="cascadeRegion(2,this)" style="height:30px;">
+		<option ${u.city == null ? "selected='selected'" : ''} value="-1">选择城市</option>
+		<c:forEach items="${ citys}" var="city">
+			<option value="${city }" ${u.city == city ? "selected='selected'" : '' }>${city }</option>
+		</c:forEach>
 	</select>
-                                                                <select id="area" name="area" id="area" style="height:30px;">
-		<option selected="selected" value="-1">选择县/区</option>
-
+    <select id="area" name="area" style="height:30px;">
+		<option ${u.area == null ? "selected='selected'" : '' } value="-1">选择县/区</option>
+		<c:forEach items="${ areas}" var="area">
+			<option value="${area }" ${u.area == area ? "selected='selected'" : '' }>${area }</option>
+		</c:forEach>
 	</select>
                                                             </div>
                                                         </div>                                   
@@ -369,7 +379,7 @@ Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tup1'], [], [], 
                                                 <div class="form-group">
                                                     <label for="input001" class="col-sm-2 control-label form-label">收货地址</label>
                                                     <div class="col-sm-6">
-                                                        <input name="receivingAddress" type="text" id="receivingAddress" class="form-control">
+                                                        <input name="receivingAddress" value="${u.receivingAddress }" type="text" id="receivingAddress" class="form-control">
                                                     </div>
                                                 </div>
                                                

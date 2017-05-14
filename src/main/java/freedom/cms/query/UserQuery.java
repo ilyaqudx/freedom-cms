@@ -7,11 +7,18 @@ public class UserQuery {
 	private String code;
 	private String phone;
 	private String name;
-	private Long  recommender;
-	public Long getRecommender() {
+	private String  recommender;
+	private String adminCode;//如果是管理员查询,传入该参数
+	public String getAdminCode() {
+		return adminCode;
+	}
+	public void setAdminCode(String adminCode) {
+		this.adminCode = adminCode;
+	}
+	public String getRecommender() {
 		return recommender;
 	}
-	public void setRecommender(Long recommender) {
+	public void setRecommender(String recommender) {
 		this.recommender = recommender;
 	}
 	public String getStartTime() {

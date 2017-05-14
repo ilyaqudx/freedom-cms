@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- saved from url=(0051)http://osd.greenleafgroup.cn/member/spwd.aspx?id=36 -->
+<!-- saved from url=(0051)javascript:void(0)?id=36 -->
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
 	会员管理系统
 </title><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
     <script src="/js/public.js"></script>
 </head>
 
-<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="http://osd.greenleafgroup.cn/member/spwd.aspx?id=36###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="http://osd.greenleafgroup.cn/member/spwd.aspx?id=36###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="http://osd.greenleafgroup.cn/member/spwd.aspx?id=36###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="http://osd.greenleafgroup.cn/member/spwd.aspx?id=36###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="http://osd.greenleafgroup.cn/member/spwd.aspx?id=36###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
+<body class="sticky-header left-side-collapsed"><div class="" style="display: none; position: absolute;"><div class="ui_outer"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2" class="ui_header"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"><span class="ui_title_icon"></span><b class="ui_title_txt" unselectable="on"></b></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0)?id=36###" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_rese" href="javascript:void(0)?id=36###" title="恢复"><b class="ui_rese_b"></b><b class="ui_rese_t"></b></a><a class="ui_max" href="javascript:void(0)?id=36###" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0)?id=36###" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0)?id=36###" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon"><img src="" class="ui_icon_bg"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2" class="ui_footer"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div></div>
     <form name="form1" method="post" action="/verifyPayPwd" id="form1">
 <div>
 <input type="hidden" name="__RefreshPageGuid" id="__RefreshPageGuid" value="08744b9c-381c-47ce-afe0-5f46e8b111a8">
@@ -29,104 +29,6 @@
 <jsp:include page="header.jsp"/>
             <div class="main-content">
 <jsp:include page="top.jsp"/>
-<!--     <a class="toggle-btn  menu-collapsed"><i class="fa fa-bars"></i></a>
-    <div class="menu-right">
-
-        <div class="user-panel-top">
-            <div class="profile_details_left">
-                <ul class="nofitications-dropdown">
-
-                    
-                   
-                    <li class="dropdown">
-                        <a href="http://osd.greenleafgroup.cn/member/spwd.aspx?id=36#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                             <span>最新公告</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="notification_header">
-                                    <h3>最新公告</h3>
-                                </div>
-                            </li>
-                            
-                                    <li>
-                                        <a href="javascript:void(0)" onclick="showMessaggeInfo(167)">
-                                            <div class="notification_desc">
-                                                <p>母亲节活动</p>
-                                                <p><span>2017/5/11 16:19:44</span></p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                
-                                    <li>
-                                        <a href="javascript:void(0)" onclick="showMessaggeInfo(166)">
-                                            <div class="notification_desc">
-                                                <p>商城单公告</p>
-                                                <p><span>2017/5/6 11:05:50</span></p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                
-                                    <li>
-                                        <a href="javascript:void(0)" onclick="showMessaggeInfo(164)">
-                                            <div class="notification_desc">
-                                                <p>5.1放假公告</p>
-                                                <p><span>2017/4/18 10:46:21</span></p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                
-                                    <li>
-                                        <a href="javascript:void(0)" onclick="showMessaggeInfo(163)">
-                                            <div class="notification_desc">
-                                                <p>美嘉公告</p>
-                                                <p><span>2017/4/14 12:48:10</span></p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                
-                                    <li>
-                                        <a href="javascript:void(0)" onclick="showMessaggeInfo(161)">
-                                            <div class="notification_desc">
-                                                <p>关于收货注意事项及《收货异常表》填写</p>
-                                                <p><span>2017/4/5 14:39:35</span></p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                    </li>
-                                
-                            <li>
-                                <div class="notification_bottom">
-                                    <a href="http://osd.greenleafgroup.cn/member/message/notice.aspx">查看更多</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="profile_details">
-                <div class="profile_img">
-                    <span style="background: url(/member/images/8.jpg) no-repeat center"></span>
-                    <div class="user-name">
-                        <p><b id="top_p_name">于林可</b><span id="top_p_level">会员</span></p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="clearfix"></div>
-            </div>
-           
-            <div class="clearfix"></div>
-        </div>
-
-    </div>
-</div> -->
 
                 <div id="page-wrapper">
                     <div class="graphs">

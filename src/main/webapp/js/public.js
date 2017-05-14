@@ -42,7 +42,7 @@ function renderGender(v, m) {
     }
 }
 function showMessaggeInfo(id) {
-	$.dialog({ id: 'a3_2', title: '系统公告', content: 'url:http://osd.greenleafgroup.cn/notice_detail.aspx?id=166', max: true, min: true, width: '80%', height: '60%', lock: true, padding: 0 });
+	$.dialog({ id: 'a3_2', title: '系统公告', content: 'url:http://osd.greenleafgroup.cn/notice_detail.aspx?id=167', max: true, min: true, width: '80%', height: '60%', lock: true, padding: 0 });
 }
 function showMemberInfo(id) {
     $.dialog({ id: 'a3_3', title: '会员信息', content: 'url:/member/member/minfo.aspx?id=' + id, max: false, min: false, width: '300px', height: '150px', lock: true, padding: 0 });

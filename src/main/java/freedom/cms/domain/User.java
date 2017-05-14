@@ -37,7 +37,13 @@ public class User {
 	private String city;//市
 	private String area;//区
 	private String receivingAddress;//收货地址
-	
+	private Integer admin;
+	public Integer getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Integer admin) {
+		this.admin = admin;
+	}
 	public Date getActivationTime() {
 		return activationTime;
 	}

@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import freedom.cms.domain.Achievement;
 import freedom.cms.domain.CashOrder;
 import freedom.cms.domain.User;
 import freemarker.template.Configuration;
@@ -18,9 +19,9 @@ public class ReflectUtils {
 	public static final int ORM_IBATIS = 1,ORM_MYBATIS = 2;
 	
 	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws Exception {
+	public static void main1(String[] args) throws Exception {
 		
-		Class<?> clazz = User.class;
+		Class<?> clazz = Achievement.class;
 		String packageName = "freedom.cms.mapper";
 		String className   = clazz.getSimpleName();
 		String allClassName= clazz.getName();
