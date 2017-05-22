@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.collect.Lists;
 
 import freedom.cms.Kit;
 import freedom.cms.P;
@@ -368,7 +369,7 @@ public class UserController {
 	@RequestMapping(value = "/user/login")
 	public Result<?> login(HttpServletRequest request,HttpServletResponse resp,
 			@RequestBody LoginVO vo){
-		User user = userMapper.getByCode(vo.getCode());
+		User user = userMapper.getByCodeAndTemp(Kit.mapOf("code", vo.getCode(), "vo", vo,"list",Lists.newArrayList(vo)));
 		if(user == null){
 			return Result.err("用户不存在");
 		}
@@ -389,7 +390,7 @@ public class UserController {
 	
 	@RequestMapping("/user/list")
 	public ModelAndView list(ModelAndView mv,Page<User> page,UserQuery query,HttpServletRequest request){
-		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 2),true);
+		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10),true);
 		query.setName(encoding(query.getName()));
 		User user = SessionUtils.getUserInSession(request);
 		if(user.getAdmin() != Kit.TRUE){

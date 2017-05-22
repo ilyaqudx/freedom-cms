@@ -1,6 +1,7 @@
 package freedom.cms.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,6 +14,7 @@ import org.apache.ibatis.mapping.StatementType;
 import freedom.cms.Kit;
 import freedom.cms.domain.User;
 import freedom.cms.query.UserQuery;
+import freedom.cms.vo.LoginVO;
 
 /**  
  * 创建时间: 2017年5月3日 下午12:26:15  
@@ -33,8 +35,13 @@ public interface UserMapper {
 	
 	@Select("SELECT * FROM User WHERE id = #{id}")
 	public User get(Long id);
-	@Select("select * from User where code = #{code}")
+	
+	@Select("select * from User where code = #{6}")
 	public User getByCode(String code);
+	
+	@Select("select * from User where code = #{list[0].code}")
+	public User getByCodeAndTemp(Map<String,Object> map);
+	
 	@Select("select count(id) from User where code = #{code}")
 	public Long isExist(String code);
 	@SelectProvider(type=UserProvider.class,method = "list")

@@ -78,7 +78,7 @@ public class AchievementController {
 	
 	@RequestMapping("/list")
 	public ModelAndView list(ModelAndView mv,Page<Achievement> page,AchievementQuery query,HttpServletRequest request){
-		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 2),true);
+		page = PageHelper.startPage(Math.max(page.getPageNum(), 1), Math.max(page.getPageSize(), 10),true);
 		List<Achievement> as = achievementMapper.list(query);
 		P p = new P();
 		p.setCurrentPage(page.getPageNum());
